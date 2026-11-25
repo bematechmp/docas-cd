@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#13315c">
+<title>DOCAS CD — Control de Muelles y KPIs</title>
+<style>
+:root{
+  --pri:#13315c;--pri2:#1d4ed8;--bg:#f1f5f9;--card:#ffffff;--line:#cbd5e1;
+  --txt:#0f172a;--mut:#64748b;--ok:#15803d;--warn:#b45309;--bad:#b91c1c;--r:14px
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font:15px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--txt);padding-bottom:78px}
+button,input,select,textarea{font:inherit}
+.hidden{display:none!important}
+
+/* LOGIN */
+.login{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(160deg,#0f2544,#1e40af);margin-bottom:-78px}
+.loginCard{width:min(400px,100%);background:#fff;padding:28px 24px;border-radius:20px;box-shadow:0 20px 50px #0004}
+.brand{font-size:26px;font-weight:900;color:var(--pri);letter-spacing:-.5px}
+.sub{color:var(--mut);margin:4px 0 20px;font-size:14px}
+
+/* HEADER */
+.top{position:sticky;top:0;z-index:20;background:var(--pri);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px #0002}
+.top h1{margin:0;font-size:18px;font-weight:800}
+.top small{display:block;font-size:11px;opacity:.85}
+.topBtns{display:flex;gap:8px;align-items:center}
+.pill{background:#ffffff22;border:1px solid #ffffff44;color:#fff;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
+
+/* BANNER OFFLINE */
+.banner{background:#fef3c7;color:#92400e;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;border-bottom:1px solid #fcd34d}
+
+/* CONTENEDOR Y TARJETAS */
+main{max-width:960px;margin:0 auto;padding:14px}
+.page{display:none}
+.page.active{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px;box-shadow:0 2px 8px #0f172a08}
+.cardTitle{margin:0 0 12px;font-size:15px;font-weight:800;color:var(--pri);display:flex;justify-content:space-between;align-items:center}
+
+/* FORMULARIOS */
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.field{margin-bottom:12px}
+.field label{display:block;font-weight:700;font-size:11px;color:#334155;margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px}
+.field input,.field select,.field textarea{
+  width:100%;min-height:46px;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px;
+  background:#fff;color:var(--txt);font-size:15px;transition:border-color .15s
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--pri2)}
+.field input:disabled{background:#f1f5f9;color:#94a3b8}
+.field textarea{min-height:70px;resize:vertical}
+
+/* CHIPS DE SELECCIÓN RÁPIDA */
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chipBtn{
+  flex:1;min-width:85px;min-height:44px;border:1.5px solid var(--line);background:#f8fafc;
+  color:var(--txt);border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;text-align:center
+}
+.chipBtn.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+
+.inline{display:flex;gap:8px}
+.inline input{flex:1}
+
+/* BOTONES */
+.btn{
+  border:0;border-radius:12px;min-height:48px;padding:11px 16px;background:var(--pri);
+  color:#fff;font-weight:800;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px
+}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+.btn.full{width:100%}
+.btn.sec{background:#e2e8f0;color:var(--pri);min-height:46px;padding:0 14px;font-size:13px}
+.btn.ok{background:var(--ok)}
+.btn.sm{min-height:36px;padding:6px 12px;font-size:12px;border-radius:8px}
+
+/* RESUMEN EN VIVO SIMPLE */
+.summaryBox{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px;margin:12px 0;text-align:center}
+.summaryBox span{display:block;font-size:11px;color:var(--mut);font-weight:700}
+.summaryBox b{font-size:17px;color:var(--pri)}
+
+/* TARJETAS DE PATIO E HISTORIAL */
+.opCard{border-left:5px solid var(--warn)}
+.opCard.done{border-left-color:var(--ok)}
+.opHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.opDoca{font-size:17px;font-weight:900;color:var(--pri)}
+.badge{padding:4px 9px;border-radius:999px;font-size:11px;font-weight:800;background:#fef3c7;color:#92400e}
+.badge.ok{background:#dcfce7;color:#166534}
+.badge.bad{background:#fee2e2;color:#991b1b}
+.opMeta{font-size:13px;color:#475569;margin-bottom:8px}
+.closeBox{border-top:1px solid var(--line);margin-top:10px;padding-top:12px}
+
+/* DASHBOARD KPIS Y GRÁFICOS PROFESIONALES */
+.kpiGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kpiBox{
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;
+  border-top:4px solid var(--pri2);box-shadow:0 2px 6px #0f172a06
+}
+.kpiBox.ok{border-top-color:var(--ok)}
+.kpiBox.warn{border-top-color:var(--warn)}
+.kpiBox.bad{border-top-color:var(--bad)}
+.kpiLbl{font-size:11px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
+.kpiVal{font-size:22px;font-weight:900;color:var(--pri);margin:4px 0 2px}
+.kpiSub{font-size:11px;color:#475569}
+
+.chartGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.barRow{margin-bottom:11px}
+.barInfo{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:4px;color:#1e293b}
+.barTrack{height:12px;background:#e2e8f0;border-radius:999px;overflow:hidden}
+.barFill{height:100%;background:linear-gradient(90deg,var(--pri),var(--pri2));border-radius:999px;transition:width .4s ease}
+.barFill.ok{background:linear-gradient(90deg,#15803d,#22c55e)}
+.barFill.warn{background:linear-gradient(90deg,#b45309,#f59e0b)}
+.barFill.bad{background:linear-gradient(90deg,#b91c1c,#ef4444)}
+
+/* DONA CSS DE STATUS */
+.donutWrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center;padding:6px 0}
+.donut{width:124px;height:124px;border-radius:50%;position:relative;display:grid;place-items:center;flex-shrink:0}
+.donut::after{content:"";width:76px;height:76px;background:#fff;border-radius:50%;position:absolute}
+.donutCenter{position:relative;z-index:2;text-align:center;font-weight:900;color:var(--pri);font-size:16px;line-height:1.1}
+.donutCenter small{display:block;font-size:10px;color:var(--mut);font-weight:700}
+.legend{flex:1;min-width:150px;display:flex;flex-direction:column;gap:7px;font-size:12px}
+.legItem{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.legDot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
+
+/* NAVEGACIÓN INFERIOR FIJA */
+.bottomNav{
+  position:fixed;bottom:0;left:0;right:0;z-index:25;background:#fff;border-top:1px solid var(--line);
+  display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom));box-shadow:0 -2px 10px #0001
+}
+.navBtn{
+  flex:1;border:0;background:transparent;color:var(--mut);font-weight:700;font-size:11px;
+  padding:6px 2px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;border-radius:10px
+}
+.navBtn.active{color:var(--pri);background:#eff6ff}
+.navIcon{font-size:18px;line-height:1}
+
+.err{color:var(--bad);font-size:13px;font-weight:700;margin-top:8px;min-height:18px}
+.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:40;background:#0f172a;color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;font-weight:700;box-shadow:0 8px 24px #0004;white-space:nowrap}
+
+@media(max-width:700px){
+  .row4{grid-template-columns:1fr 1fr}
+  .kpiGrid{grid-template-columns:1fr 1fr}
+  .chartGrid{grid-template-columns:1fr}
+}
+@media(max-width:420px){
+  .kpiGrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- PANTALLA DE INICIO DE SESIÓN -->
+<section id="loginGate" class="login">
+  <div class="loginCard">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div class="brand">DOCAS CD</div>
+      <button id="loginLang" type="button" class="pill" style="color:var(--pri);border-color:var(--line)">ES / PT</button>
+    </div>
+    <p class="sub" data-t="sub">Control de muelles y productividad</p>
+    <form id="loginForm">
+      <div class="field">
+        <label data-t="user">Usuario</label>
+        <input id="loginUser" required autocomplete="username">
+      </div>
+      <div class="field">
+        <label data-t="pass">Contraseña</label>
+        <input id="loginPass" type="password" required autocomplete="current-password">
+      </div>
+      <button id="loginBtn" type="submit" class="btn full" data-t="enter">Entrar</button>
+      <div id="loginErr" class="err"></div>
+    </form>
+  </div>
+</section>
+
+<!-- APLICACIÓN PRINCIPAL -->
+<div id="app" class="hidden">
+  <div id="pendingBanner" class="banner hidden">
+    <span id="pendingCount"></span>
+    <button id="retryBtn" type="button" class="btn sm" data-t="retry">Enviar ahora</button>
+  </div>
+
+  <header class="top">
+    <div>
+      <h1>DOCAS CD</h1>
+      <small id="userLabel"></small>
+    </div>
+    <div class="topBtns">
+      <button id="langBtn" type="button" class="pill">ES / PT</button>
+      <button id="refreshBtn" type="button" class="pill" title="Actualizar">↻</button>
+      <button id="logoutBtn" type="button" class="pill" data-t="exit">Salir</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- PANTALLA 1: REGISTRAR -->
+    <section id="tabNew" class="page">
+      <form id="newForm">
+        <div class="card">
+          <div class="cardTitle">
+            <span data-t="newReg">Nuevo Registro</span>
+            <small id="syncInfo" style="font-weight:400;font-size:11px;color:var(--mut)"></small>
+          </div>
+
+          <div class="field">
+            <label data-t="area">Área / Expedição *</label>
+            <div class="chips" data-target="expedicao">
+              <button type="button" class="chipBtn active" data-val="CD">CD</button>
+              <button type="button" class="chipBtn" data-val="FABRICA">FÁBRICA</button>
+            </div>
+            <input type="hidden" name="expedicao" value="CD" required>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label data-t="date">Fecha *</label>
+              <input name="data" type="date" required>
+            </div>
+            <div class="field">
+              <label data-t="shift">Turno *</label>
+              <select name="turno" required>
+                <option value="1° Turno">1° Turno</option>
+                <option value="2° Turno">2° Turno</option>
+                <option value="3° Turno">3° Turno</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label data-t="dock">Doca / Muelle *</label>
+              <input name="doca" maxlength="30" required>
+            </div>
+            <div class="field">
+              <label data-t="op">Operación *</label>
+              <select name="operacao" required>
+                <option value="Recebimento" data-es="Recepción" data-pt="Recebimento">Recepción</option>
+                <option value="Expedicao" data-es="Expedición" data-pt="Expedição">Expedición</option>
+                <option value="Transferencia" data-es="Transferencia" data-pt="Transferência">Transferencia</option>
+                <option value="Devolucao" data-es="Devolución" data-pt="Devolução">Devolución</option>
+                <option value="Carrossel">Carrossel</option>
+                <option value="Outro" data-es="Otro" data-pt="Outro">Otro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label data-t="plate">Placa / Vehículo *</label>
+            <div class="inline">
+              <input name="placa" maxlength="25" required>
+              <button type="button" id="btnInterno" class="btn sec">INTERNO</button>
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label data-t="start">Inicio *</label>
+              <div class="inline">
+                <input name="inicio" type="time" required>
+                <button type="button" class="btn sec nowBtn" data-t="now">Ahora</button>
+              </div>
+            </div>
+            <div class="field">
+              <label data-t="end">Fin</label>
+              <div class="inline">
+                <input name="fim" type="time">
+                <button type="button" class="btn sec nowBtn" data-t="now">Ahora</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="field">
+              <label data-t="workers">Personas *</label>
+              <input name="colaboradores" type="number" min="1" step="1" value="1" required>
+            </div>
+            <div class="field">
+              <label data-t="vol">Volumen (Cajas/Un.)</label>
+              <input name="volume" type="number" min="0" step="0.01">
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Status *</label>
+            <select name="status" required>
+              <option value="Concluido" data-es="Concluido" data-pt="Concluído">Concluido</option>
+              <option value="Em operacao" data-es="En operación" data-pt="Em operação">En operación</option>
+              <option value="Aguardando" data-es="Aguardando" data-pt="Aguardando">Aguardando</option>
+              <option value="Parado" data-es="Parado" data-pt="Parado">Parado</option>
+            </select>
+          </div>
+
+          <div class="field" id="motivoBox">
+            <label data-t="reason">Motivo de parada *</label>
+            <input name="motivo" maxlength="100">
+          </div>
+
+          <div class="field">
+            <label data-t="notes">Observaciones</label>
+            <textarea name="observacoes" maxlength="250"></textarea>
+          </div>
+
+          <div class="summaryBox">
+            <div><span data-t="tOcup">Tiempo (h)</span><b id="rtTime">0,00</b></div>
+            <div><span>HH</span><b id="rtHH">0,00</b></div>
+            <div><span>Vol / HH</span><b id="rtProd">0,00</b></div>
+          </div>
+
+          <button id="saveBtn" type="submit" class="btn full ok" data-t="save">Guardar en Sheets</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- PANTALLA 2: EN PATIO -->
+    <section id="tabYard" class="page">
+      <div class="cardTitle" style="padding:0 4px">
+        <span data-t="openOps">En Patio / Abiertas</span>
+        <span class="badge" id="yardCount">0</span>
+      </div>
+      <div id="yardList"></div>
+    </section>
+
+    <!-- PANTALLA 3: KPIS Y GRÁFICOS -->
+    <section id="tabKpis" class="page">
+      <div class="card">
+        <div class="cardTitle">
+          <span data-t="kpiTitle">Indicadores y Rendimiento (KPIs)</span>
+          <button id="clearFiltersBtn" type="button" class="btn sm sec" data-t="clearF">Ver Todo</button>
+        </div>
+        <div class="row4">
+          <div class="field" style="margin-bottom:4px">
+            <label data-t="fDate">Fecha</label>
+            <input id="kDate" type="date">
+          </div>
+          <div class="field" style="margin-bottom:4px">
+            <label data-t="fArea">Área</label>
+            <select id="kArea">
+              <option value="" data-es="Todas" data-pt="Todas">Todas</option>
+              <option value="CD">CD</option>
+              <option value="FABRICA">FABRICA</option>
+            </select>
+          </div>
+          <div class="field" style="margin-bottom:4px">
+            <label data-t="fShift">Turno</label>
+            <select id="kShift">
+              <option value="" data-es="Todos" data-pt="Todos">Todos</option>
+              <option value="1° Turno">1° Turno</option>
+              <option value="2° Turno">2° Turno</option>
+              <option value="3° Turno">3° Turno</option>
+            </select>
+          </div>
+          <div class="field" style="margin-bottom:4px">
+            <label data-t="fOp">Operación</label>
+            <select id="kOp">
+              <option value="" data-es="Todas" data-pt="Todas">Todas</option>
+              <option value="Recebimento" data-es="Recepción" data-pt="Recebimento">Recepción</option>
+              <option value="Expedicao" data-es="Expedición" data-pt="Expedição">Expedición</option>
+              <option value="Transferencia" data-es="Transferencia" data-pt="Transferência">Transferencia</option>
+              <option value="Devolucao" data-es="Devolución" data-pt="Devolução">Devolución</option>
+              <option value="Carrossel">Carrossel</option>
+              <option value="Outro" data-es="Otro" data-pt="Outro">Otro</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 TARJETAS KPI -->
+      <div class="kpiGrid" id="kpiCards"></div>
+
+      <!-- GRÁFICOS DE ANÁLISIS -->
+      <div class="chartGrid">
+        <div class="card">
+          <div class="cardTitle"><span data-t="cStatus">Distribución por Status</span></div>
+          <div id="chartStatus"></div>
+        </div>
+
+        <div class="card">
+          <div class="cardTitle"><span data-t="cProd">Productividad por Operación (Vol/HH)</span></div>
+          <div id="chartProd"></div>
+        </div>
+
+        <div class="card">
+          <div class="cardTitle"><span data-t="cShift">Volumen Movido por Turno</span></div>
+          <div id="chartShift"></div>
+        </div>
+
+        <div class="card">
+          <div class="cardTitle"><span data-t="cDocks">Top Muelles / Docas más Usados</span></div>
+          <div id="chartDocks"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardTitle"><span data-t="cStops">Paradas y Tiempos Improductivos (Horas)</span></div>
+        <div id="chartStops"></div>
+      </div>
+    </section>
+
+    <!-- PANTALLA 4: HISTORIAL -->
+    <section id="tabHistory" class="page">
+      <div class="card">
+        <div class="row2" style="align-items:end">
+          <div class="field" style="margin:0">
+            <label data-t="filterDate">Filtrar fecha</label>
+            <input id="filterDate" type="date">
+          </div>
+          <button id="exportBtn" type="button" class="btn sec" data-t="export">Descargar Excel (CSV)</button>
+        </div>
+      </div>
+      <div id="historyList"></div>
+    </section>
+  </main>
+
+  <!-- BARRA INFERIOR DE NAVEGACIÓN -->
+  <nav class="bottomNav" id="bottomNav">
+    <button type="button" class="navBtn" data-tab="tabNew" data-roles="TODO,OPERADOR">
+      <span class="navIcon">➕</span>
+      <span data-t="nav1">Registrar</span>
+    </button>
+    <button type="button" class="navBtn" data-tab="tabYard" data-roles="TODO,OPERADOR,SUPERVISOR">
+      <span class="navIcon">🚚</span>
+      <span data-t="nav2">En Patio</span>
+    </button>
+    <button type="button" class="navBtn" data-tab="tabKpis" data-roles="TODO,SUPERVISOR">
+      <span class="navIcon">📊</span>
+      <span data-t="nav3">KPIs</span>
+    </button>
+    <button type="button" class="navBtn" data-tab="tabHistory" data-roles="TODO,OPERADOR,SUPERVISOR">
+      <span class="navIcon">📋</span>
+      <span data-t="nav4">Historial</span>
+    </button>
+  </nav>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script>
+const API_URL = 'https://script.google.com/macros/s/AKfycbz9Y_L23iGG7sQSlMN0cVnPFulJdGYdcjuiO0QhhwPzntrelNVw9QgNFbznJqRXeHMvcg/exec';
+const K = { session: 'docasSessionSimple', queue: 'docasQueueSimple', lang: 'docasLangSimple' };
+const S = { session: null, data: [], lang: localStorage.getItem(K.lang) || 'es' };
+const $ = (q, r = document) => r.querySelector(q);
+const $$ = (q, r = document) => [...r.querySelectorAll(q)];
+
+const TXT = {
+  es: {
+    sub: 'Control de muelles y productividad', user: 'Usuario', pass: 'Contraseña', enter: 'Entrar',
+    retry: 'Enviar ahora', exit: 'Salir', newReg: 'Nuevo Registro', area: 'Área / Expedição *',
+    date: 'Fecha *', shift: 'Turno *', dock: 'Doca / Muelle *', op: 'Operación *',
+    plate: 'Placa / Vehículo *', start: 'Inicio *', end: 'Fin', now: 'Ahora',
+    workers: 'Personas *', vol: 'Volumen (Cajas/Un.)', reason: 'Motivo de parada *',
+    notes: 'Observaciones', tOcup: 'Tiempo (h)', save: 'Guardar en Sheets',
+    openOps: 'En Patio / Abiertas', filterDate: 'Filtrar fecha', export: 'Descargar Excel (CSV)',
+    nav1: 'Registrar', nav2: 'En Patio', nav3: 'KPIs', nav4: 'Historial',
+    kpiTitle: 'Indicadores y Rendimiento (KPIs)', clearF: 'Ver Todo',
+    fDate: 'Fecha', fArea: 'Área', fShift: 'Turno', fOp: 'Operación',
+    cStatus: 'Distribución por Status', cProd: 'Productividad por Operación (Vol/HH)',
+    cShift: 'Volumen Movido por Turno', cDocks: 'Top Muelles / Docas más Usados',
+    cStops: 'Paradas y Tiempos Improductivos (Horas)'
+  },
+  pt: {
+    sub: 'Controle de docas e produtividade', user: 'Usuário', pass: 'Senha', enter: 'Entrar',
+    retry: 'Enviar agora', exit: 'Sair', newReg: 'Novo Registro', area: 'Área / Expedição *',
+    date: 'Data *', shift: 'Turno *', dock: 'Doca *', op: 'Operação *',
+    plate: 'Placa / Veículo *', start: 'Início *', end: 'Fim', now: 'Agora',
+    workers: 'Pessoas *', vol: 'Volume (Caixas/Un.)', reason: 'Motivo da parada *',
+    notes: 'Observações', tOcup: 'Tempo (h)', save: 'Salvar no Sheets',
+    openOps: 'No Pátio / Abertas', filterDate: 'Filtrar data', export: 'Baixar Excel (CSV)',
+    nav1: 'Registrar', nav2: 'No Pátio', nav3: 'KPIs', nav4: 'Histórico',
+    kpiTitle: 'Indicadores e Desempenho (KPIs)', clearF: 'Ver Tudo',
+    fDate: 'Data', fArea: 'Área', fShift: 'Turno', fOp: 'Operação',
+    cStatus: 'Distribuição por Status', cProd: 'Produtividade por Operação (Vol/HH)',
+    cShift: 'Volume Movimentado por Turno', cDocks: 'Top Docas mais Utilizadas',
+    cStops: 'Paradas e Tempos Improdutivos (Horas)'
+  }
+};
+
+function uid() {
+  return (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '_' + Math.random().toString(36).slice(2)).replace(/-/g, '_');
+}
+function today() { return new Date().toLocaleDateString('sv-SE'); }
+function now() { return new Date().toTimeString().slice(0, 5); }
+function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+function fmt(v, d = 2) { return (+v || 0).toLocaleString(S.lang === 'pt' ? 'pt-BR' : 'es-ES', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+
+function tr() {
+  $$('[data-t]').forEach(el => { el.textContent = TXT[S.lang][el.dataset.t] || el.textContent; });
+  $$('option[data-es]').forEach(el => { el.textContent = el.dataset[S.lang]; });
+  document.documentElement.lang = S.lang;
+}
+
+function toggleLang() {
+  S.lang = S.lang === 'es' ? 'pt' : 'es';
+  localStorage.setItem(K.lang, S.lang);
+  tr();
+  renderAll();
+}
+
+function toast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), 3200);
+}
+
+async function api(method, payload, timeout = 20000) {
+  const c = new AbortController();
+  const timer = setTimeout(() => c.abort(), timeout);
+  try {
+    let r;
+    if (method === 'GET') {
+      const q = new URLSearchParams(payload);
+      r = await fetch(API_URL + '?' + q.toString(), { method: 'GET', redirect: 'follow', cache: 'no-store', signal: c.signal });
+    } else {
+      r = await fetch(API_URL, {
+        method: 'POST',
+        redirect: 'follow',
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+        body: JSON.stringify(payload),
+        signal: c.signal
+      });
+    }
+    const j = JSON.parse(await r.text());
+    if (j.code === 'SESSION_EXPIRED' || j.code === 'SESSION_REQUIRED') {
+      signOut(false);
+      throw new Error(j.message);
+    }
+    return j;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+function updateFormRules() {
+  const f = $('#newForm');
+  const st = f.status.value;
+  const needReason = ['Parado', 'Aguardando'].includes(st);
+  $('#motivoBox').classList.toggle('hidden', !needReason);
+  f.motivo.required = needReason;
+  if (!needReason) f.motivo.value = '';
+
+  const isDone = st === 'Concluido';
+  f.fim.required = isDone;
+  f.volume.required = isDone;
+}
+
+function updateLiveMetrics() {
+  const f = $('#newForm');
+  const i = f.inicio.value, fin = f.fim.value;
+  const col = +f.colaboradores.value || 0;
+  const vol = f.volume.value;
+
+  if (!i || !fin) {
+    $('#rtTime').textContent = '0,00';
+    $('#rtHH').textContent = '0,00';
+    $('#rtProd').textContent = '0,00';
+    return;
+  }
+  const a = i.split(':').map(Number), b = fin.split(':').map(Number);
+  let min = b[0] * 60 + b[1] - (a[0] * 60 + a[1]);
+  if (min < 0) min += 1440;
+  const tempo = min / 60;
+  const hh = tempo * col;
+  const prod = (hh > 0 && vol !== '') ? (+vol / hh) : 0;
+
+  $('#rtTime').textContent = fmt(tempo);
+  $('#rtHH').textContent = fmt(hh);
+  $('#rtProd').textContent = fmt(prod);
+}
+
+/* COLA OFFLINE */
+function getQueue() { try { return JSON.parse(localStorage.getItem(K.queue) || '[]'); } catch (_) { return []; } }
+function saveQueue(q) { localStorage.setItem(K.queue, JSON.stringify(q)); renderQueueBanner(); }
+function enqueue(item) {
+  const q = getQueue();
+  if (!q.some(x => x.requestId === item.requestId)) q.push(item);
+  saveQueue(q);
+}
+function renderQueueBanner() {
+  const n = getQueue().length;
+  $('#pendingBanner').classList.toggle('hidden', !n);
+  $('#pendingCount').textContent = `${n} ${S.lang === 'es' ? 'registro(s) pendiente(s) de enviar' : 'registro(s) pendente(s)'}`;
+}
+
+async function retryQueue() {
+  if (!S.session) return;
+  let q = getQueue(), left = [];
+  for (let i = 0; i < q.length; i++) {
+    try {
+      const r = await api('POST', { ...q[i].payload, token: S.session.token, requestId: q[i].requestId });
+      if (r.status !== 'ok') left.push(q[i]);
+    } catch (_) {
+      left.push(...q.slice(i));
+      break;
+    }
+  }
+  saveQueue(left);
+  if (!left.length) {
+    toast(S.lang === 'es' ? 'Pendientes enviados' : 'Pendências enviadas');
+    await loadData();
+  }
+}
+
+async function loadData() {
+  const r = await api('GET', { action: 'read', token: S.session.token });
+  if (r.status !== 'ok') throw new Error(r.message);
+  S.data = r.data || [];
+  $('#syncInfo').textContent = new Date(r.serverTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  renderAll();
+}
+
+function showTab(id) {
+  $$('.navBtn').forEach(b => b.classList.toggle('active', b.dataset.tab === id));
+  $$('.page').forEach(p => p.classList.toggle('active', p.id === id));
+  if (id === 'tabKpis') renderKpis();
+}
+
+async function enterApp() {
+  $('#loginGate').classList.add('hidden');
+  $('#app').classList.remove('hidden');
+  $('#userLabel').textContent = `${S.session.user} (${S.session.permisos})`;
+
+  const role = S.session.permisos;
+  $$('.navBtn').forEach(b => b.classList.toggle('hidden', !b.dataset.roles.split(',').includes(role)));
+  const firstTab = $('.navBtn:not(.hidden)');
+  if (firstTab) showTab(firstTab.dataset.tab);
+
+  renderQueueBanner();
+  try {
+    await loadData();
+    if (navigator.onLine && getQueue().length) retryQueue();
+  } catch (e) {
+    toast(e.message);
+  }
+}
+
+function signOut(call = true) {
+  if (call && S.session) api('GET', { action: 'logout', token: S.session.token }).catch(() => {});
+  sessionStorage.removeItem(K.session);
+  S.session = null;
+  S.data = [];
+  $('#app').classList.add('hidden');
+  $('#loginGate').classList.remove('hidden');
+  $('#loginPass').value = '';
+}
+
+async function handleSave(e) {
+  e.preventDefault();
+  const f = e.currentTarget;
+  const btn = $('#saveBtn');
+  btn.disabled = true;
+
+  const p = Object.fromEntries(new FormData(f).entries());
+  p.action = 'create';
+  p.requestId = uid();
+  p.doca = p.doca.trim().replace(/\s+/g, ' ').toUpperCase();
+  p.placa = p.placa.replace(/\s/g, '').toUpperCase();
+
+  try {
+    const r = await api('POST', { ...p, token: S.session.token });
+    if (r.status !== 'ok') throw Object.assign(new Error(r.message), { functional: true });
+    toast(r.message);
+    const keep = { data: p.data, turno: p.turno, expedicao: p.expedicao };
+    f.reset();
+    f.data.value = keep.data;
+    f.turno.value = keep.turno;
+    f.expedicao.value = keep.expedicao;
+    f.colaboradores.value = '1';
+    updateFormRules();
+    updateLiveMetrics();
+    await loadData();
+  } catch (err) {
+    if (!err.functional) {
+      enqueue({ requestId: p.requestId, payload: p });
+      toast(S.lang === 'es' ? 'Sin internet: guardado en el celular' : 'Sem internet: salvo no celular');
+    } else {
+      toast(err.message);
+    }
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function renderYard() {
+  const open = S.data.filter(x => ['Em operacao', 'Aguardando', 'Parado'].includes(x.status));
+  $('#yardCount').textContent = open.length;
+  $('#yardList').innerHTML = open.map(x => `
+    <div class="card opCard">
+      <div class="opHead">
+        <span class="opDoca">Doca ${esc(x.doca)} · ${esc(x.placa)}</span>
+        <span class="badge">${esc(x.status)}</span>
+      </div>
+      <div class="opMeta">${esc(x.data)} · ${esc(x.turno)} · ${esc(x.operacao)} · ${x.colaboradores} pers. · Inicio: <b>${esc(x.inicio)}</b></div>
+      <button type="button" class="btn sm sec toggleClose">${S.lang === 'es' ? 'Finalizar / Actualizar' : 'Finalizar / Atualizar'}</button>
+      <form class="closeBox hidden" data-row="${x.rowId}">
+        <div class="row2">
+          <div class="field"><label>Fim *</label><input name="fim" type="time" value="${now()}" required></div>
+          <div class="field"><label>Volume *</label><input name="volume" type="number" min="0" step="0.01" value="${x.volume ?? ''}" required></div>
+        </div>
+        <div class="field"><label>Status *</label>
+          <select name="status">
+            <option value="Concluido">Concluido</option>
+            <option value="Parado">Parado</option>
+            <option value="Aguardando">Aguardando</option>
+          </select>
+        </div>
+        <div class="field"><label>Motivo</label><input name="motivo" value="${esc(x.motivo)}"></div>
+        <div class="field"><label>Observações</label><input name="observacoes" value="${esc(x.observacoes)}"></div>
+        <button type="submit" class="btn full ok">${S.lang === 'es' ? 'Confirmar cierre' : 'Confirmar fechamento'}</button>
+      </form>
+    </div>
+  `).join('') || `<div class="card" style="text-align:center;color:var(--mut)">${S.lang === 'es' ? 'No hay camiones abiertos en patio.' : 'Nenhum veículo aberto no pátio.'}</div>`;
+}
+
+async function handleCloseOp(e) {
+  e.preventDefault();
+  const f = e.target;
+  if (!f.matches('.closeBox')) return;
+  const x = S.data.find(a => a.rowId === +f.dataset.row);
+  if (!x) return;
+
+  const p = { ...Object.fromEntries(new FormData(f).entries()), action: 'close_op', rowId: x.rowId, fingerprint: x.fingerprint, requestId: uid() };
+  try {
+    const r = await api('POST', { ...p, token: S.session.token });
+    if (r.status !== 'ok') throw Object.assign(new Error(r.message), { functional: true });
+    toast(r.message);
+    await loadData();
+  } catch (err) {
+    if (!err.functional) {
+      enqueue({ requestId: p.requestId, payload: p });
+      toast(S.lang === 'es' ? 'Sin internet: cierre guardado en cola' : 'Sem internet: salvo na fila');
+    } else {
+      toast(err.message);
+    }
+  }
+}
+
+/* MÓDULO DE KPIS Y GRÁFICOS */
+function renderBarsHTML(items, colorClass = '', unit = '') {
+  if (!items.length) return `<div style="color:var(--mut);font-size:13px;text-align:center;padding:12px 0">${S.lang === 'es' ? 'Sin datos para este filtro' : 'Sem dados para este filtro'}</div>`;
+  const max = Math.max(1, ...items.map(x => x.val));
+  return items.map(it => {
+    const pct = Math.min(100, Math.round((it.val / max) * 100));
+    return `
+      <div class="barRow">
+        <div class="barInfo">
+          <span>${esc(it.label)}</span>
+          <span>${fmt(it.val, it.dec ?? 2)}${unit}</span>
+        </div>
+        <div class="barTrack">
+          <div class="barFill ${it.cls || colorClass}" style="width:${pct}%"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderKpis() {
+  const fDate = $('#kDate').value;
+  const fArea = $('#kArea').value;
+  const fShift = $('#kShift').value;
+  const fOp = $('#kOp').value;
+
+  const list = S.data.filter(x =>
+    (!fDate || x.data === fDate) &&
+    (!fArea || x.expedicao === fArea) &&
+    (!fShift || x.turno === fShift) &&
+    (!fOp || x.operacao === fOp)
+  );
+
+  const totalOps = list.length;
+  const doneOps = list.filter(x => x.status === 'Concluido').length;
+  const openOps = totalOps - doneOps;
+  const totalVol = list.reduce((s, x) => s + (+x.volume || 0), 0);
+  const totalHH = list.reduce((s, x) => s + (+x.hh || 0), 0);
+  const totalTempo = list.reduce((s, x) => s + (+x.tempo || 0), 0);
+  const stoppedHours = list.filter(x => ['Parado', 'Aguardando'].includes(x.status) || x.motivo).reduce((s, x) => s + (+x.tempo || 0), 0);
+  const globalProd = totalHH > 0 ? (totalVol / totalHH) : 0;
+  const timedList = list.filter(x => x.tempo != null && x.tempo > 0);
+  const avgCycleMin = timedList.length ? (timedList.reduce((s, x) => s + (+x.tempo || 0), 0) / timedList.length) * 60 : 0;
+  const effPct = totalTempo > 0 ? Math.max(0, ((totalTempo - stoppedHours) / totalTempo) * 100) : 100;
+
+  const es = S.lang === 'es';
+  $('#kpiCards').innerHTML = `
+    <div class="kpiBox ok">
+      <div class="kpiLbl">${es ? 'Productividad Global' : 'Produtividade Global'}</div>
+      <div class="kpiVal">${fmt(globalProd)}</div>
+      <div class="kpiSub">Vol / HH</div>
+    </div>
+    <div class="kpiBox">
+      <div class="kpiLbl">${es ? 'Volumen Total' : 'Volume Total'}</div>
+      <div class="kpiVal">${fmt(totalVol, 0)}</div>
+      <div class="kpiSub">${es ? 'Cajas / Unidades' : 'Caixas / Unidades'}</div>
+    </div>
+    <div class="kpiBox">
+      <div class="kpiLbl">${es ? 'Operaciones' : 'Operações'}</div>
+      <div class="kpiVal">${totalOps}</div>
+      <div class="kpiSub">${doneOps} ${es ? 'concluidas' : 'concluídas'} · ${openOps} ${es ? 'abiertas' : 'abertas'}</div>
+    </div>
+    <div class="kpiBox">
+      <div class="kpiLbl">${es ? 'Ciclo Promedio' : 'Ciclo Médio'}</div>
+      <div class="kpiVal">${Math.round(avgCycleMin)} min</div>
+      <div class="kpiSub">${es ? 'Tiempo en muelle' : 'Tempo na doca'}</div>
+    </div>
+    <div class="kpiBox ${effPct >= 85 ? 'ok' : 'warn'}">
+      <div class="kpiLbl">${es ? 'Eficiencia Operativa' : 'Eficiência Operacional'}</div>
+      <div class="kpiVal">${fmt(effPct, 1)}%</div>
+      <div class="kpiSub">${fmt(totalHH)} HH ${es ? 'totales' : 'totais'}</div>
+    </div>
+    <div class="kpiBox ${stoppedHours > 0 ? 'bad' : 'ok'}">
+      <div class="kpiLbl">${es ? 'Tiempo Parado / Espera' : 'Tempo Parado / Espera'}</div>
+      <div class="kpiVal">${fmt(stoppedHours)} h</div>
+      <div class="kpiSub">${es ? 'Cuellos de botella' : 'Gargalos'}</div>
+    </div>
+  `;
+
+  // 1. Gráfico Dona por Status
+  const cDone = list.filter(x => x.status === 'Concluido').length;
+  const cRun = list.filter(x => x.status === 'Em operacao').length;
+  const cWait = list.filter(x => x.status === 'Aguardando').length;
+  const cStop = list.filter(x => x.status === 'Parado').length;
+
+  if (!totalOps) {
+    $('#chartStatus').innerHTML = `<div style="color:var(--mut);font-size:13px;text-align:center;padding:20px 0">${es ? 'Sin registros' : 'Sem registros'}</div>`;
+  } else {
+    const p1 = (cDone / totalOps) * 100;
+    const p2 = p1 + (cRun / totalOps) * 100;
+    const p3 = p2 + (cWait / totalOps) * 100;
+    $('#chartStatus').innerHTML = `
+      <div class="donutWrap">
+        <div class="donut" style="background:conic-gradient(#16a34a 0% ${p1}%, #2563eb ${p1}% ${p2}%, #f59e0b ${p2}% ${p3}%, #dc2626 ${p3}% 100%)">
+          <div class="donutCenter">${totalOps}<small>${es ? 'TOTAL' : 'TOTAL'}</small></div>
+        </div>
+        <div class="legend">
+          <div class="legItem"><span><i class="legDot" style="background:#16a34a"></i>Concluido</span><b>${cDone}</b></div>
+          <div class="legItem"><span><i class="legDot" style="background:#2563eb"></i>Em operação</span><b>${cRun}</b></div>
+          <div class="legItem"><span><i class="legDot" style="background:#f59e0b"></i>Aguardando</span><b>${cWait}</b></div>
+          <div class="legItem"><span><i class="legDot" style="background:#dc2626"></i>Parado</span><b>${cStop}</b></div>
+        </div>
+      </div>
+    `;
+  }
+
+  // 2. Productividad por Operación (Vol / HH)
+  const byOp = {};
+  list.forEach(x => {
+    const k = x.operacao || 'Outro';
+    if (!byOp[k]) byOp[k] = { vol: 0, hh: 0 };
+    byOp[k].vol += (+x.volume || 0);
+    byOp[k].hh += (+x.hh || 0);
+  });
+  const opItems = Object.entries(byOp)
+    .map(([label, v]) => ({ label, val: v.hh > 0 ? v.vol / v.hh : 0, cls: 'ok' }))
+    .sort((a, b) => b.val - a.val);
+  $('#chartProd').innerHTML = renderBarsHTML(opItems, 'ok');
+
+  // 3. Volumen por Turno
+  const byShift = {};
+  list.forEach(x => {
+    const k = x.turno || 'Sin turno';
+    byShift[k] = (byShift[k] || 0) + (+x.volume || 0);
+  });
+  const shiftItems = Object.entries(byShift)
+    .map(([label, val]) => ({ label, val, dec: 0 }))
+    .sort((a, b) => b.val - a.val);
+  $('#chartShift').innerHTML = renderBarsHTML(shiftItems);
+
+  // 4. Top Muelles más usados
+  const byDock = {};
+  list.forEach(x => {
+    const k = 'Doca ' + (x.doca || '?');
+    byDock[k] = (byDock[k] || 0) + 1;
+  });
+  const dockItems = Object.entries(byDock)
+    .map(([label, val]) => ({ label, val, dec: 0 }))
+    .sort((a, b) => b.val - a.val)
+    .slice(0, 6);
+  $('#chartDocks').innerHTML = renderBarsHTML(dockItems, '', es ? ' ops' : ' ops');
+
+  // 5. Paradas por Motivo (Horas)
+  const byStop = {};
+  list.filter(x => ['Parado', 'Aguardando'].includes(x.status) || x.motivo).forEach(x => {
+    const k = x.motivo || x.status;
+    byStop[k] = (byStop[k] || 0) + (+x.tempo || 0);
+  });
+  const stopItems = Object.entries(byStop)
+    .map(([label, val]) => ({ label, val, cls: 'bad' }))
+    .sort((a, b) => b.val - a.val);
+  $('#chartStops').innerHTML = renderBarsHTML(stopItems, 'bad', ' h');
+}
+
+function renderHistory() {
+  const fDate = $('#filterDate').value;
+  const list = S.data.filter(x => !fDate || x.data === fDate).slice().reverse();
+  $('#historyList').innerHTML = list.map(x => {
+    const isDone = x.status === 'Concluido';
+    return `
+      <div class="card opCard ${isDone ? 'done' : ''}">
+        <div class="opHead">
+          <span class="opDoca">Doca ${esc(x.doca)} · ${esc(x.placa)}</span>
+          <span class="badge ${isDone ? 'ok' : ''}">${esc(x.status)}</span>
+        </div>
+        <div class="opMeta">
+          ${esc(x.data)} | ${esc(x.turno)} | <b>${esc(x.operacao)}</b> (${esc(x.expedicao)})<br>
+          ${esc(x.inicio)} → ${esc(x.fim || '--:--')} · Vol: <b>${fmt(x.volume)}</b> · ${x.colaboradores} pers.
+          ${x.motivo ? `<br><span style="color:var(--bad)">Motivo: ${esc(x.motivo)}</span>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('') || `<div class="card" style="text-align:center;color:var(--mut)">${S.lang === 'es' ? 'Sin registros para esta fecha.' : 'Sem registros para esta data.'}</div>`;
+}
+
+function exportCSV() {
+  const fDate = $('#filterDate').value;
+  const list = S.data.filter(x => !fDate || x.data === fDate);
+  const head = ['Data', 'Turno', 'Doca', 'Operacao', 'Placa', 'Inicio', 'Fim', 'Colaboradores', 'Volume', 'Status', 'Motivo', 'Observacoes', 'Expedicao', 'Tempo(h)', 'HH', 'Vol/HH', 'USER'];
+  const rows = list.map(x => [x.data, x.turno, x.doca, x.operacao, x.placa, x.inicio, x.fim, x.colaboradores, x.volume, x.status, x.motivo, x.observacoes, x.expedicao, x.tempo, x.hh, x.prod, x.user]);
+  const text = '\ufeff' + [head, ...rows].map(r => r.map(v => '"' + String(v ?? '').replace(/"/g, '""') + '"').join(';')).join('\n');
+  const u = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
+  const a = document.createElement('a');
+  a.href = u;
+  a.download = 'DOCAS_' + (fDate || today()) + '.csv';
+  a.click();
+  URL.revokeObjectURL(u);
+}
+
+function renderAll() {
+  tr();
+  renderYard();
+  renderKpis();
+  renderHistory();
+  updateLiveMetrics();
+  renderQueueBanner();
+}
+
+/* EVENTOS */
+$('#loginForm').onsubmit = async e => {
+  e.preventDefault();
+  $('#loginErr').textContent = '';
+  const btn = $('#loginBtn');
+  btn.disabled = true;
+  try {
+    const r = await api('GET', { action: 'login', user: $('#loginUser').value, pass: $('#loginPass').value });
+    if (r.status !== 'ok') throw new Error(r.message);
+    S.session = { user: r.user, permisos: r.permisos, token: r.token, expiresAt: Date.now() + r.expiresIn * 1000 };
+    sessionStorage.setItem(K.session, JSON.stringify(S.session));
+    enterApp();
+  } catch (err) {
+    $('#loginErr').textContent = err.message;
+  } finally {
+    btn.disabled = false;
+  }
+};
+
+$$('.chips').forEach(box => {
+  box.onclick = e => {
+    if (!e.target.matches('.chipBtn')) return;
+    $$('.chipBtn', box).forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    $('#newForm').elements[box.dataset.target].value = e.target.dataset.val;
+  };
+});
+
+$('#loginLang').onclick = $('#langBtn').onclick = toggleLang;
+$('#logoutBtn').onclick = () => signOut(true);
+$('#refreshBtn').onclick = () => loadData().then(() => toast(S.lang === 'es' ? 'Actualizado' : 'Atualizado')).catch(e => toast(e.message));
+$('#retryBtn').onclick = retryQueue;
+$('#btnInterno').onclick = () => { $('#newForm').placa.value = 'INTERNO'; };
+$$('.nowBtn').forEach(b => b.onclick = () => { b.previousElementSibling.value = now(); updateLiveMetrics(); });
+$('#newForm').oninput = updateLiveMetrics;
+$('#newForm').status.onchange = updateFormRules;
+$('#newForm').onsubmit = handleSave;
+$('#bottomNav').onclick = e => { const b = e.target.closest('.navBtn'); if (b) showTab(b.dataset.tab); };
+$('#yardList').onclick = e => { if (e.target.matches('.toggleClose')) e.target.nextElementSibling.classList.toggle('hidden'); };
+$('#yardList').onsubmit = handleCloseOp;
+$('#filterDate').onchange = renderHistory;
+$('#exportBtn').onclick = exportCSV;
+$$('#kDate, #kArea, #kShift, #kOp').forEach(el => el.onchange = renderKpis);
+$('#clearFiltersBtn').onclick = () => {
+  $('#kDate').value = '';
+  $('#kArea').value = '';
+  $('#kShift').value = '';
+  $('#kOp').value = '';
+  renderKpis();
+};
+window.addEventListener('online', () => { renderQueueBanner(); if (S.session) retryQueue(); });
+
+$('#newForm').data.value = today();
+$('#filterDate').value = today();
+$('#kDate').value = '';
+updateFormRules();
+tr();
+
+try { S.session = JSON.parse(sessionStorage.getItem(K.session) || 'null'); } catch (_) { S.session = null; }
+if (S.session && S.session.token && S.session.expiresAt > Date.now()) {
+  enterApp();
+} else {
+  signOut(false);
+}
+</script>
+</body>
+</html>
