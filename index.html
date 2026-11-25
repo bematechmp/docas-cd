@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#13315c">
-<title>DOCAS CD — Control de Muelles y KPIs</title>
+<meta name="theme-color" content="#0f2544">
+<title>DOCAS CD — YMS & BI Control de Muelles</title>
 <style>
 :root{
-  --pri:#13315c;--pri2:#1d4ed8;--bg:#f1f5f9;--card:#ffffff;--line:#cbd5e1;
+  --pri:#0f2544;--pri2:#1d4ed8;--acc:#0284c7;--bg:#f1f5f9;--card:#ffffff;--line:#cbd5e1;
   --txt:#0f172a;--mut:#64748b;--ok:#15803d;--warn:#b45309;--bad:#b91c1c;--r:14px
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -16,14 +16,15 @@ button,input,select,textarea{font:inherit}
 .hidden{display:none!important}
 
 /* LOGIN */
-.login{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(160deg,#0f2544,#1e40af);margin-bottom:-78px}
-.loginCard{width:min(400px,100%);background:#fff;padding:28px 24px;border-radius:20px;box-shadow:0 20px 50px #0004}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(160deg,#09172c,#1e3a8a);margin-bottom:-78px}
+.loginCard{width:min(400px,100%);background:#fff;padding:28px 24px;border-radius:20px;box-shadow:0 20px 50px #0005}
 .brand{font-size:26px;font-weight:900;color:var(--pri);letter-spacing:-.5px}
 .sub{color:var(--mut);margin:4px 0 20px;font-size:14px}
 
 /* HEADER */
 .top{position:sticky;top:0;z-index:20;background:var(--pri);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px #0002}
-.top h1{margin:0;font-size:18px;font-weight:800}
+.top h1{margin:0;font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px}
+.ymsTag{background:#0284c7;color:#fff;font-size:10px;padding:2px 7px;border-radius:6px;letter-spacing:.5px;font-weight:800}
 .top small{display:block;font-size:11px;opacity:.85}
 .topBtns{display:flex;gap:8px;align-items:center}
 .pill{background:#ffffff22;border:1px solid #ffffff44;color:#fff;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
@@ -32,20 +33,20 @@ button,input,select,textarea{font:inherit}
 .banner{background:#fef3c7;color:#92400e;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;border-bottom:1px solid #fcd34d}
 
 /* CONTENEDOR Y TARJETAS */
-main{max-width:960px;margin:0 auto;padding:14px}
+main{max-width:1120px;margin:0 auto;padding:14px}
 .page{display:none}
 .page.active{display:block}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px;box-shadow:0 2px 8px #0f172a08}
-.cardTitle{margin:0 0 12px;font-size:15px;font-weight:800;color:var(--pri);display:flex;justify-content:space-between;align-items:center}
+.cardTitle{margin:0 0 12px;font-size:14px;font-weight:800;color:var(--pri);display:flex;justify-content:space-between;align-items:center;text-transform:uppercase;letter-spacing:.3px;gap:8px;flex-wrap:wrap}
 
 /* FORMULARIOS */
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.row4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.row6{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
 .field{margin-bottom:12px}
 .field label{display:block;font-weight:700;font-size:11px;color:#334155;margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px}
 .field input,.field select,.field textarea{
-  width:100%;min-height:46px;padding:9px 12px;border:1.5px solid var(--line);border-radius:10px;
-  background:#fff;color:var(--txt);font-size:15px;transition:border-color .15s
+  width:100%;min-height:42px;padding:7px 10px;border:1.5px solid var(--line);border-radius:10px;
+  background:#fff;color:var(--txt);font-size:13.5px;transition:border-color .15s
 }
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--pri2)}
 .field input:disabled{background:#f1f5f9;color:#94a3b8}
@@ -69,9 +70,9 @@ main{max-width:960px;margin:0 auto;padding:14px}
 }
 .btn:disabled{opacity:.6;cursor:not-allowed}
 .btn.full{width:100%}
-.btn.sec{background:#e2e8f0;color:var(--pri);min-height:46px;padding:0 14px;font-size:13px}
+.btn.sec{background:#e2e8f0;color:var(--pri);min-height:42px;padding:0 14px;font-size:13px}
 .btn.ok{background:var(--ok)}
-.btn.sm{min-height:36px;padding:6px 12px;font-size:12px;border-radius:8px}
+.btn.sm{min-height:34px;padding:5px 11px;font-size:12px;border-radius:8px}
 
 /* RESUMEN EN VIVO SIMPLE */
 .summaryBox{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:10px;margin:12px 0;text-align:center}
@@ -86,40 +87,119 @@ main{max-width:960px;margin:0 auto;padding:14px}
 .badge{padding:4px 9px;border-radius:999px;font-size:11px;font-weight:800;background:#fef3c7;color:#92400e}
 .badge.ok{background:#dcfce7;color:#166534}
 .badge.bad{background:#fee2e2;color:#991b1b}
+.badge.run{background:#dbeafe;color:#1e40af}
 .opMeta{font-size:13px;color:#475569;margin-bottom:8px}
 .closeBox{border-top:1px solid var(--line);margin-top:10px;padding-top:12px}
 
-/* DASHBOARD KPIS Y GRÁFICOS PROFESIONALES */
-.kpiGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
-.kpiBox{
-  background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;
-  border-top:4px solid var(--pri2);box-shadow:0 2px 6px #0f172a06
+/* =========================================================
+   DASHBOARD YMS & BI INTERACTIVO
+   ========================================================= */
+.biBanner{
+  background:linear-gradient(135deg,#0f2544,#1e3a8a);color:#fff;border-radius:var(--r);
+  padding:14px 16px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px
 }
+.biBanner h2{margin:0;font-size:16px;font-weight:900}
+.biBanner p{margin:2px 0 0;font-size:12px;opacity:.85}
+.presetBar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
+.presetBtn{
+  border:1px solid var(--line);background:#f8fafc;color:var(--pri);font-size:11px;font-weight:800;
+  padding:5px 10px;border-radius:8px;cursor:pointer
+}
+.presetBtn:hover,.presetBtn.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+.activeFilters{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.fChip{
+  background:#eff6ff;border:1px solid #93c5fd;color:#1e40af;font-size:11px;font-weight:800;
+  padding:4px 10px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;cursor:pointer
+}
+.fChip:hover{background:#dbeafe}
+
+/* TARJETAS KPI INTERACTIVAS (8 KPIS) */
+.kpiGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.kpiBox{
+  background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:13px;
+  border-top:4px solid var(--pri2);box-shadow:0 2px 6px #0f172a06;cursor:pointer;
+  transition:transform .15s,box-shadow .15s,border-color .15s;position:relative
+}
+.kpiBox:hover{transform:translateY(-2px);box-shadow:0 6px 16px #0f172a14;border-color:var(--pri2)}
+.kpiBox.selected{background:#eff6ff;border-color:var(--pri2);box-shadow:0 0 0 2px #1d4ed833}
 .kpiBox.ok{border-top-color:var(--ok)}
 .kpiBox.warn{border-top-color:var(--warn)}
 .kpiBox.bad{border-top-color:var(--bad)}
-.kpiLbl{font-size:11px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
-.kpiVal{font-size:22px;font-weight:900;color:var(--pri);margin:4px 0 2px}
+.kpiTop{display:flex;justify-content:space-between;align-items:center;gap:4px}
+.kpiLbl{font-size:10.5px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
+.kpiHint{font-size:10px;color:var(--pri2);font-weight:700;opacity:.85;white-space:nowrap}
+.kpiVal{font-size:21px;font-weight:900;color:var(--pri);margin:4px 0 2px}
 .kpiSub{font-size:11px;color:#475569}
 
+/* MAPA VISUAL DE MUELLES (YARD DOCK BOARD) */
+.dockBoard{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:9px}
+.dockTile{
+  border:1.5px solid var(--line);border-radius:12px;padding:10px;background:#f8fafc;
+  cursor:pointer;transition:all .15s;position:relative
+}
+.dockTile:hover{transform:translateY(-2px);box-shadow:0 4px 12px #0001}
+.dockTile.selected{outline:2.5px solid var(--pri2);background:#eff6ff}
+.dockTile.st-run{border-left:5px solid #2563eb;background:#eff6ff66}
+.dockTile.st-wait{border-left:5px solid #f59e0b;background:#fef3c766}
+.dockTile.st-stop{border-left:5px solid #dc2626;background:#fee2e266}
+.dockTile.st-done{border-left:5px solid #16a34a}
+.dockTile.sla-alert{border-color:#dc2626;box-shadow:0 0 0 1px #dc262644}
+.dockTop{display:flex;justify-content:space-between;align-items:center}
+.dockName{font-weight:900;font-size:14px;color:var(--pri)}
+.dockTimer{font-size:10px;font-weight:800;padding:2px 6px;border-radius:6px;background:#e2e8f0;color:#1e293b}
+.dockTimer.over{background:#fee2e2;color:#b91c1c}
+.dockPlate{font-size:11px;font-weight:700;color:#334155;margin:3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dockStat{font-size:10px;font-weight:800;text-transform:uppercase}
+
+/* GRÁFICOS INTERACTIVOS */
 .chartGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.barRow{margin-bottom:11px}
+.barRow{
+  margin-bottom:7px;padding:7px 9px;border-radius:10px;cursor:pointer;
+  border:1px solid transparent;transition:background .15s,border-color .15s
+}
+.barRow:hover{background:#f1f5f9;border-color:#cbd5e1}
+.barRow.selected{background:#eff6ff;border-color:#2563eb}
 .barInfo{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:4px;color:#1e293b}
-.barTrack{height:12px;background:#e2e8f0;border-radius:999px;overflow:hidden}
-.barFill{height:100%;background:linear-gradient(90deg,var(--pri),var(--pri2));border-radius:999px;transition:width .4s ease}
+.barTrack{height:11px;background:#e2e8f0;border-radius:999px;overflow:hidden}
+.barFill{height:100%;background:linear-gradient(90deg,var(--pri),var(--pri2));border-radius:999px;transition:width .35s ease}
 .barFill.ok{background:linear-gradient(90deg,#15803d,#22c55e)}
 .barFill.warn{background:linear-gradient(90deg,#b45309,#f59e0b)}
 .barFill.bad{background:linear-gradient(90deg,#b91c1c,#ef4444)}
 
-/* DONA CSS DE STATUS */
-.donutWrap{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center;padding:6px 0}
+/* DONA INTERACTIVA */
+.donutWrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;padding:4px 0}
 .donut{width:124px;height:124px;border-radius:50%;position:relative;display:grid;place-items:center;flex-shrink:0}
 .donut::after{content:"";width:76px;height:76px;background:#fff;border-radius:50%;position:absolute}
 .donutCenter{position:relative;z-index:2;text-align:center;font-weight:900;color:var(--pri);font-size:16px;line-height:1.1}
 .donutCenter small{display:block;font-size:10px;color:var(--mut);font-weight:700}
-.legend{flex:1;min-width:150px;display:flex;flex-direction:column;gap:7px;font-size:12px}
-.legItem{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.legend{flex:1;min-width:155px;display:flex;flex-direction:column;gap:4px;font-size:12px}
+.legItem{
+  display:flex;justify-content:space-between;align-items:center;font-weight:700;
+  padding:5px 8px;border-radius:8px;cursor:pointer;border:1px solid transparent
+}
+.legItem:hover{background:#f1f5f9}
+.legItem.selected{background:#eff6ff;border-color:#2563eb;color:var(--pri)}
 .legDot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
+
+/* COMPARATIVA CD VS FABRICA */
+.areaCompGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.areaCard{border:1.5px solid var(--line);border-radius:12px;padding:12px;background:#f8fafc;cursor:pointer;transition:.15s}
+.areaCard:hover{border-color:var(--pri2)}
+.areaCard.selected{background:#eff6ff;border-color:var(--pri2)}
+.areaCard h4{margin:0 0 6px;font-size:14px;font-weight:900;color:var(--pri);display:flex;justify-content:space-between}
+.areaStats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-size:11px;text-align:center}
+.areaStats div{background:#fff;padding:6px 4px;border-radius:8px;border:1px solid #e2e8f0}
+.areaStats b{display:block;font-size:13px;color:var(--pri)}
+
+/* TABLA DRILL-DOWN INTERACTIVA */
+.drillTools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.searchInput{min-height:34px;padding:4px 10px;border:1.5px solid var(--line);border-radius:8px;font-size:12px;min-width:180px}
+.drillTableWrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.drillTable{width:100%;border-collapse:collapse;font-size:12px;text-align:left}
+.drillTable th{background:#f8fafc;color:var(--pri);font-weight:800;padding:9px 10px;border-bottom:1.5px solid var(--line);white-space:nowrap}
+.drillTable td{padding:8px 10px;border-bottom:1px solid #e2e8f0;white-space:nowrap}
+.drillTable tr:hover td{background:#f8fafc}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px;color:var(--mut);font-weight:700}
 
 /* NAVEGACIÓN INFERIOR FIJA */
 .bottomNav{
@@ -136,12 +216,13 @@ main{max-width:960px;margin:0 auto;padding:14px}
 .err{color:var(--bad);font-size:13px;font-weight:700;margin-top:8px;min-height:18px}
 .toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:40;background:#0f172a;color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;font-weight:700;box-shadow:0 8px 24px #0004;white-space:nowrap}
 
-@media(max-width:700px){
-  .row4{grid-template-columns:1fr 1fr}
+@media(max-width:860px){
+  .row6{grid-template-columns:1fr 1fr}
   .kpiGrid{grid-template-columns:1fr 1fr}
   .chartGrid{grid-template-columns:1fr}
+  .areaCompGrid{grid-template-columns:1fr}
 }
-@media(max-width:420px){
+@media(max-width:440px){
   .kpiGrid{grid-template-columns:1fr}
 }
 </style>
@@ -152,10 +233,10 @@ main{max-width:960px;margin:0 auto;padding:14px}
 <section id="loginGate" class="login">
   <div class="loginCard">
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <div class="brand">DOCAS CD</div>
+      <div class="brand">DOCAS CD <span class="ymsTag">YMS</span></div>
       <button id="loginLang" type="button" class="pill" style="color:var(--pri);border-color:var(--line)">ES / PT</button>
     </div>
-    <p class="sub" data-t="sub">Control de muelles y productividad</p>
+    <p class="sub" data-t="sub">Gestión de patio, muelles y BI</p>
     <form id="loginForm">
       <div class="field">
         <label data-t="user">Usuario</label>
@@ -180,7 +261,7 @@ main{max-width:960px;margin:0 auto;padding:14px}
 
   <header class="top">
     <div>
-      <h1>DOCAS CD</h1>
+      <h1>DOCAS CD <span class="ymsTag">YMS & BI</span></h1>
       <small id="userLabel"></small>
     </div>
     <div class="topBtns">
@@ -318,19 +399,36 @@ main{max-width:960px;margin:0 auto;padding:14px}
       <div id="yardList"></div>
     </section>
 
-    <!-- PANTALLA 3: KPIS Y GRÁFICOS -->
+    <!-- PANTALLA 3: YMS & BI (KPIS INTERACTIVOS) -->
     <section id="tabKpis" class="page">
-      <div class="card">
-        <div class="cardTitle">
-          <span data-t="kpiTitle">Indicadores y Rendimiento (KPIs)</span>
-          <button id="clearFiltersBtn" type="button" class="btn sm sec" data-t="clearF">Ver Todo</button>
+      <div class="biBanner">
+        <div>
+          <h2 data-t="biHead">Tablero YMS & BI — Control de Muelles</h2>
+          <p data-t="biSub">Haz clic en cualquier tarjeta, muelle o barra para cruzar filtros en vivo</p>
         </div>
-        <div class="row4">
-          <div class="field" style="margin-bottom:4px">
-            <label data-t="fDate">Fecha</label>
-            <input id="kDate" type="date">
+        <button id="clearFiltersBtn" type="button" class="btn sm" style="background:#ffffff22;border:1px solid #ffffff55" data-t="clearF">Limpiar Filtros</button>
+      </div>
+
+      <!-- PANEL DE FILTROS CON RANGO DE FECHAS Y PRESETS -->
+      <div class="card">
+        <div class="presetBar">
+          <span style="font-size:11px;font-weight:800;color:var(--mut);text-transform:uppercase" data-t="quickRange">Período rápido:</span>
+          <button type="button" class="presetBtn" data-range="TODAY" data-t="rToday">Hoy</button>
+          <button type="button" class="presetBtn" data-range="7D" data-t="r7d">Últimos 7 días</button>
+          <button type="button" class="presetBtn" data-range="MONTH" data-t="rMonth">Este mes</button>
+          <button type="button" class="presetBtn active" data-range="ALL" data-t="rAll">Todo el historial</button>
+        </div>
+
+        <div class="row6">
+          <div class="field" style="margin-bottom:2px">
+            <label data-t="fStart">Data Inicio</label>
+            <input id="kDateStart" type="date">
           </div>
-          <div class="field" style="margin-bottom:4px">
+          <div class="field" style="margin-bottom:2px">
+            <label data-t="fEnd">Data Fin</label>
+            <input id="kDateEnd" type="date">
+          </div>
+          <div class="field" style="margin-bottom:2px">
             <label data-t="fArea">Área</label>
             <select id="kArea">
               <option value="" data-es="Todas" data-pt="Todas">Todas</option>
@@ -338,7 +436,7 @@ main{max-width:960px;margin:0 auto;padding:14px}
               <option value="FABRICA">FABRICA</option>
             </select>
           </div>
-          <div class="field" style="margin-bottom:4px">
+          <div class="field" style="margin-bottom:2px">
             <label data-t="fShift">Turno</label>
             <select id="kShift">
               <option value="" data-es="Todos" data-pt="Todos">Todos</option>
@@ -347,7 +445,7 @@ main{max-width:960px;margin:0 auto;padding:14px}
               <option value="3° Turno">3° Turno</option>
             </select>
           </div>
-          <div class="field" style="margin-bottom:4px">
+          <div class="field" style="margin-bottom:2px">
             <label data-t="fOp">Operación</label>
             <select id="kOp">
               <option value="" data-es="Todas" data-pt="Todas">Todas</option>
@@ -359,14 +457,50 @@ main{max-width:960px;margin:0 auto;padding:14px}
               <option value="Outro" data-es="Otro" data-pt="Outro">Otro</option>
             </select>
           </div>
+          <div class="field" style="margin-bottom:2px">
+            <label>Status</label>
+            <select id="kStatus">
+              <option value="" data-es="Todos" data-pt="Todos">Todos</option>
+              <option value="Concluido">Concluido</option>
+              <option value="Em operacao">Em operação</option>
+              <option value="Aguardando">Aguardando</option>
+              <option value="Parado">Parado</option>
+            </select>
+          </div>
         </div>
+        <div id="activeFilterChips" class="activeFilters"></div>
       </div>
 
-      <!-- 6 TARJETAS KPI -->
+      <!-- 8 TARJETAS KPI INTERACTIVAS -->
       <div class="kpiGrid" id="kpiCards"></div>
 
-      <!-- GRÁFICOS DE ANÁLISIS -->
+      <!-- COMPARATIVA CD VS FÁBRICA -->
+      <div class="card">
+        <div class="cardTitle"><span data-t="areaCompTitle">Comparativa Operativa: CD vs FÁBRICA</span></div>
+        <div id="areaCompBox" class="areaCompGrid"></div>
+      </div>
+
+      <!-- MAPA VISUAL DE MUELLES EN VIVO (YARD DOCK BOARD) -->
+      <div class="card">
+        <div class="cardTitle">
+          <span data-t="dockBoardTitle">Mapa de Muelles / Docas (Tiempo en vivo y filtro)</span>
+          <small id="dockBoardHint" style="font-weight:600;color:var(--mut);text-transform:none"></small>
+        </div>
+        <div id="dockBoard" class="dockBoard"></div>
+      </div>
+
+      <!-- GRÁFICOS DE ANÁLISIS INTERACTIVOS -->
       <div class="chartGrid">
+        <div class="card">
+          <div class="cardTitle"><span data-t="cDaily">Evolución Diaria de Volumen</span></div>
+          <div id="chartDaily"></div>
+        </div>
+
+        <div class="card">
+          <div class="cardTitle"><span data-t="cDockLoad">Ocupación / Congestión por Muelle (Horas)</span></div>
+          <div id="chartDockLoad"></div>
+        </div>
+
         <div class="card">
           <div class="cardTitle"><span data-t="cStatus">Distribución por Status</span></div>
           <div id="chartStatus"></div>
@@ -383,14 +517,25 @@ main{max-width:960px;margin:0 auto;padding:14px}
         </div>
 
         <div class="card">
-          <div class="cardTitle"><span data-t="cDocks">Top Muelles / Docas más Usados</span></div>
-          <div id="chartDocks"></div>
+          <div class="cardTitle"><span data-t="cStops">Cuellos de Botella / Motivos de Demora (Horas)</span></div>
+          <div id="chartStops"></div>
         </div>
       </div>
 
+      <!-- DETALLE DE OPERACIONES FILTRADAS (DRILL-DOWN CON BUSCADOR Y EXPORTACIÓN) -->
       <div class="card">
-        <div class="cardTitle"><span data-t="cStops">Paradas y Tiempos Improductivos (Horas)</span></div>
-        <div id="chartStops"></div>
+        <div class="cardTitle">
+          <div>
+            <span id="drillTitle">Detalle de Operaciones Filtradas</span>
+            <span class="badge ok" id="drillCount" style="margin-left:6px">0</span>
+          </div>
+          <div class="drillTools">
+            <input id="biSearch" type="search" class="searchInput" placeholder="Buscar placa o doca...">
+            <button id="biExportBtn" type="button" class="btn sm sec" data-t="exportFiltered">Exportar Filtro (CSV)</button>
+          </div>
+        </div>
+        <div class="drillTableWrap" id="drillTableBox"></div>
+        <div class="pager" id="drillPager"></div>
       </div>
     </section>
 
@@ -421,7 +566,7 @@ main{max-width:960px;margin:0 auto;padding:14px}
     </button>
     <button type="button" class="navBtn" data-tab="tabKpis" data-roles="TODO,SUPERVISOR">
       <span class="navIcon">📊</span>
-      <span data-t="nav3">KPIs</span>
+      <span data-t="nav3">YMS / KPIs</span>
     </button>
     <button type="button" class="navBtn" data-tab="tabHistory" data-roles="TODO,OPERADOR,SUPERVISOR">
       <span class="navIcon">📋</span>
@@ -435,40 +580,60 @@ main{max-width:960px;margin:0 auto;padding:14px}
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbz9Y_L23iGG7sQSlMN0cVnPFulJdGYdcjuiO0QhhwPzntrelNVw9QgNFbznJqRXeHMvcg/exec';
 const K = { session: 'docasSessionSimple', queue: 'docasQueueSimple', lang: 'docasLangSimple' };
-const S = { session: null, data: [], lang: localStorage.getItem(K.lang) || 'es' };
+const S = {
+  session: null,
+  data: [],
+  lastFiltered: [],
+  lang: localStorage.getItem(K.lang) || 'es',
+  bi: { doca: '', kpiFocus: 'ALL', showAllRows: false }
+};
 const $ = (q, r = document) => r.querySelector(q);
 const $$ = (q, r = document) => [...r.querySelectorAll(q)];
 
 const TXT = {
   es: {
-    sub: 'Control de muelles y productividad', user: 'Usuario', pass: 'Contraseña', enter: 'Entrar',
+    sub: 'Gestión de patio, muelles y BI', user: 'Usuario', pass: 'Contraseña', enter: 'Entrar',
     retry: 'Enviar ahora', exit: 'Salir', newReg: 'Nuevo Registro', area: 'Área / Expedição *',
     date: 'Fecha *', shift: 'Turno *', dock: 'Doca / Muelle *', op: 'Operación *',
     plate: 'Placa / Vehículo *', start: 'Inicio *', end: 'Fin', now: 'Ahora',
     workers: 'Personas *', vol: 'Volumen (Cajas/Un.)', reason: 'Motivo de parada *',
     notes: 'Observaciones', tOcup: 'Tiempo (h)', save: 'Guardar en Sheets',
     openOps: 'En Patio / Abiertas', filterDate: 'Filtrar fecha', export: 'Descargar Excel (CSV)',
-    nav1: 'Registrar', nav2: 'En Patio', nav3: 'KPIs', nav4: 'Historial',
-    kpiTitle: 'Indicadores y Rendimiento (KPIs)', clearF: 'Ver Todo',
-    fDate: 'Fecha', fArea: 'Área', fShift: 'Turno', fOp: 'Operación',
+    nav1: 'Registrar', nav2: 'En Patio', nav3: 'YMS / KPIs', nav4: 'Historial',
+    biHead: 'Tablero YMS & BI — Control de Muelles',
+    biSub: 'Haz clic en cualquier tarjeta, muelle o barra para cruzar filtros en vivo',
+    clearF: 'Limpiar Filtros', quickRange: 'Período rápido:', rToday: 'Hoy', r7d: 'Últimos 7 días',
+    rMonth: 'Este mes', rAll: 'Todo', fStart: 'Data Inicio', fEnd: 'Data Fin',
+    fArea: 'Área', fShift: 'Turno', fOp: 'Operación',
+    areaCompTitle: 'Comparativa Operativa: CD vs FÁBRICA',
+    dockBoardTitle: 'Mapa de Muelles / Docas (Estadía en vivo y filtro)',
+    cDaily: 'Evolución Diaria de Volumen',
+    cDockLoad: 'Ocupación / Congestión por Muelle (Horas)',
     cStatus: 'Distribución por Status', cProd: 'Productividad por Operación (Vol/HH)',
-    cShift: 'Volumen Movido por Turno', cDocks: 'Top Muelles / Docas más Usados',
-    cStops: 'Paradas y Tiempos Improductivos (Horas)'
+    cShift: 'Volumen Movido por Turno', cStops: 'Motivos de Demora / Paradas (Horas)',
+    exportFiltered: 'Exportar Filtro (CSV)'
   },
   pt: {
-    sub: 'Controle de docas e produtividade', user: 'Usuário', pass: 'Senha', enter: 'Entrar',
+    sub: 'Gestão de pátio, docas e BI', user: 'Usuário', pass: 'Senha', enter: 'Entrar',
     retry: 'Enviar agora', exit: 'Sair', newReg: 'Novo Registro', area: 'Área / Expedição *',
     date: 'Data *', shift: 'Turno *', dock: 'Doca *', op: 'Operação *',
     plate: 'Placa / Veículo *', start: 'Início *', end: 'Fim', now: 'Agora',
     workers: 'Pessoas *', vol: 'Volume (Caixas/Un.)', reason: 'Motivo da parada *',
     notes: 'Observações', tOcup: 'Tempo (h)', save: 'Salvar no Sheets',
     openOps: 'No Pátio / Abertas', filterDate: 'Filtrar data', export: 'Baixar Excel (CSV)',
-    nav1: 'Registrar', nav2: 'No Pátio', nav3: 'KPIs', nav4: 'Histórico',
-    kpiTitle: 'Indicadores e Desempenho (KPIs)', clearF: 'Ver Tudo',
-    fDate: 'Data', fArea: 'Área', fShift: 'Turno', fOp: 'Operação',
+    nav1: 'Registrar', nav2: 'No Pátio', nav3: 'YMS / KPIs', nav4: 'Histórico',
+    biHead: 'Painel YMS & BI — Controle de Docas',
+    biSub: 'Clique em qualquer cartão, doca ou barra para cruzar filtros ao vivo',
+    clearF: 'Limpar Filtros', quickRange: 'Período rápido:', rToday: 'Hoje', r7d: 'Últimos 7 dias',
+    rMonth: 'Este mês', rAll: 'Tudo', fStart: 'Data Início', fEnd: 'Data Fim',
+    fArea: 'Área', fShift: 'Turno', fOp: 'Operação',
+    areaCompTitle: 'Comparativo Operacional: CD vs FÁBRICA',
+    dockBoardTitle: 'Mapa de Docas (Permanência ao vivo e filtro)',
+    cDaily: 'Evolução Diária de Volume',
+    cDockLoad: 'Ocupação / Congestionamento por Doca (Horas)',
     cStatus: 'Distribuição por Status', cProd: 'Produtividade por Operação (Vol/HH)',
-    cShift: 'Volume Movimentado por Turno', cDocks: 'Top Docas mais Utilizadas',
-    cStops: 'Paradas e Tempos Improdutivos (Horas)'
+    cShift: 'Volume Movimentado por Turno', cStops: 'Motivos de Demora / Paradas (Horas)',
+    exportFiltered: 'Exportar Filtro (CSV)'
   }
 };
 
@@ -476,13 +641,86 @@ function uid() {
   return (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '_' + Math.random().toString(36).slice(2)).replace(/-/g, '_');
 }
 function today() { return new Date().toLocaleDateString('sv-SE'); }
+function addDays(baseStr, delta) {
+  const d = new Date(baseStr + 'T12:00:00');
+  d.setDate(d.getDate() + delta);
+  return d.toLocaleDateString('sv-SE');
+}
 function now() { return new Date().toTimeString().slice(0, 5); }
 function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 function fmt(v, d = 2) { return (+v || 0).toLocaleString(S.lang === 'pt' ? 'pt-BR' : 'es-ES', { minimumFractionDigits: d, maximumFractionDigits: d }); }
 
+/* LIMPIEZA Y NORMALIZACIÓN DE DATOS DE SHEETS (.trim() + NÚMEROS SEGUROS) */
+function cleanRow(raw) {
+  return {
+    ...raw,
+    data: String(raw.data ?? '').trim().slice(0, 10),
+    turno: String(raw.turno ?? '').trim(),
+    doca: String(raw.doca ?? '').trim().replace(/\s+/g, ' ').toUpperCase(),
+    operacao: String(raw.operacao ?? '').trim(),
+    placa: String(raw.placa ?? '').trim().toUpperCase(),
+    inicio: String(raw.inicio ?? '').trim().slice(0, 5),
+    fim: String(raw.fim ?? '').trim().slice(0, 5),
+    status: String(raw.status ?? '').trim(),
+    motivo: String(raw.motivo ?? '').trim(),
+    observacoes: String(raw.observacoes ?? '').trim(),
+    expedicao: String(raw.expedicao ?? '').trim().toUpperCase(),
+    user: String(raw.user ?? '').trim()
+  };
+}
+
+function cleanNum(v) {
+  if (v === '' || v == null) return 0;
+  const n = +v;
+  if (!isFinite(n) || n > 100000 || n < 0) return 0;
+  return n;
+}
+
+/* CALCULA MINUTOS DESDE INICIO HASTA AHORA PARA CAMIONES ABIERTOS */
+function getLiveStayMinutes(x) {
+  if (!x.inicio) return 0;
+  const a = String(x.inicio).split(':').map(Number);
+  if (a.length < 2 || isNaN(a[0])) return 0;
+  const cur = now().split(':').map(Number);
+  let min = (cur[0] * 60 + cur[1]) - (a[0] * 60 + a[1]);
+  if (min < 0) min += 1440;
+  return min;
+}
+
+function formatMinutesShort(min) {
+  const h = Math.floor(min / 60);
+  const m = Math.round(min % 60);
+  return h > 0 ? `${h}h ${String(m).padStart(2, '0')}m` : `${m}m`;
+}
+
+function calcSafeMetrics(x) {
+  let tempo = cleanNum(x.tempo);
+  let hh = cleanNum(x.hh);
+  let prod = cleanNum(x.prod);
+  const col = Math.max(1, Math.round(cleanNum(x.colaboradores) || 1));
+  const vol = cleanNum(x.volume);
+
+  if (tempo === 0 && x.inicio && x.fim) {
+    const a = String(x.inicio).split(':').map(Number);
+    const b = String(x.fim).split(':').map(Number);
+    if (a.length >= 2 && b.length >= 2 && !isNaN(a[0]) && !isNaN(b[0])) {
+      let min = (b[0] * 60 + b[1]) - (a[0] * 60 + a[1]);
+      if (min < 0) min += 1440;
+      tempo = min / 60;
+    }
+  } else if (tempo === 0 && ['Em operacao', 'Aguardando', 'Parado'].includes(x.status) && x.data === today()) {
+    tempo = getLiveStayMinutes(x) / 60;
+  }
+
+  if (hh === 0 && tempo > 0) hh = tempo * col;
+  if (prod === 0 && hh > 0 && vol > 0) prod = vol / hh;
+  return { tempo, hh, prod, vol, col };
+}
+
 function tr() {
   $$('[data-t]').forEach(el => { el.textContent = TXT[S.lang][el.dataset.t] || el.textContent; });
   $$('option[data-es]').forEach(el => { el.textContent = el.dataset[S.lang]; });
+  $('#biSearch').placeholder = S.lang === 'es' ? 'Buscar placa o doca...' : 'Buscar placa ou doca...';
   document.documentElement.lang = S.lang;
 }
 
@@ -601,7 +839,7 @@ async function retryQueue() {
 async function loadData() {
   const r = await api('GET', { action: 'read', token: S.session.token });
   if (r.status !== 'ok') throw new Error(r.message);
-  S.data = r.data || [];
+  S.data = (r.data || []).map(cleanRow);
   $('#syncInfo').textContent = new Date(r.serverTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   renderAll();
 }
@@ -681,32 +919,39 @@ async function handleSave(e) {
 function renderYard() {
   const open = S.data.filter(x => ['Em operacao', 'Aguardando', 'Parado'].includes(x.status));
   $('#yardCount').textContent = open.length;
-  $('#yardList').innerHTML = open.map(x => `
-    <div class="card opCard">
-      <div class="opHead">
-        <span class="opDoca">Doca ${esc(x.doca)} · ${esc(x.placa)}</span>
-        <span class="badge">${esc(x.status)}</span>
+  $('#yardList').innerHTML = open.map(x => {
+    const stayMin = x.data === today() ? getLiveStayMinutes(x) : 0;
+    const stayBadge = stayMin > 0 ? `<span class="badge ${stayMin > 120 ? 'bad' : 'run'}">⏱ ${formatMinutesShort(stayMin)}</span>` : '';
+    return `
+      <div class="card opCard">
+        <div class="opHead">
+          <span class="opDoca">Doca ${esc(x.doca)} · ${esc(x.placa)}</span>
+          <div style="display:flex;gap:6px;align-items:center">
+            ${stayBadge}
+            <span class="badge">${esc(x.status)}</span>
+          </div>
+        </div>
+        <div class="opMeta">${esc(x.data)} · ${esc(x.turno)} · ${esc(x.operacao)} · ${x.colaboradores} pers. · Inicio: <b>${esc(x.inicio)}</b></div>
+        <button type="button" class="btn sm sec toggleClose">${S.lang === 'es' ? 'Finalizar / Actualizar' : 'Finalizar / Atualizar'}</button>
+        <form class="closeBox hidden" data-row="${x.rowId}">
+          <div class="row2">
+            <div class="field"><label>Fim *</label><input name="fim" type="time" value="${now()}" required></div>
+            <div class="field"><label>Volume *</label><input name="volume" type="number" min="0" step="0.01" value="${x.volume ?? ''}" required></div>
+          </div>
+          <div class="field"><label>Status *</label>
+            <select name="status">
+              <option value="Concluido">Concluido</option>
+              <option value="Parado">Parado</option>
+              <option value="Aguardando">Aguardando</option>
+            </select>
+          </div>
+          <div class="field"><label>Motivo</label><input name="motivo" value="${esc(x.motivo)}"></div>
+          <div class="field"><label>Observações</label><input name="observacoes" value="${esc(x.observacoes)}"></div>
+          <button type="submit" class="btn full ok">${S.lang === 'es' ? 'Confirmar cierre' : 'Confirmar fechamento'}</button>
+        </form>
       </div>
-      <div class="opMeta">${esc(x.data)} · ${esc(x.turno)} · ${esc(x.operacao)} · ${x.colaboradores} pers. · Inicio: <b>${esc(x.inicio)}</b></div>
-      <button type="button" class="btn sm sec toggleClose">${S.lang === 'es' ? 'Finalizar / Actualizar' : 'Finalizar / Atualizar'}</button>
-      <form class="closeBox hidden" data-row="${x.rowId}">
-        <div class="row2">
-          <div class="field"><label>Fim *</label><input name="fim" type="time" value="${now()}" required></div>
-          <div class="field"><label>Volume *</label><input name="volume" type="number" min="0" step="0.01" value="${x.volume ?? ''}" required></div>
-        </div>
-        <div class="field"><label>Status *</label>
-          <select name="status">
-            <option value="Concluido">Concluido</option>
-            <option value="Parado">Parado</option>
-            <option value="Aguardando">Aguardando</option>
-          </select>
-        </div>
-        <div class="field"><label>Motivo</label><input name="motivo" value="${esc(x.motivo)}"></div>
-        <div class="field"><label>Observações</label><input name="observacoes" value="${esc(x.observacoes)}"></div>
-        <button type="submit" class="btn full ok">${S.lang === 'es' ? 'Confirmar cierre' : 'Confirmar fechamento'}</button>
-      </form>
-    </div>
-  `).join('') || `<div class="card" style="text-align:center;color:var(--mut)">${S.lang === 'es' ? 'No hay camiones abiertos en patio.' : 'Nenhum veículo aberto no pátio.'}</div>`;
+    `;
+  }).join('') || `<div class="card" style="text-align:center;color:var(--mut)">${S.lang === 'es' ? 'No hay camiones abiertos en patio.' : 'Nenhum veículo aberto no pátio.'}</div>`;
 }
 
 async function handleCloseOp(e) {
@@ -732,16 +977,84 @@ async function handleCloseOp(e) {
   }
 }
 
-/* MÓDULO DE KPIS Y GRÁFICOS */
-function renderBarsHTML(items, colorClass = '', unit = '') {
+/* =========================================================
+   MÓDULO DE YMS & BI INTERACTIVO (CROSS-FILTERING AVANZADO)
+   ========================================================= */
+function applyPresetRange(mode) {
+  $$('.presetBtn').forEach(b => b.classList.toggle('active', b.dataset.range === mode));
+  const t = today();
+  if (mode === 'TODAY') {
+    $('#kDateStart').value = t;
+    $('#kDateEnd').value = t;
+  } else if (mode === '7D') {
+    $('#kDateStart').value = addDays(t, -6);
+    $('#kDateEnd').value = t;
+  } else if (mode === 'MONTH') {
+    $('#kDateStart').value = t.slice(0, 7) + '-01';
+    $('#kDateEnd').value = t;
+  } else {
+    $('#kDateStart').value = '';
+    $('#kDateEnd').value = '';
+  }
+  S.bi.showAllRows = false;
+  renderKpis();
+}
+
+function toggleSelectFilter(selId, val) {
+  const el = $(selId);
+  el.value = (el.value === val) ? '' : val;
+  S.bi.showAllRows = false;
+  renderKpis();
+}
+
+function toggleDocaFilter(doca) {
+  S.bi.doca = (S.bi.doca === doca) ? '' : doca;
+  S.bi.showAllRows = false;
+  renderKpis();
+}
+
+function setKpiFocus(mode) {
+  S.bi.kpiFocus = (S.bi.kpiFocus === mode) ? 'ALL' : mode;
+  S.bi.showAllRows = false;
+  renderKpis();
+}
+
+function renderActiveFilterChips() {
+  const es = S.lang === 'es';
+  const chips = [];
+  if ($('#kDateStart').value) chips.push({ lbl: `${es ? 'Desde' : 'De'}: ${$('#kDateStart').value}`, clear: () => { $('#kDateStart').value = ''; } });
+  if ($('#kDateEnd').value) chips.push({ lbl: `${es ? 'Hasta' : 'Até'}: ${$('#kDateEnd').value}`, clear: () => { $('#kDateEnd').value = ''; } });
+  if ($('#kArea').value) chips.push({ lbl: `Área: ${$('#kArea').value}`, clear: () => { $('#kArea').value = ''; } });
+  if ($('#kShift').value) chips.push({ lbl: `Turno: ${$('#kShift').value}`, clear: () => { $('#kShift').value = ''; } });
+  if ($('#kOp').value) chips.push({ lbl: `${es ? 'Operación' : 'Operação'}: ${$('#kOp').value}`, clear: () => { $('#kOp').value = ''; } });
+  if ($('#kStatus').value) chips.push({ lbl: `Status: ${$('#kStatus').value}`, clear: () => { $('#kStatus').value = ''; } });
+  if (S.bi.doca) chips.push({ lbl: `Doca: ${S.bi.doca}`, clear: () => { S.bi.doca = ''; } });
+  if (S.bi.kpiFocus !== 'ALL') chips.push({ lbl: `${es ? 'Vista' : 'Visão'}: ${S.bi.kpiFocus}`, clear: () => { S.bi.kpiFocus = 'ALL'; } });
+
+  const box = $('#activeFilterChips');
+  if (!chips.length) {
+    box.innerHTML = '';
+    return;
+  }
+  box.innerHTML = chips.map((c, idx) => `<button type="button" class="fChip" data-cidx="${idx}">${esc(c.lbl)} ✕</button>`).join('');
+  $$('.fChip', box).forEach(btn => {
+    btn.onclick = () => {
+      chips[+btn.dataset.cidx].clear();
+      renderKpis();
+    };
+  });
+}
+
+function renderBarsHTML(items, activeVal, onClickAttr, colorClass = '', unit = '') {
   if (!items.length) return `<div style="color:var(--mut);font-size:13px;text-align:center;padding:12px 0">${S.lang === 'es' ? 'Sin datos para este filtro' : 'Sem dados para este filtro'}</div>`;
   const max = Math.max(1, ...items.map(x => x.val));
   return items.map(it => {
     const pct = Math.min(100, Math.round((it.val / max) * 100));
+    const isSel = activeVal && activeVal === it.key;
     return `
-      <div class="barRow">
+      <div class="barRow ${isSel ? 'selected' : ''}" ${onClickAttr ? `${onClickAttr}="${esc(it.key)}"` : ''}>
         <div class="barInfo">
-          <span>${esc(it.label)}</span>
+          <span>${esc(it.label)} ${isSel ? '✓' : ''}</span>
           <span>${fmt(it.val, it.dec ?? 2)}${unit}</span>
         </div>
         <div class="barTrack">
@@ -753,69 +1066,230 @@ function renderBarsHTML(items, colorClass = '', unit = '') {
 }
 
 function renderKpis() {
-  const fDate = $('#kDate').value;
+  const fStart = $('#kDateStart').value;
+  const fEnd = $('#kDateEnd').value;
   const fArea = $('#kArea').value;
   const fShift = $('#kShift').value;
   const fOp = $('#kOp').value;
+  const fStatus = $('#kStatus').value;
+  const fDoca = S.bi.doca;
 
-  const list = S.data.filter(x =>
-    (!fDate || x.data === fDate) &&
+  renderActiveFilterChips();
+
+  const matchDateRange = (x) => (!fStart || x.data >= fStart) && (!fEnd || x.data <= fEnd);
+
+  // Base filtrada completa
+  const baseList = S.data.filter(x =>
+    matchDateRange(x) &&
     (!fArea || x.expedicao === fArea) &&
     (!fShift || x.turno === fShift) &&
-    (!fOp || x.operacao === fOp)
+    (!fOp || x.operacao === fOp) &&
+    (!fStatus || x.status === fStatus) &&
+    (!fDoca || x.doca === fDoca)
   );
 
-  const totalOps = list.length;
-  const doneOps = list.filter(x => x.status === 'Concluido').length;
+  const enriched = baseList.map(x => ({ ...x, m: calcSafeMetrics(x) }));
+
+  const totalOps = enriched.length;
+  const doneOps = enriched.filter(x => x.status === 'Concluido').length;
   const openOps = totalOps - doneOps;
-  const totalVol = list.reduce((s, x) => s + (+x.volume || 0), 0);
-  const totalHH = list.reduce((s, x) => s + (+x.hh || 0), 0);
-  const totalTempo = list.reduce((s, x) => s + (+x.tempo || 0), 0);
-  const stoppedHours = list.filter(x => ['Parado', 'Aguardando'].includes(x.status) || x.motivo).reduce((s, x) => s + (+x.tempo || 0), 0);
+  const totalVol = enriched.reduce((s, x) => s + x.m.vol, 0);
+  const totalHH = enriched.reduce((s, x) => s + x.m.hh, 0);
+  const totalTempo = enriched.reduce((s, x) => s + x.m.tempo, 0);
+
+  // Separación clara entre PARADO (detención operativa) y AGUARDANDO (espera en patio)
+  const paradoRows = enriched.filter(x => x.status === 'Parado');
+  const aguardandoRows = enriched.filter(x => x.status === 'Aguardando');
+  const delayRows = enriched.filter(x => ['Parado', 'Aguardando'].includes(x.status) || x.motivo);
+
+  const paradoHours = paradoRows.reduce((s, x) => s + x.m.tempo, 0);
+  const aguardandoHours = aguardandoRows.reduce((s, x) => s + x.m.tempo, 0);
+  const totalDelayHours = paradoHours + aguardandoHours;
+
   const globalProd = totalHH > 0 ? (totalVol / totalHH) : 0;
-  const timedList = list.filter(x => x.tempo != null && x.tempo > 0);
-  const avgCycleMin = timedList.length ? (timedList.reduce((s, x) => s + (+x.tempo || 0), 0) / timedList.length) * 60 : 0;
-  const effPct = totalTempo > 0 ? Math.max(0, ((totalTempo - stoppedHours) / totalTempo) * 100) : 100;
+  const timedList = enriched.filter(x => x.m.tempo > 0);
+  const avgCycleMin = timedList.length ? (timedList.reduce((s, x) => s + x.m.tempo, 0) / timedList.length) * 60 : 0;
+  const effPct = totalTempo > 0 ? Math.max(0, ((totalTempo - totalDelayHours) / totalTempo) * 100) : 100;
 
   const es = S.lang === 'es';
+  const focus = S.bi.kpiFocus;
+
+  // 8 TARJETAS KPI INTERACTIVAS
   $('#kpiCards').innerHTML = `
-    <div class="kpiBox ok">
-      <div class="kpiLbl">${es ? 'Productividad Global' : 'Produtividade Global'}</div>
+    <div class="kpiBox ok ${focus === 'TOP_PROD' ? 'selected' : ''}" data-focus="TOP_PROD">
+      <div class="kpiTop">
+        <span class="kpiLbl">${es ? 'Productividad Global' : 'Produtividade Global'}</span>
+        <span class="kpiHint">${es ? 'Ordenar ▾' : 'Ordenar ▾'}</span>
+      </div>
       <div class="kpiVal">${fmt(globalProd)}</div>
-      <div class="kpiSub">Vol / HH</div>
+      <div class="kpiSub">Vol / HH (${fmt(totalHH)} HH)</div>
     </div>
-    <div class="kpiBox">
-      <div class="kpiLbl">${es ? 'Volumen Total' : 'Volume Total'}</div>
+
+    <div class="kpiBox ${focus === 'TOP_VOL' ? 'selected' : ''}" data-focus="TOP_VOL">
+      <div class="kpiTop">
+        <span class="kpiLbl">${es ? 'Volumen Total' : 'Volume Total'}</span>
+        <span class="kpiHint">${es ? 'Top Vol ▾' : 'Top Vol ▾'}</span>
+      </div>
       <div class="kpiVal">${fmt(totalVol, 0)}</div>
       <div class="kpiSub">${es ? 'Cajas / Unidades' : 'Caixas / Unidades'}</div>
     </div>
-    <div class="kpiBox">
-      <div class="kpiLbl">${es ? 'Operaciones' : 'Operações'}</div>
+
+    <div class="kpiBox ${focus === 'OPEN_ONLY' ? 'selected' : ''}" data-focus="OPEN_ONLY">
+      <div class="kpiTop">
+        <span class="kpiLbl">${es ? 'Operaciones YMS' : 'Operações YMS'}</span>
+        <span class="kpiHint">${es ? 'Abiertas ▾' : 'Abertas ▾'}</span>
+      </div>
       <div class="kpiVal">${totalOps}</div>
-      <div class="kpiSub">${doneOps} ${es ? 'concluidas' : 'concluídas'} · ${openOps} ${es ? 'abiertas' : 'abertas'}</div>
+      <div class="kpiSub">${doneOps} ${es ? 'concluidas' : 'concluídas'} · <b>${openOps} ${es ? 'abiertas' : 'abertas'}</b></div>
     </div>
-    <div class="kpiBox">
-      <div class="kpiLbl">${es ? 'Ciclo Promedio' : 'Ciclo Médio'}</div>
+
+    <div class="kpiBox ${focus === 'LONG_CYCLE' ? 'selected' : ''}" data-focus="LONG_CYCLE">
+      <div class="kpiTop">
+        <span class="kpiLbl">${es ? 'Ciclo Promedio' : 'Ciclo Médio'}</span>
+        <span class="kpiHint">${es ? 'Mayor ▾' : 'Maior ▾'}</span>
+      </div>
       <div class="kpiVal">${Math.round(avgCycleMin)} min</div>
-      <div class="kpiSub">${es ? 'Tiempo en muelle' : 'Tempo na doca'}</div>
+      <div class="kpiSub">${es ? 'Permanencia en muelle' : 'Permanência na doca'}</div>
     </div>
-    <div class="kpiBox ${effPct >= 85 ? 'ok' : 'warn'}">
-      <div class="kpiLbl">${es ? 'Eficiencia Operativa' : 'Eficiência Operacional'}</div>
+
+    <div class="kpiBox ${effPct >= 85 ? 'ok' : 'warn'}" data-focus="ALL">
+      <div class="kpiTop">
+        <span class="kpiLbl">${es ? 'Eficiencia Operativa' : 'Eficiência Operacional'}</span>
+        <span class="kpiHint">SLA</span>
+      </div>
       <div class="kpiVal">${fmt(effPct, 1)}%</div>
-      <div class="kpiSub">${fmt(totalHH)} HH ${es ? 'totales' : 'totais'}</div>
+      <div class="kpiSub">${fmt(totalTempo)} h ${es ? 'totales en muelle' : 'totais na doca'}</div>
     </div>
-    <div class="kpiBox ${stoppedHours > 0 ? 'bad' : 'ok'}">
-      <div class="kpiLbl">${es ? 'Tiempo Parado / Espera' : 'Tempo Parado / Espera'}</div>
-      <div class="kpiVal">${fmt(stoppedHours)} h</div>
-      <div class="kpiSub">${es ? 'Cuellos de botella' : 'Gargalos'}</div>
+
+    <div class="kpiBox ${paradoHours > 0 ? 'bad' : 'ok'} ${focus === 'PARADO_ONLY' ? 'selected' : ''}" data-focus="PARADO_ONLY">
+      <div class="kpiTop">
+        <span class="kpiLbl">${es ? 'Tiempo Parado' : 'Tempo Parado'}</span>
+        <span class="kpiHint">${es ? 'Filtrar ▾' : 'Filtrar ▾'}</span>
+      </div>
+      <div class="kpiVal">${fmt(paradoHours)} h</div>
+      <div class="kpiSub">${paradoRows.length} ${es ? 'detenciones en muelle' : 'paradas na doca'}</div>
+    </div>
+
+    <div class="kpiBox ${aguardandoHours > 0 ? 'warn' : 'ok'} ${focus === 'AGUARDANDO_ONLY' ? 'selected' : ''}" data-focus="AGUARDANDO_ONLY">
+      <div class="kpiTop">
+        <span class="kpiLbl">${es ? 'Tiempo Aguardando' : 'Tempo Aguardando'}</span>
+        <span class="kpiHint">${es ? 'Filtrar ▾' : 'Filtrar ▾'}</span>
+      </div>
+      <div class="kpiVal">${fmt(aguardandoHours)} h</div>
+      <div class="kpiSub">${aguardandoRows.length} ${es ? 'esperas de liberación' : 'esperas de liberação'}</div>
+    </div>
+
+    <div class="kpiBox" data-focus="ALL">
+      <div class="kpiTop">
+        <span class="kpiLbl">${es ? 'Promedio / Operación' : 'Média / Operação'}</span>
+        <span class="kpiHint">Vol</span>
+      </div>
+      <div class="kpiVal">${fmt(totalOps ? totalVol / totalOps : 0, 0)}</div>
+      <div class="kpiSub">${es ? 'Cajas por vehículo' : 'Caixas por veículo'}</div>
     </div>
   `;
 
-  // 1. Gráfico Dona por Status
-  const cDone = list.filter(x => x.status === 'Concluido').length;
-  const cRun = list.filter(x => x.status === 'Em operacao').length;
-  const cWait = list.filter(x => x.status === 'Aguardando').length;
-  const cStop = list.filter(x => x.status === 'Parado').length;
+  $$('#kpiCards .kpiBox').forEach(card => {
+    card.onclick = () => setKpiFocus(card.dataset.focus);
+  });
+
+  // COMPARATIVA OPERATIVA CD VS FÁBRICA (respectando el rango de fechas y filtros)
+  const areaBase = S.data.filter(x =>
+    matchDateRange(x) &&
+    (!fShift || x.turno === fShift) &&
+    (!fOp || x.operacao === fOp) &&
+    (!fStatus || x.status === fStatus) &&
+    (!fDoca || x.doca === fDoca)
+  ).map(x => ({ ...x, m: calcSafeMetrics(x) }));
+
+  $('#areaCompBox').innerHTML = ['CD', 'FABRICA'].map(ar => {
+    const sub = areaBase.filter(x => x.expedicao === ar);
+    const v = sub.reduce((s, x) => s + x.m.vol, 0);
+    const h = sub.reduce((s, x) => s + x.m.hh, 0);
+    const p = h > 0 ? v / h : 0;
+    const isSel = fArea === ar;
+    return `
+      <div class="areaCard ${isSel ? 'selected' : ''}" data-area="${ar}">
+        <h4><span>${ar} ${isSel ? '✓' : ''}</span><span class="badge ${isSel ? 'run' : ''}">${sub.length} ops</span></h4>
+        <div class="areaStats">
+          <div><span>${es ? 'Volumen' : 'Volume'}</span><b>${fmt(v, 0)}</b></div>
+          <div><span>HH</span><b>${fmt(h, 1)}</b></div>
+          <div><span>Vol / HH</span><b>${fmt(p, 2)}</b></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  $$('#areaCompBox .areaCard').forEach(card => {
+    card.onclick = () => toggleSelectFilter('#kArea', card.dataset.area);
+  });
+
+  // MAPA VISUAL DE MUELLES EN VIVO (YARD DOCK BOARD)
+  const dockMap = {};
+  S.data.filter(x => matchDateRange(x) && (!fArea || x.expedicao === fArea)).forEach(x => {
+    const d = x.doca || '?';
+    if (!dockMap[d]) dockMap[d] = { doca: d, count: 0, last: x };
+    dockMap[d].count++;
+    dockMap[d].last = x;
+  });
+  const docks = Object.values(dockMap).sort((a, b) => a.doca.localeCompare(b.doca, undefined, { numeric: true }));
+  $('#dockBoardHint').textContent = fDoca ? `${es ? 'Filtrado:' : 'Filtrado:'} Doca ${fDoca}` : `${docks.length} ${es ? 'muelles registrados' : 'docas registradas'}`;
+
+  $('#dockBoard').innerHTML = docks.map(d => {
+    const st = d.last.status;
+    const isOpen = ['Em operacao', 'Aguardando', 'Parado'].includes(st);
+    const stayMin = (isOpen && d.last.data === today()) ? getLiveStayMinutes(d.last) : 0;
+    const overSla = stayMin > 120;
+    const cls = st === 'Em operacao' ? 'st-run' : st === 'Aguardando' ? 'st-wait' : st === 'Parado' ? 'st-stop' : 'st-done';
+    const isSel = fDoca === d.doca;
+    return `
+      <div class="dockTile ${cls} ${overSla ? 'sla-alert' : ''} ${isSel ? 'selected' : ''}" data-doca="${esc(d.doca)}">
+        <div class="dockTop">
+          <span class="dockName">Doca ${esc(d.doca)}</span>
+          ${stayMin > 0 ? `<span class="dockTimer ${overSla ? 'over' : ''}">⏱ ${formatMinutesShort(stayMin)}</span>` : ''}
+        </div>
+        <div class="dockPlate">${esc(d.last.placa)} · ${d.count} ops</div>
+        <div class="dockStat">${esc(st)}</div>
+      </div>
+    `;
+  }).join('') || `<div style="color:var(--mut);font-size:13px">${es ? 'Sin muelles registrados.' : 'Sem docas registradas.'}</div>`;
+
+  $$('#dockBoard .dockTile').forEach(tile => {
+    tile.onclick = () => toggleDocaFilter(tile.dataset.doca);
+  });
+
+  // 1. Evolución Diaria de Volumen (últimos 10 días del filtro)
+  const byDay = {};
+  enriched.forEach(x => {
+    const k = x.data || '?';
+    byDay[k] = (byDay[k] || 0) + x.m.vol;
+  });
+  const dayItems = Object.entries(byDay)
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .slice(-10)
+    .map(([key, val]) => ({ key, label: key.slice(5), val, dec: 0 }));
+  $('#chartDaily').innerHTML = renderBarsHTML(dayItems, '', '', '');
+
+  // 2. Ocupación / Congestión por Muelle (Horas) - interactivo
+  const byDockHours = {};
+  enriched.forEach(x => {
+    const k = x.doca || '?';
+    byDockHours[k] = (byDockHours[k] || 0) + x.m.tempo;
+  });
+  const dockHourItems = Object.entries(byDockHours)
+    .map(([key, val]) => ({ key, label: `Doca ${key}`, val, cls: 'warn' }))
+    .sort((a, b) => b.val - a.val)
+    .slice(0, 8);
+  $('#chartDockLoad').innerHTML = renderBarsHTML(dockHourItems, fDoca, 'data-doca', 'warn', ' h');
+  $$('#chartDockLoad .barRow').forEach(el => {
+    el.onclick = () => toggleDocaFilter(el.dataset.doca);
+  });
+
+  // 3. Gráfico Dona por Status (interactivo)
+  const cDone = enriched.filter(x => x.status === 'Concluido').length;
+  const cRun = enriched.filter(x => x.status === 'Em operacao').length;
+  const cWait = enriched.filter(x => x.status === 'Aguardando').length;
+  const cStop = enriched.filter(x => x.status === 'Parado').length;
 
   if (!totalOps) {
     $('#chartStatus').innerHTML = `<div style="color:var(--mut);font-size:13px;text-align:center;padding:20px 0">${es ? 'Sin registros' : 'Sem registros'}</div>`;
@@ -823,67 +1297,165 @@ function renderKpis() {
     const p1 = (cDone / totalOps) * 100;
     const p2 = p1 + (cRun / totalOps) * 100;
     const p3 = p2 + (cWait / totalOps) * 100;
+    const legs = [
+      { st: 'Concluido', lbl: 'Concluido', cnt: cDone, col: '#16a34a' },
+      { st: 'Em operacao', lbl: 'Em operação', cnt: cRun, col: '#2563eb' },
+      { st: 'Aguardando', lbl: 'Aguardando', cnt: cWait, col: '#f59e0b' },
+      { st: 'Parado', lbl: 'Parado', cnt: cStop, col: '#dc2626' }
+    ];
     $('#chartStatus').innerHTML = `
       <div class="donutWrap">
         <div class="donut" style="background:conic-gradient(#16a34a 0% ${p1}%, #2563eb ${p1}% ${p2}%, #f59e0b ${p2}% ${p3}%, #dc2626 ${p3}% 100%)">
-          <div class="donutCenter">${totalOps}<small>${es ? 'TOTAL' : 'TOTAL'}</small></div>
+          <div class="donutCenter">${totalOps}<small>OPS</small></div>
         </div>
         <div class="legend">
-          <div class="legItem"><span><i class="legDot" style="background:#16a34a"></i>Concluido</span><b>${cDone}</b></div>
-          <div class="legItem"><span><i class="legDot" style="background:#2563eb"></i>Em operação</span><b>${cRun}</b></div>
-          <div class="legItem"><span><i class="legDot" style="background:#f59e0b"></i>Aguardando</span><b>${cWait}</b></div>
-          <div class="legItem"><span><i class="legDot" style="background:#dc2626"></i>Parado</span><b>${cStop}</b></div>
+          ${legs.map(l => `
+            <div class="legItem ${fStatus === l.st ? 'selected' : ''}" data-st="${l.st}">
+              <span><i class="legDot" style="background:${l.col}"></i>${l.lbl}</span>
+              <b>${l.cnt}</b>
+            </div>
+          `).join('')}
         </div>
       </div>
     `;
+    $$('#chartStatus .legItem').forEach(el => {
+      el.onclick = () => toggleSelectFilter('#kStatus', el.dataset.st);
+    });
   }
 
-  // 2. Productividad por Operación (Vol / HH)
+  // 4. Productividad por Operación (Vol / HH) - interactivo
   const byOp = {};
-  list.forEach(x => {
+  enriched.forEach(x => {
     const k = x.operacao || 'Outro';
     if (!byOp[k]) byOp[k] = { vol: 0, hh: 0 };
-    byOp[k].vol += (+x.volume || 0);
-    byOp[k].hh += (+x.hh || 0);
+    byOp[k].vol += x.m.vol;
+    byOp[k].hh += x.m.hh;
   });
   const opItems = Object.entries(byOp)
-    .map(([label, v]) => ({ label, val: v.hh > 0 ? v.vol / v.hh : 0, cls: 'ok' }))
+    .map(([key, v]) => ({ key, label: key, val: v.hh > 0 ? v.vol / v.hh : 0, cls: 'ok' }))
     .sort((a, b) => b.val - a.val);
-  $('#chartProd').innerHTML = renderBarsHTML(opItems, 'ok');
+  $('#chartProd').innerHTML = renderBarsHTML(opItems, fOp, 'data-op', 'ok');
+  $$('#chartProd .barRow').forEach(el => {
+    el.onclick = () => toggleSelectFilter('#kOp', el.dataset.op);
+  });
 
-  // 3. Volumen por Turno
+  // 5. Volumen por Turno (ya limpio con .trim()) - interactivo
   const byShift = {};
-  list.forEach(x => {
-    const k = x.turno || 'Sin turno';
-    byShift[k] = (byShift[k] || 0) + (+x.volume || 0);
+  enriched.forEach(x => {
+    const k = x.turno || '1° Turno';
+    byShift[k] = (byShift[k] || 0) + x.m.vol;
   });
   const shiftItems = Object.entries(byShift)
-    .map(([label, val]) => ({ label, val, dec: 0 }))
+    .map(([key, val]) => ({ key, label: key, val, dec: 0 }))
     .sort((a, b) => b.val - a.val);
-  $('#chartShift').innerHTML = renderBarsHTML(shiftItems);
-
-  // 4. Top Muelles más usados
-  const byDock = {};
-  list.forEach(x => {
-    const k = 'Doca ' + (x.doca || '?');
-    byDock[k] = (byDock[k] || 0) + 1;
+  $('#chartShift').innerHTML = renderBarsHTML(shiftItems, fShift, 'data-shift');
+  $$('#chartShift .barRow').forEach(el => {
+    el.onclick = () => toggleSelectFilter('#kShift', el.dataset.shift);
   });
-  const dockItems = Object.entries(byDock)
-    .map(([label, val]) => ({ label, val, dec: 0 }))
-    .sort((a, b) => b.val - a.val)
-    .slice(0, 6);
-  $('#chartDocks').innerHTML = renderBarsHTML(dockItems, '', es ? ' ops' : ' ops');
 
-  // 5. Paradas por Motivo (Horas)
+  // 6. Motivos de Demora / Paradas (Horas)
   const byStop = {};
-  list.filter(x => ['Parado', 'Aguardando'].includes(x.status) || x.motivo).forEach(x => {
+  delayRows.forEach(x => {
     const k = x.motivo || x.status;
-    byStop[k] = (byStop[k] || 0) + (+x.tempo || 0);
+    byStop[k] = (byStop[k] || 0) + x.m.tempo;
   });
   const stopItems = Object.entries(byStop)
-    .map(([label, val]) => ({ label, val, cls: 'bad' }))
+    .map(([key, val]) => ({ key, label: key, val, cls: 'bad' }))
     .sort((a, b) => b.val - a.val);
-  $('#chartStops').innerHTML = renderBarsHTML(stopItems, 'bad', ' h');
+  $('#chartStops').innerHTML = renderBarsHTML(stopItems, '', '', 'bad', ' h');
+
+  // 7. TABLA DRILL-DOWN INTERACTIVA CON BUSCADOR Y EXPORTACIÓN
+  let drill = enriched.slice().reverse();
+  let titleTxt = es ? 'Detalle de Operaciones Filtradas' : 'Detalhe de Operações Filtradas';
+
+  if (focus === 'TOP_PROD') {
+    drill = drill.slice().sort((a, b) => b.m.prod - a.m.prod);
+    titleTxt = es ? 'Ranking por Mayor Productividad (Vol/HH)' : 'Ranking por Maior Produtividade (Vol/HH)';
+  } else if (focus === 'TOP_VOL') {
+    drill = drill.slice().sort((a, b) => b.m.vol - a.m.vol);
+    titleTxt = es ? 'Ranking por Mayor Volumen Movido' : 'Ranking por Maior Volume Movimentado';
+  } else if (focus === 'OPEN_ONLY') {
+    drill = drill.filter(x => x.status !== 'Concluido');
+    titleTxt = es ? 'Operaciones Abiertas en Patio' : 'Operações Abertas no Pátio';
+  } else if (focus === 'LONG_CYCLE') {
+    drill = drill.slice().sort((a, b) => b.m.tempo - a.m.tempo);
+    titleTxt = es ? 'Ranking por Mayor Tiempo en Muelle' : 'Ranking por Maior Tempo na Doca';
+  } else if (focus === 'PARADO_ONLY') {
+    drill = paradoRows.slice().reverse();
+    titleTxt = es ? 'Operaciones en Estado PARADO' : 'Operações em Status PARADO';
+  } else if (focus === 'AGUARDANDO_ONLY') {
+    drill = aguardandoRows.slice().reverse();
+    titleTxt = es ? 'Operaciones en Estado AGUARDANDO' : 'Operações em Status AGUARDANDO';
+  }
+
+  const qSearch = $('#biSearch').value.trim().toUpperCase();
+  if (qSearch) {
+    drill = drill.filter(x =>
+      x.placa.includes(qSearch) ||
+      x.doca.includes(qSearch) ||
+      x.motivo.toUpperCase().includes(qSearch)
+    );
+  }
+
+  S.lastFiltered = drill;
+  $('#drillTitle').textContent = titleTxt;
+  $('#drillCount').textContent = drill.length;
+
+  const limit = S.bi.showAllRows ? drill.length : 40;
+  const visible = drill.slice(0, limit);
+
+  if (!drill.length) {
+    $('#drillTableBox').innerHTML = `<div style="padding:16px;text-align:center;color:var(--mut);font-size:13px">${es ? 'Sin registros para esta selección.' : 'Sem registros para esta seleção.'}</div>`;
+    $('#drillPager').innerHTML = '';
+  } else {
+    $('#drillTableBox').innerHTML = `
+      <table class="drillTable">
+        <thead>
+          <tr>
+            <th>${es ? 'Fecha' : 'Data'}</th>
+            <th>Área</th>
+            <th>Turno</th>
+            <th>Doca</th>
+            <th>${es ? 'Operación' : 'Operação'}</th>
+            <th>Placa</th>
+            <th>Status</th>
+            <th>${es ? 'Tiempo' : 'Tempo'}</th>
+            <th>Vol</th>
+            <th>Vol/HH</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${visible.map(x => `
+            <tr>
+              <td>${esc(x.data)}</td>
+              <td>${esc(x.expedicao)}</td>
+              <td>${esc(x.turno)}</td>
+              <td><b>${esc(x.doca)}</b></td>
+              <td>${esc(x.operacao)}</td>
+              <td>${esc(x.placa)}</td>
+              <td><span class="badge ${x.status === 'Concluido' ? 'ok' : x.status === 'Parado' ? 'bad' : x.status === 'Em operacao' ? 'run' : ''}">${esc(x.status)}</span></td>
+              <td>${fmt(x.m.tempo)} h</td>
+              <td><b>${fmt(x.m.vol, 0)}</b></td>
+              <td><b>${fmt(x.m.prod)}</b></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+
+    if (drill.length > 40) {
+      $('#drillPager').innerHTML = `
+        <span>${es ? `Mostrando ${visible.length} de ${drill.length} registros` : `Mostrando ${visible.length} de ${drill.length} registros`}</span>
+        <button type="button" id="toggleRowsBtn" class="btn sm sec">${S.bi.showAllRows ? (es ? 'Mostrar menos' : 'Mostrar menos') : (es ? `Ver todos (${drill.length})` : `Ver todos (${drill.length})`)}</button>
+      `;
+      $('#toggleRowsBtn').onclick = () => {
+        S.bi.showAllRows = !S.bi.showAllRows;
+        renderKpis();
+      };
+    } else {
+      $('#drillPager').innerHTML = `<span>${drill.length} ${es ? 'registros encontrados' : 'registros encontrados'}</span>`;
+    }
+  }
 }
 
 function renderHistory() {
@@ -907,18 +1479,26 @@ function renderHistory() {
   }).join('') || `<div class="card" style="text-align:center;color:var(--mut)">${S.lang === 'es' ? 'Sin registros para esta fecha.' : 'Sem registros para esta data.'}</div>`;
 }
 
-function exportCSV() {
-  const fDate = $('#filterDate').value;
-  const list = S.data.filter(x => !fDate || x.data === fDate);
+function downloadCSVRows(list, filename) {
   const head = ['Data', 'Turno', 'Doca', 'Operacao', 'Placa', 'Inicio', 'Fim', 'Colaboradores', 'Volume', 'Status', 'Motivo', 'Observacoes', 'Expedicao', 'Tempo(h)', 'HH', 'Vol/HH', 'USER'];
   const rows = list.map(x => [x.data, x.turno, x.doca, x.operacao, x.placa, x.inicio, x.fim, x.colaboradores, x.volume, x.status, x.motivo, x.observacoes, x.expedicao, x.tempo, x.hh, x.prod, x.user]);
-  const text = '\ufeff' + [head, ...rows].map(r => r.map(v => '"' + String(v ?? '').replace(/"/g, '""') + '"').join(';')).join('\n');
+  const text = '\\ufeff' + [head, ...rows].map(r => r.map(v => '"' + String(v ?? '').replace(/"/g, '""') + '"').join(';')).join('\\n');
   const u = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
   const a = document.createElement('a');
   a.href = u;
-  a.download = 'DOCAS_' + (fDate || today()) + '.csv';
+  a.download = filename;
   a.click();
   URL.revokeObjectURL(u);
+}
+
+function exportCSV() {
+  const fDate = $('#filterDate').value;
+  const list = S.data.filter(x => !fDate || x.data === fDate);
+  downloadCSVRows(list, 'DOCAS_' + (fDate || today()) + '.csv');
+}
+
+function exportFilteredBI() {
+  downloadCSVRows(S.lastFiltered, 'DOCAS_BI_FILTRADO_' + today() + '.csv');
 }
 
 function renderAll() {
@@ -972,19 +1552,47 @@ $('#yardList').onclick = e => { if (e.target.matches('.toggleClose')) e.target.n
 $('#yardList').onsubmit = handleCloseOp;
 $('#filterDate').onchange = renderHistory;
 $('#exportBtn').onclick = exportCSV;
-$$('#kDate, #kArea, #kShift, #kOp').forEach(el => el.onchange = renderKpis);
+$('#biExportBtn').onclick = exportFilteredBI;
+$('#biSearch').oninput = () => { S.bi.showAllRows = false; renderKpis(); };
+
+$$('.presetBtn').forEach(btn => {
+  btn.onclick = () => applyPresetRange(btn.dataset.range);
+});
+
+$$('#kDateStart, #kDateEnd').forEach(el => {
+  el.onchange = () => {
+    $$('.presetBtn').forEach(b => b.classList.remove('active'));
+    S.bi.showAllRows = false;
+    renderKpis();
+  };
+});
+
+$$('#kArea, #kShift, #kOp, #kStatus').forEach(el => {
+  el.onchange = () => {
+    S.bi.showAllRows = false;
+    renderKpis();
+  };
+});
+
 $('#clearFiltersBtn').onclick = () => {
-  $('#kDate').value = '';
+  $('#kDateStart').value = '';
+  $('#kDateEnd').value = '';
   $('#kArea').value = '';
   $('#kShift').value = '';
   $('#kOp').value = '';
+  $('#kStatus').value = '';
+  $('#biSearch').value = '';
+  $$('.presetBtn').forEach(b => b.classList.toggle('active', b.dataset.range === 'ALL'));
+  S.bi.doca = '';
+  S.bi.kpiFocus = 'ALL';
+  S.bi.showAllRows = false;
   renderKpis();
 };
+
 window.addEventListener('online', () => { renderQueueBanner(); if (S.session) retryQueue(); });
 
 $('#newForm').data.value = today();
 $('#filterDate').value = today();
-$('#kDate').value = '';
 updateFormRules();
 tr();
 
