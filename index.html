@@ -33,7 +33,7 @@ button,input,select,textarea{font:inherit}
 .banner{background:#fef3c7;color:#92400e;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;border-bottom:1px solid #fcd34d}
 
 /* CONTENEDOR Y TARJETAS */
-main{max-width:1120px;margin:0 auto;padding:14px}
+main{max-width:1140px;margin:0 auto;padding:14px}
 .page{display:none}
 .page.active{display:block}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px;box-shadow:0 2px 8px #0f172a08}
@@ -41,7 +41,7 @@ main{max-width:1120px;margin:0 auto;padding:14px}
 
 /* FORMULARIOS */
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.row6{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.row7{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
 .field{margin-bottom:12px}
 .field label{display:block;font-weight:700;font-size:11px;color:#334155;margin-bottom:5px;text-transform:uppercase;letter-spacing:.3px}
 .field input,.field select,.field textarea{
@@ -53,12 +53,18 @@ main{max-width:1120px;margin:0 auto;padding:14px}
 .field textarea{min-height:70px;resize:vertical}
 
 /* CHIPS DE SELECCIÓN RÁPIDA */
-.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
 .chipBtn{
-  flex:1;min-width:85px;min-height:44px;border:1.5px solid var(--line);background:#f8fafc;
-  color:var(--txt);border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;text-align:center
+  flex:1;min-width:78px;min-height:42px;padding:6px 8px;border:1.5px solid var(--line);background:#f8fafc;
+  color:var(--txt);border-radius:10px;font-weight:800;font-size:13px;cursor:pointer;text-align:center;transition:.12s
 }
-.chipBtn.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+.chipBtn.active{background:var(--pri);color:#fff;border-color:var(--pri);box-shadow:0 2px 6px #0f254433}
+.reasonChips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.rChip{
+  border:1px solid var(--line);background:#f8fafc;color:#334155;font-size:11.5px;font-weight:700;
+  padding:5px 9px;border-radius:8px;cursor:pointer
+}
+.rChip:hover,.rChip.active{background:#fef3c7;border-color:#f59e0b;color:#92400e}
 
 .inline{display:flex;gap:8px}
 .inline input{flex:1}
@@ -82,24 +88,24 @@ main{max-width:1120px;margin:0 auto;padding:14px}
 /* TARJETAS DE PATIO E HISTORIAL */
 .opCard{border-left:5px solid var(--warn)}
 .opCard.done{border-left-color:var(--ok)}
-.opHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.opDoca{font-size:17px;font-weight:900;color:var(--pri)}
-.badge{padding:4px 9px;border-radius:999px;font-size:11px;font-weight:800;background:#fef3c7;color:#92400e}
+.opHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:6px;flex-wrap:wrap}
+.opDoca{font-size:16px;font-weight:900;color:var(--pri)}
+.badge{padding:3px 9px;border-radius:999px;font-size:11px;font-weight:800;background:#fef3c7;color:#92400e}
 .badge.ok{background:#dcfce7;color:#166534}
 .badge.bad{background:#fee2e2;color:#991b1b}
 .badge.run{background:#dbeafe;color:#1e40af}
+.badge.veh{background:#e2e8f0;color:#1e293b}
 .opMeta{font-size:13px;color:#475569;margin-bottom:8px}
 .closeBox{border-top:1px solid var(--line);margin-top:10px;padding-top:12px}
 
-/* =========================================================
-   DASHBOARD YMS & BI INTERACTIVO
-   ========================================================= */
+/* DASHBOARD YMS & BI INTERACTIVO */
 .biBanner{
   background:linear-gradient(135deg,#0f2544,#1e3a8a);color:#fff;border-radius:var(--r);
   padding:14px 16px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px
 }
 .biBanner h2{margin:0;font-size:16px;font-weight:900}
 .biBanner p{margin:2px 0 0;font-size:12px;opacity:.85}
+
 .presetBar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center}
 .presetBtn{
   border:1px solid var(--line);background:#f8fafc;color:var(--pri);font-size:11px;font-weight:800;
@@ -113,7 +119,61 @@ main{max-width:1120px;margin:0 auto;padding:14px}
 }
 .fChip:hover{background:#dbeafe}
 
-/* TARJETAS KPI INTERACTIVAS (8 KPIS) */
+/* TOOLTIPS INTERACTIVOS (PC Y CELULAR) */
+.tipIcon{
+  display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;
+  border-radius:50%;background:#e2e8f0;color:var(--pri);font-size:10px;font-weight:900;
+  cursor:help;margin-left:4px;vertical-align:middle;flex-shrink:0
+}
+.tipIcon:hover{background:var(--pri2);color:#fff}
+.tipPop{
+  position:fixed;z-index:60;max-width:270px;background:#0f172a;color:#f8fafc;
+  padding:9px 12px;border-radius:10px;font-size:12px;line-height:1.4;font-weight:600;
+  box-shadow:0 10px 28px #0005;pointer-events:none;border:1px solid #334155
+}
+
+/* MODAL / FICHA RESUMEN DE OPERACIÓN (VISUAL PARA CAPTURA) */
+.modalBack{
+  position:fixed;inset:0;z-index:70;background:#0f172a88;backdrop-filter:blur(2px);
+  display:grid;place-items:center;padding:16px
+}
+.modalCard{
+  width:min(520px,100%);background:#fff;border-radius:18px;border:1px solid var(--line);
+  box-shadow:0 24px 60px #0006;overflow:hidden;animation:popIn .15s ease-out
+}
+@keyframes popIn{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+.modalHead{
+  background:linear-gradient(135deg,#0f2544,#1e3a8a);color:#fff;padding:14px 18px;
+  display:flex;justify-content:space-between;align-items:center;gap:10px
+}
+.modalHead h3{margin:0;font-size:16px;font-weight:900;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.modalClose{
+  border:0;background:#ffffff22;color:#fff;width:30px;height:30px;border-radius:50%;
+  font-weight:900;cursor:pointer;display:grid;place-items:center;flex-shrink:0
+}
+.modalClose:hover{background:#ffffff44}
+.modalBody{padding:16px 18px}
+.sumTopStrip{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
+  padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e2e8f0
+}
+.sumMainTitle{font-size:18px;font-weight:900;color:var(--pri)}
+.sumGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.sumCell{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 10px}
+.sumCell span{display:block;font-size:10px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
+.sumCell b{display:block;font-size:14px;font-weight:900;color:var(--pri);margin-top:2px}
+.sumNoteBox{
+  background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:10px 12px;
+  font-size:12.5px;color:#334155;margin-top:8px
+}
+.sumNoteBox.alert{background:#fef2f2;border-color:#fecaca;color:#991b1b}
+.sumNoteBox strong{display:block;font-size:10.5px;text-transform:uppercase;margin-bottom:2px;opacity:.85}
+.sumFoot{
+  margin-top:12px;padding-top:10px;border-top:1px dashed var(--line);
+  display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:var(--mut);font-weight:700
+}
+
+/* TARJETAS KPI INTERACTIVAS */
 .kpiGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
 .kpiBox{
   background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:13px;
@@ -126,27 +186,34 @@ main{max-width:1120px;margin:0 auto;padding:14px}
 .kpiBox.warn{border-top-color:var(--warn)}
 .kpiBox.bad{border-top-color:var(--bad)}
 .kpiTop{display:flex;justify-content:space-between;align-items:center;gap:4px}
-.kpiLbl{font-size:10.5px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
+.kpiLbl{font-size:10.5px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.3px;display:flex;align-items:center}
 .kpiHint{font-size:10px;color:var(--pri2);font-weight:700;opacity:.85;white-space:nowrap}
 .kpiVal{font-size:21px;font-weight:900;color:var(--pri);margin:4px 0 2px}
 .kpiSub{font-size:11px;color:#475569}
 
-/* MAPA VISUAL DE MUELLES (YARD DOCK BOARD) */
-.dockBoard{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:9px}
+/* MAPA VISUAL DE DOCAS SEPARADO POR ÁREA */
+.dockLegend{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;font-weight:700;margin-bottom:10px;color:#475569}
+.dockLegend span{display:inline-flex;align-items:center;gap:4px}
+.dockLegend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.dockGroup{margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
+.dockGroup:first-child{margin-top:0;padding-top:0;border-top:0}
+.dockGroupTitle{font-size:12px;font-weight:900;color:var(--pri);margin:0 0 8px;display:flex;align-items:center;gap:6px;text-transform:uppercase}
+.dockBoard{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px}
 .dockTile{
   border:1.5px solid var(--line);border-radius:12px;padding:10px;background:#f8fafc;
   cursor:pointer;transition:all .15s;position:relative
 }
 .dockTile:hover{transform:translateY(-2px);box-shadow:0 4px 12px #0001}
 .dockTile.selected{outline:2.5px solid var(--pri2);background:#eff6ff}
-.dockTile.st-run{border-left:5px solid #2563eb;background:#eff6ff66}
-.dockTile.st-wait{border-left:5px solid #f59e0b;background:#fef3c766}
-.dockTile.st-stop{border-left:5px solid #dc2626;background:#fee2e266}
-.dockTile.st-done{border-left:5px solid #16a34a}
+.dockTile.st-run{border-left:5px solid #2563eb;background:#eff6ff88}
+.dockTile.st-wait{border-left:5px solid #f59e0b;background:#fef3c788}
+.dockTile.st-stop{border-left:5px solid #dc2626;background:#fee2e288}
+.dockTile.st-done{border-left:5px solid #16a34a;background:#f0fdf488}
 .dockTile.sla-alert{border-color:#dc2626;box-shadow:0 0 0 1px #dc262644}
-.dockTop{display:flex;justify-content:space-between;align-items:center}
-.dockName{font-weight:900;font-size:14px;color:var(--pri)}
-.dockTimer{font-size:10px;font-weight:800;padding:2px 6px;border-radius:6px;background:#e2e8f0;color:#1e293b}
+.dockTop{display:flex;justify-content:space-between;align-items:center;gap:4px}
+.dockName{font-weight:900;font-size:13.5px;color:var(--pri)}
+.dockAreaTag{font-size:9.5px;font-weight:900;padding:1px 5px;border-radius:4px;background:#e2e8f0;color:#334155}
+.dockTimer{font-size:10px;font-weight:800;padding:2px 6px;border-radius:6px;background:#e2e8f0;color:#1e293b;white-space:nowrap}
 .dockTimer.over{background:#fee2e2;color:#b91c1c}
 .dockPlate{font-size:11px;font-weight:700;color:#334155;margin:3px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dockStat{font-size:10px;font-weight:800;text-transform:uppercase}
@@ -159,7 +226,7 @@ main{max-width:1120px;margin:0 auto;padding:14px}
 }
 .barRow:hover{background:#f1f5f9;border-color:#cbd5e1}
 .barRow.selected{background:#eff6ff;border-color:#2563eb}
-.barInfo{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:4px;color:#1e293b}
+.barInfo{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:4px;color:#1e293b;gap:8px}
 .barTrack{height:11px;background:#e2e8f0;border-radius:999px;overflow:hidden}
 .barFill{height:100%;background:linear-gradient(90deg,var(--pri),var(--pri2));border-radius:999px;transition:width .35s ease}
 .barFill.ok{background:linear-gradient(90deg,#15803d,#22c55e)}
@@ -193,12 +260,14 @@ main{max-width:1120px;margin:0 auto;padding:14px}
 
 /* TABLA DRILL-DOWN INTERACTIVA */
 .drillTools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.searchInput{min-height:34px;padding:4px 10px;border:1.5px solid var(--line);border-radius:8px;font-size:12px;min-width:180px}
+.searchInput{min-height:34px;padding:4px 10px;border:1.5px solid var(--line);border-radius:8px;font-size:12px;min-width:200px}
 .drillTableWrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
 .drillTable{width:100%;border-collapse:collapse;font-size:12px;text-align:left}
 .drillTable th{background:#f8fafc;color:var(--pri);font-weight:800;padding:9px 10px;border-bottom:1.5px solid var(--line);white-space:nowrap}
 .drillTable td{padding:8px 10px;border-bottom:1px solid #e2e8f0;white-space:nowrap}
-.drillTable tr:hover td{background:#f8fafc}
+.drillTable tbody tr{cursor:pointer;transition:background .12s}
+.drillTable tbody tr:hover td{background:#eff6ff}
+.drillTable tbody tr:hover td:first-child{box-shadow:inset 3px 0 0 var(--pri2)}
 .pager{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px;color:var(--mut);font-weight:700}
 
 /* NAVEGACIÓN INFERIOR FIJA */
@@ -216,14 +285,16 @@ main{max-width:1120px;margin:0 auto;padding:14px}
 .err{color:var(--bad);font-size:13px;font-weight:700;margin-top:8px;min-height:18px}
 .toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:40;background:#0f172a;color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;font-weight:700;box-shadow:0 8px 24px #0004;white-space:nowrap}
 
-@media(max-width:860px){
-  .row6{grid-template-columns:1fr 1fr}
+@media(max-width:960px){
+  .row7{grid-template-columns:1fr 1fr}
   .kpiGrid{grid-template-columns:1fr 1fr}
   .chartGrid{grid-template-columns:1fr}
   .areaCompGrid{grid-template-columns:1fr}
 }
-@media(max-width:440px){
+@media(max-width:560px){
+  .row2{grid-template-columns:1fr}
   .kpiGrid{grid-template-columns:1fr}
+  .sumGrid{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -323,11 +394,24 @@ main{max-width:1120px;margin:0 auto;padding:14px}
             </div>
           </div>
 
-          <div class="field">
-            <label data-t="plate">Placa / Vehículo *</label>
-            <div class="inline">
-              <input name="placa" maxlength="25" required>
-              <button type="button" id="btnInterno" class="btn sec">INTERNO</button>
+          <div class="row2">
+            <div class="field">
+              <label data-t="plate">Placa / Vehículo *</label>
+              <div class="inline">
+                <input name="placa" maxlength="25" required>
+                <button type="button" id="btnInterno" class="btn sec">INTERNO</button>
+              </div>
+            </div>
+            <div class="field">
+              <label data-t="vehType">Tipo de Vehículo *</label>
+              <select name="vehiculo" required>
+                <option value="CNTRN">CNTRN</option>
+                <option value="CARRETA">CARRETA</option>
+                <option value="TRUCK">TRUCK</option>
+                <option value="BAU">BAU</option>
+                <option value="VUC">VUC</option>
+                <option value="OUTRO">OUTRO</option>
+              </select>
             </div>
           </div>
 
@@ -371,6 +455,13 @@ main{max-width:1120px;margin:0 auto;padding:14px}
 
           <div class="field" id="motivoBox">
             <label data-t="reason">Motivo de parada *</label>
+            <div class="reasonChips" id="reasonQuickChips">
+              <button type="button" class="rChip" data-val="Falta de Conferente">Falta de Conferente</button>
+              <button type="button" class="rChip" data-val="Aguardando NF / Sistema">Aguardando NF / Sistema</button>
+              <button type="button" class="rChip" data-val="Falta de Empilhadeira">Falta de Empilhadeira</button>
+              <button type="button" class="rChip" data-val="Chuva">Chuva</button>
+              <button type="button" class="rChip" data-val="Manutenção">Manutenção</button>
+            </div>
             <input name="motivo" maxlength="100">
           </div>
 
@@ -380,7 +471,7 @@ main{max-width:1120px;margin:0 auto;padding:14px}
           </div>
 
           <div class="summaryBox">
-            <div><span data-t="tOcup">Tiempo (h)</span><b id="rtTime">0,00</b></div>
+            <div><span data-t="tOcup">Tiempo</span><b id="rtTime">0Min</b></div>
             <div><span>HH</span><b id="rtHH">0,00</b></div>
             <div><span>Vol / HH</span><b id="rtProd">0,00</b></div>
           </div>
@@ -389,8 +480,7 @@ main{max-width:1120px;margin:0 auto;padding:14px}
         </div>
       </form>
     </section>
-
-    <!-- PANTALLA 2: EN PATIO -->
+<!-- PANTALLA 2: EN PATIO -->
     <section id="tabYard" class="page">
       <div class="cardTitle" style="padding:0 4px">
         <span data-t="openOps">En Patio / Abiertas</span>
@@ -399,17 +489,17 @@ main{max-width:1120px;margin:0 auto;padding:14px}
       <div id="yardList"></div>
     </section>
 
-    <!-- PANTALLA 3: YMS & BI (KPIS INTERACTIVOS) -->
+    <!-- PANTALLA 3: YMS & BI -->
     <section id="tabKpis" class="page">
       <div class="biBanner">
         <div>
           <h2 data-t="biHead">Tablero YMS & BI — Control de Muelles</h2>
-          <p data-t="biSub">Haz clic en cualquier tarjeta, muelle o barra para cruzar filtros en vivo</p>
+          <p data-t="biSub">Haz clic en cualquier tarjeta, doca o barra para cruzar filtros en vivo · Toca una fila de la tabla para ver su ficha completa</p>
         </div>
         <button id="clearFiltersBtn" type="button" class="btn sm" style="background:#ffffff22;border:1px solid #ffffff55" data-t="clearF">Limpiar Filtros</button>
       </div>
 
-      <!-- PANEL DE FILTROS CON RANGO DE FECHAS Y PRESETS -->
+      <!-- PANEL DE FILTROS -->
       <div class="card">
         <div class="presetBar">
           <span style="font-size:11px;font-weight:800;color:var(--mut);text-transform:uppercase" data-t="quickRange">Período rápido:</span>
@@ -419,7 +509,7 @@ main{max-width:1120px;margin:0 auto;padding:14px}
           <button type="button" class="presetBtn active" data-range="ALL" data-t="rAll">Todo el historial</button>
         </div>
 
-        <div class="row6">
+        <div class="row7">
           <div class="field" style="margin-bottom:2px">
             <label data-t="fStart">Data Inicio</label>
             <input id="kDateStart" type="date">
@@ -458,6 +548,18 @@ main{max-width:1120px;margin:0 auto;padding:14px}
             </select>
           </div>
           <div class="field" style="margin-bottom:2px">
+            <label data-t="fVeh">Vehículo</label>
+            <select id="kVeh">
+              <option value="" data-es="Todos" data-pt="Todos">Todos</option>
+              <option value="CNTRN">CNTRN</option>
+              <option value="CARRETA">CARRETA</option>
+              <option value="TRUCK">TRUCK</option>
+              <option value="BAU">BAU</option>
+              <option value="VUC">VUC</option>
+              <option value="OUTRO">OUTRO</option>
+            </select>
+          </div>
+          <div class="field" style="margin-bottom:2px">
             <label>Status</label>
             <select id="kStatus">
               <option value="" data-es="Todos" data-pt="Todos">Todos</option>
@@ -471,66 +573,80 @@ main{max-width:1120px;margin:0 auto;padding:14px}
         <div id="activeFilterChips" class="activeFilters"></div>
       </div>
 
-      <!-- 8 TARJETAS KPI INTERACTIVAS -->
+      <!-- 8 TARJETAS KPI INTERACTIVAS CON TOOLTIPS -->
       <div class="kpiGrid" id="kpiCards"></div>
 
       <!-- COMPARATIVA CD VS FÁBRICA -->
       <div class="card">
-        <div class="cardTitle"><span data-t="areaCompTitle">Comparativa Operativa: CD vs FÁBRICA</span></div>
+        <div class="cardTitle">
+          <span><span data-t="areaCompTitle">Comparativa Operativa: CD vs FÁBRICA</span> <span class="tipIcon" data-tip-es="Compara volumen, Horas-Hombre (HH) y productividad Vol/HH entre CD y FÁBRICA. Haz clic en una tarjeta para filtrar." data-tip-pt="Compara volume, Horas-Homem (HH) e produtividade Vol/HH entre CD e FÁBRICA. Clique em um cartão para filtrar.">ⓘ</span></span>
+        </div>
         <div id="areaCompBox" class="areaCompGrid"></div>
       </div>
 
-      <!-- MAPA VISUAL DE MUELLES EN VIVO (YARD DOCK BOARD) -->
+      <!-- MAPA VISUAL DE DOCAS SEPARADO POR ÁREA -->
       <div class="card">
         <div class="cardTitle">
-          <span data-t="dockBoardTitle">Mapa de Muelles / Docas (Tiempo en vivo y filtro)</span>
-          <small id="dockBoardHint" style="font-weight:600;color:var(--mut);text-transform:none"></small>
+          <span><span data-t="dockBoardTitle">Mapa de Estado por Muelle (YMS en vivo)</span> <span class="tipIcon" data-tip-es="Separado por área (CD y FÁBRICA) para que nunca se mezclen muelles con el mismo número. Haz clic en una doca para filtrar exactamente esa área y ese muelle." data-tip-pt="Separado por área (CD e FÁBRICA) para nunca misturar docas com o mesmo número. Clique em uma doca para filtrar exatamente essa área e essa doca.">ⓘ</span></span>
+          <small id="dockBoardHint" style="font-weight:700;color:var(--pri);text-transform:none"></small>
         </div>
-        <div id="dockBoard" class="dockBoard"></div>
+        <div class="dockLegend">
+          <span><i style="background:#2563eb"></i>Em operação</span>
+          <span><i style="background:#f59e0b"></i>Aguardando</span>
+          <span><i style="background:#dc2626"></i>Parado</span>
+          <span><i style="background:#16a34a"></i>Concluido</span>
+        </div>
+        <div id="dockBoard"></div>
       </div>
 
-      <!-- GRÁFICOS DE ANÁLISIS INTERACTIVOS -->
+      <!-- GRÁFICOS INTERACTIVOS -->
       <div class="chartGrid">
         <div class="card">
-          <div class="cardTitle"><span data-t="cDaily">Evolución Diaria de Volumen</span></div>
+          <div class="cardTitle"><span><span data-t="cDaily">Evolución Diaria de Volumen</span> <span class="tipIcon" data-tip-es="Suma del volumen movido por día en los últimos 10 días con movimiento dentro del filtro activo." data-tip-pt="Soma do volume movimentado por dia nos últimos 10 dias com movimento dentro do filtro ativo.">ⓘ</span></span></div>
           <div id="chartDaily"></div>
         </div>
 
         <div class="card">
-          <div class="cardTitle"><span data-t="cDockLoad">Ocupación / Congestión por Muelle (Horas)</span></div>
+          <div class="cardTitle"><span><span data-t="cDockLoad">Carga de Operaciones por Muelle (Área · Doca)</span> <span class="tipIcon" data-tip-es="Cantidad total de operaciones atendidas por cada muelle identificado con su área (CD o FÁBRICA). Haz clic en cualquier barra para filtrar." data-tip-pt="Quantidade total de operações atendidas por cada doca identificada com sua área (CD ou FÁBRICA). Clique em qualquer barra para filtrar.">ⓘ</span></span></div>
           <div id="chartDockLoad"></div>
         </div>
 
         <div class="card">
-          <div class="cardTitle"><span data-t="cStatus">Distribución por Status</span></div>
+          <div class="cardTitle"><span><span data-t="cStatus">Distribución por Status</span> <span class="tipIcon" data-tip-es="Proporción de operaciones Concluidas, En operación, Aguardando y Paradas. Haz clic en la leyenda para filtrar." data-tip-pt="Proporção de operações Concluídas, Em operação, Aguardando e Paradas. Clique na legenda para filtrar.">ⓘ</span></span></div>
           <div id="chartStatus"></div>
         </div>
 
         <div class="card">
-          <div class="cardTitle"><span data-t="cProd">Productividad por Operación (Vol/HH)</span></div>
+          <div class="cardTitle"><span><span data-t="cProd">Productividad por Operación (Vol/HH)</span> <span class="tipIcon" data-tip-es="Promedio real de Volumen dividido entre Horas-Hombre (Personas × Tiempo) por tipo de operación." data-tip-pt="Média real de Volume dividido por Horas-Homem (Pessoas × Tempo) por tipo de operação.">ⓘ</span></span></div>
           <div id="chartProd"></div>
         </div>
 
         <div class="card">
-          <div class="cardTitle"><span data-t="cShift">Volumen Movido por Turno</span></div>
-          <div id="chartShift"></div>
+          <div class="cardTitle"><span><span data-t="cVeh">Rendimiento por Tipo de Vehículo</span> <span class="tipIcon" data-tip-es="Muestra cantidad de operaciones, tiempo promedio en muelle (2H 20Min) y productividad Vol/HH por cada tipo de vehículo (Columna S). Haz clic para filtrar." data-tip-pt="Mostra quantidade de operações, tempo médio na doca (2H 20Min) e produtividade Vol/HH por cada tipo de veículo (Coluna S). Clique para filtrar.">ⓘ</span></span></div>
+          <div id="chartVeh"></div>
         </div>
 
         <div class="card">
-          <div class="cardTitle"><span data-t="cStops">Cuellos de Botella / Motivos de Demora (Horas)</span></div>
+          <div class="cardTitle"><span><span data-t="cShift">Volumen Movido por Turno</span> <span class="tipIcon" data-tip-es="Total de cajas o unidades movidas en 1°, 2° y 3° Turno. Haz clic en un turno para filtrar." data-tip-pt="Total de caixas ou unidades movimentadas no 1°, 2° e 3° Turno. Clique em um turno para filtrar.">ⓘ</span></span></div>
+          <div id="chartShift"></div>
+        </div>
+
+        <div class="card" style="grid-column:1/-1">
+          <div class="cardTitle"><span><span data-t="cStops">Cuellos de Botella / Motivos de Demora</span> <span class="tipIcon" data-tip-es="Tiempo acumulado (en formato 2H 20Min) de operaciones en estado Parado o Aguardando agrupado por motivo." data-tip-pt="Tempo acumulado (no formato 2H 20Min) de operações em status Parado ou Aguardando agrupado por motivo.">ⓘ</span></span></div>
           <div id="chartStops"></div>
         </div>
       </div>
 
-      <!-- DETALLE DE OPERACIONES FILTRADAS (DRILL-DOWN CON BUSCADOR Y EXPORTACIÓN) -->
+      <!-- DETALLE DE OPERACIONES FILTRADAS -->
       <div class="card">
         <div class="cardTitle">
           <div>
             <span id="drillTitle">Detalle de Operaciones Filtradas</span>
             <span class="badge ok" id="drillCount" style="margin-left:6px">0</span>
+            <small style="font-size:11px;font-weight:600;color:var(--mut);text-transform:none;margin-left:6px" data-t="clickRowHint">(Clic en una fila para ver resumen)</small>
           </div>
           <div class="drillTools">
-            <input id="biSearch" type="search" class="searchInput" placeholder="Buscar placa o doca...">
+            <input id="biSearch" type="search" class="searchInput" placeholder="Buscar placa, doca, vehículo o usuario...">
             <button id="biExportBtn" type="button" class="btn sm sec" data-t="exportFiltered">Exportar Filtro (CSV)</button>
           </div>
         </div>
@@ -575,8 +691,19 @@ main{max-width:1120px;margin:0 auto;padding:14px}
   </nav>
 </div>
 
-<div id="toast" class="toast hidden"></div>
+<!-- MODAL DE RESUMEN VISUAL DE OPERACIÓN -->
+<div id="opModal" class="modalBack hidden">
+  <div class="modalCard" role="dialog" aria-modal="true">
+    <div class="modalHead">
+      <h3 id="opModalHeader">Resumen de Operación</h3>
+      <button type="button" id="opModalClose" class="modalClose" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modalBody" id="opModalBody"></div>
+  </div>
+</div>
 
+<div id="toast" class="toast hidden"></div>
+<div id="tipPop" class="tipPop hidden"></div>
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycbz9Y_L23iGG7sQSlMN0cVnPFulJdGYdcjuiO0QhhwPzntrelNVw9QgNFbznJqRXeHMvcg/exec';
 const K = { session: 'docasSessionSimple', queue: 'docasQueueSimple', lang: 'docasLangSimple' };
@@ -594,45 +721,49 @@ const TXT = {
   es: {
     sub: 'Gestión de patio, muelles y BI', user: 'Usuario', pass: 'Contraseña', enter: 'Entrar',
     retry: 'Enviar ahora', exit: 'Salir', newReg: 'Nuevo Registro', area: 'Área / Expedição *',
+    vehType: 'Tipo de Vehículo *',
     date: 'Fecha *', shift: 'Turno *', dock: 'Doca / Muelle *', op: 'Operación *',
     plate: 'Placa / Vehículo *', start: 'Inicio *', end: 'Fin', now: 'Ahora',
     workers: 'Personas *', vol: 'Volumen (Cajas/Un.)', reason: 'Motivo de parada *',
-    notes: 'Observaciones', tOcup: 'Tiempo (h)', save: 'Guardar en Sheets',
+    notes: 'Observaciones', tOcup: 'Tiempo', save: 'Guardar en Sheets',
     openOps: 'En Patio / Abiertas', filterDate: 'Filtrar fecha', export: 'Descargar Excel (CSV)',
     nav1: 'Registrar', nav2: 'En Patio', nav3: 'YMS / KPIs', nav4: 'Historial',
     biHead: 'Tablero YMS & BI — Control de Muelles',
-    biSub: 'Haz clic en cualquier tarjeta, muelle o barra para cruzar filtros en vivo',
+    biSub: 'Haz clic en cualquier tarjeta, doca o barra para cruzar filtros en vivo · Toca una fila de la tabla para ver su ficha completa',
     clearF: 'Limpiar Filtros', quickRange: 'Período rápido:', rToday: 'Hoy', r7d: 'Últimos 7 días',
-    rMonth: 'Este mes', rAll: 'Todo', fStart: 'Data Inicio', fEnd: 'Data Fin',
-    fArea: 'Área', fShift: 'Turno', fOp: 'Operación',
+    rMonth: 'Este mes', rAll: 'Todo el historial', fStart: 'Data Inicio', fEnd: 'Data Fin',
+    fArea: 'Área', fShift: 'Turno', fOp: 'Operación', fVeh: 'Vehículo',
     areaCompTitle: 'Comparativa Operativa: CD vs FÁBRICA',
-    dockBoardTitle: 'Mapa de Muelles / Docas (Estadía en vivo y filtro)',
-    cDaily: 'Evolución Diaria de Volumen',
-    cDockLoad: 'Ocupación / Congestión por Muelle (Horas)',
+    dockBoardTitle: 'Mapa de Estado por Muelle (YMS en vivo)',
+    cDaily: 'Evolución Diaria de Volumen', cDockLoad: 'Carga de Operaciones por Muelle (Área · Doca)',
     cStatus: 'Distribución por Status', cProd: 'Productividad por Operación (Vol/HH)',
-    cShift: 'Volumen Movido por Turno', cStops: 'Motivos de Demora / Paradas (Horas)',
+    cVeh: 'Rendimiento por Tipo de Vehículo',
+    cShift: 'Volumen Movido por Turno', cStops: 'Cuellos de Botella / Motivos de Demora',
+    clickRowHint: '(Clic en una fila para ver resumen)',
     exportFiltered: 'Exportar Filtro (CSV)'
   },
   pt: {
     sub: 'Gestão de pátio, docas e BI', user: 'Usuário', pass: 'Senha', enter: 'Entrar',
     retry: 'Enviar agora', exit: 'Sair', newReg: 'Novo Registro', area: 'Área / Expedição *',
+    vehType: 'Tipo de Veículo *',
     date: 'Data *', shift: 'Turno *', dock: 'Doca *', op: 'Operação *',
     plate: 'Placa / Veículo *', start: 'Início *', end: 'Fim', now: 'Agora',
     workers: 'Pessoas *', vol: 'Volume (Caixas/Un.)', reason: 'Motivo da parada *',
-    notes: 'Observações', tOcup: 'Tempo (h)', save: 'Salvar no Sheets',
+    notes: 'Observações', tOcup: 'Tempo', save: 'Salvar no Sheets',
     openOps: 'No Pátio / Abertas', filterDate: 'Filtrar data', export: 'Baixar Excel (CSV)',
     nav1: 'Registrar', nav2: 'No Pátio', nav3: 'YMS / KPIs', nav4: 'Histórico',
     biHead: 'Painel YMS & BI — Controle de Docas',
-    biSub: 'Clique em qualquer cartão, doca ou barra para cruzar filtros ao vivo',
+    biSub: 'Clique em qualquer cartão, doca ou barra para cruzar filtros ao vivo · Toque em uma linha da tabela para ver o resumo completo',
     clearF: 'Limpar Filtros', quickRange: 'Período rápido:', rToday: 'Hoje', r7d: 'Últimos 7 dias',
     rMonth: 'Este mês', rAll: 'Tudo', fStart: 'Data Início', fEnd: 'Data Fim',
-    fArea: 'Área', fShift: 'Turno', fOp: 'Operação',
+    fArea: 'Área', fShift: 'Turno', fOp: 'Operação', fVeh: 'Veículo',
     areaCompTitle: 'Comparativo Operacional: CD vs FÁBRICA',
-    dockBoardTitle: 'Mapa de Docas (Permanência ao vivo e filtro)',
-    cDaily: 'Evolução Diária de Volume',
-    cDockLoad: 'Ocupação / Congestionamento por Doca (Horas)',
+    dockBoardTitle: 'Mapa de Status por Doca (YMS ao vivo)',
+    cDaily: 'Evolução Diária de Volume', cDockLoad: 'Carga de Operações por Doca (Área · Doca)',
     cStatus: 'Distribuição por Status', cProd: 'Produtividade por Operação (Vol/HH)',
-    cShift: 'Volume Movimentado por Turno', cStops: 'Motivos de Demora / Paradas (Horas)',
+    cVeh: 'Desempenho por Tipo de Veículo',
+    cShift: 'Volume Movimentado por Turno', cStops: 'Gargalos / Motivos de Demora',
+    clickRowHint: '(Clique em uma linha para ver o resumo)',
     exportFiltered: 'Exportar Filtro (CSV)'
   }
 };
@@ -650,22 +781,73 @@ function now() { return new Date().toTimeString().slice(0, 5); }
 function esc(v) { return String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 function fmt(v, d = 2) { return (+v || 0).toLocaleString(S.lang === 'pt' ? 'pt-BR' : 'es-ES', { minimumFractionDigits: d, maximumFractionDigits: d }); }
 
-/* LIMPIEZA Y NORMALIZACIÓN DE DATOS DE SHEETS (.trim() + NÚMEROS SEGUROS) */
+/* FORMATEADOR HUMANO DE TIEMPO: Ej. 2.3333h -> "2H 20Min", 0.3333h -> "20Min" */
+function fmtHumanHours(hours) {
+  const totalMin = Math.round((+hours || 0) * 60);
+  if (totalMin <= 0) return '0Min';
+  const h = Math.floor(totalMin / 60);
+  const m = totalMin % 60;
+  if (h === 0) return `${m}Min`;
+  if (m === 0) return `${h}H`;
+  return `${h}H ${m}Min`;
+}
+
+function fmtHumanMinutes(totalMin) {
+  const min = Math.round(+totalMin || 0);
+  if (min <= 0) return '0Min';
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  if (h === 0) return `${m}Min`;
+  if (m === 0) return `${h}H`;
+  return `${h}H ${m}Min`;
+}
+
+function cleanDate(raw) {
+  const s = String(raw ?? '').trim();
+  if (!s) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
+  const mIso = s.match(/^(\d{4}-\d{2}-\d{2})T/);
+  if (mIso) {
+    const d = new Date(s);
+    if (!isNaN(d)) return d.toLocaleDateString('sv-SE');
+    return mIso[1];
+  }
+  const mBr = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (mBr) return `${mBr[3]}-${mBr[2].padStart(2, '0')}-${mBr[1].padStart(2, '0')}`;
+  return s;
+}
+
+function cleanTime(raw) {
+  const s = String(raw ?? '').trim();
+  if (!s) return '';
+  if (/^\d{2}:\d{2}$/.test(s)) return s;
+  const mIso = s.match(/T(\d{2}:\d{2})/);
+  if (mIso) {
+    const d = new Date(s);
+    if (!isNaN(d)) return d.toTimeString().slice(0, 5);
+    return mIso[1];
+  }
+  const mShort = s.match(/^(\d{1,2}):(\d{2})/);
+  if (mShort) return `${mShort[1].padStart(2, '0')}:${mShort[2]}`;
+  return '';
+}
+
 function cleanRow(raw) {
   return {
     ...raw,
-    data: String(raw.data ?? '').trim().slice(0, 10),
+    data: cleanDate(raw.data),
     turno: String(raw.turno ?? '').trim(),
-    doca: String(raw.doca ?? '').trim().replace(/\s+/g, ' ').toUpperCase(),
+    doca: String(raw.doca ?? '').trim().toUpperCase(),
     operacao: String(raw.operacao ?? '').trim(),
     placa: String(raw.placa ?? '').trim().toUpperCase(),
-    inicio: String(raw.inicio ?? '').trim().slice(0, 5),
-    fim: String(raw.fim ?? '').trim().slice(0, 5),
+    inicio: cleanTime(raw.inicio),
+    fim: cleanTime(raw.fim),
     status: String(raw.status ?? '').trim(),
     motivo: String(raw.motivo ?? '').trim(),
     observacoes: String(raw.observacoes ?? '').trim(),
     expedicao: String(raw.expedicao ?? '').trim().toUpperCase(),
-    user: String(raw.user ?? '').trim()
+    user: String(raw.user ?? '').trim().toUpperCase(),
+    vehiculo: String(raw.vehiculo ?? '').trim().toUpperCase()
   };
 }
 
@@ -676,7 +858,6 @@ function cleanNum(v) {
   return n;
 }
 
-/* CALCULA MINUTOS DESDE INICIO HASTA AHORA PARA CAMIONES ABIERTOS */
 function getLiveStayMinutes(x) {
   if (!x.inicio) return 0;
   const a = String(x.inicio).split(':').map(Number);
@@ -685,12 +866,6 @@ function getLiveStayMinutes(x) {
   let min = (cur[0] * 60 + cur[1]) - (a[0] * 60 + a[1]);
   if (min < 0) min += 1440;
   return min;
-}
-
-function formatMinutesShort(min) {
-  const h = Math.floor(min / 60);
-  const m = Math.round(min % 60);
-  return h > 0 ? `${h}h ${String(m).padStart(2, '0')}m` : `${m}m`;
 }
 
 function calcSafeMetrics(x) {
@@ -720,7 +895,7 @@ function calcSafeMetrics(x) {
 function tr() {
   $$('[data-t]').forEach(el => { el.textContent = TXT[S.lang][el.dataset.t] || el.textContent; });
   $$('option[data-es]').forEach(el => { el.textContent = el.dataset[S.lang]; });
-  $('#biSearch').placeholder = S.lang === 'es' ? 'Buscar placa o doca...' : 'Buscar placa ou doca...';
+  $('#biSearch').placeholder = S.lang === 'es' ? 'Buscar placa, doca, vehículo o usuario...' : 'Buscar placa, doca, veículo ou usuário...';
   document.documentElement.lang = S.lang;
 }
 
@@ -737,6 +912,112 @@ function toast(msg) {
   t.classList.remove('hidden');
   setTimeout(() => t.classList.add('hidden'), 3200);
 }
+
+/* MODAL VISUAL DE RESUMEN DE OPERACIÓN (AL HACER CLIC EN UNA FILA) */
+function openOpSummaryModal(x) {
+  if (!x) return;
+  const es = S.lang === 'es';
+  const m = calcSafeMetrics(x);
+  const statusCls = x.status === 'Concluido' ? 'ok' : x.status === 'Parado' ? 'bad' : x.status === 'Em operacao' ? 'run' : '';
+
+  $('#opModalHeader').innerHTML = `
+    <span>${es ? 'Ficha Resumen de Operación' : 'Ficha Resumo da Operação'}</span>
+    <span class="ymsTag">${esc(x.expedicao || 'CD')}</span>
+  `;
+
+  $('#opModalBody').innerHTML = `
+    <div class="sumTopStrip">
+      <div>
+        <div class="sumMainTitle">Doca ${esc(x.doca)} · ${esc(x.placa)}</div>
+        <div style="font-size:12px;color:var(--mut);font-weight:700">${esc(x.data)} · ${esc(x.turno)} · ${esc(x.operacao)}</div>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+        ${x.vehiculo ? `<span class="badge veh">${esc(x.vehiculo)}</span>` : ''}
+        <span class="badge ${statusCls}">${esc(x.status)}</span>
+      </div>
+    </div>
+
+    <div class="sumGrid">
+      <div class="sumCell"><span>${es ? 'Hora Inicio' : 'Hora Início'}</span><b>${esc(x.inicio || '--:--')}</b></div>
+      <div class="sumCell"><span>${es ? 'Hora Fin' : 'Hora Fim'}</span><b>${esc(x.fim || (es ? 'En curso' : 'Em curso'))}</b></div>
+      <div class="sumCell"><span>${es ? 'Tiempo Total' : 'Tempo Total'}</span><b>${fmtHumanHours(m.tempo)}</b></div>
+
+      <div class="sumCell"><span>${es ? 'Personas' : 'Pessoas'}</span><b>${m.col}</b></div>
+      <div class="sumCell"><span>${es ? 'Volumen' : 'Volume'}</span><b>${fmt(m.vol, 0)}</b></div>
+      <div class="sumCell"><span>Vol / HH</span><b>${fmt(m.prod)}</b></div>
+
+      <div class="sumCell"><span>Horas-Hombre (HH)</span><b>${fmt(m.hh)}</b></div>
+      <div class="sumCell"><span>${es ? 'Tipo Vehículo' : 'Tipo Veículo'}</span><b>${esc(x.vehiculo || '—')}</b></div>
+      <div class="sumCell"><span>${es ? 'Área' : 'Área'}</span><b>${esc(x.expedicao || 'CD')}</b></div>
+    </div>
+
+    ${x.motivo ? `
+      <div class="sumNoteBox alert">
+        <strong>${es ? 'Motivo de Parada / Espera' : 'Motivo de Parada / Espera'}</strong>
+        ${esc(x.motivo)}
+      </div>
+    ` : ''}
+
+    <div class="sumNoteBox">
+      <strong>${es ? 'Observaciones' : 'Observações'}</strong>
+      ${x.observacoes ? esc(x.observacoes) : `<span style="color:var(--mut)">${es ? 'Sin observaciones registradas.' : 'Sem observações registradas.'}</span>`}
+    </div>
+
+    <div class="sumFoot">
+      <span>${es ? 'Registrado por:' : 'Registrado por:'} <b style="color:var(--pri)">${esc(x.user || '—')}</b></span>
+      <span>${es ? 'Fila Sheets #' : 'Linha Sheets #'}${x.rowId || '—'}</span>
+    </div>
+  `;
+
+  $('#opModal').classList.remove('hidden');
+}
+
+function closeOpSummaryModal() {
+  $('#opModal').classList.add('hidden');
+}
+
+/* TOOLTIP POPOVER (PC Y MÓVIL) */
+function showTip(targetEl) {
+  const pop = $('#tipPop');
+  const txt = S.lang === 'pt' ? (targetEl.dataset.tipPt || targetEl.dataset.tipEs) : targetEl.dataset.tipEs;
+  if (!txt) return;
+  pop.textContent = txt;
+  pop.classList.remove('hidden');
+  const rect = targetEl.getBoundingClientRect();
+  const popRect = pop.getBoundingClientRect();
+  let left = rect.left + (rect.width / 2) - (popRect.width / 2);
+  left = Math.max(10, Math.min(window.innerWidth - popRect.width - 10, left));
+  let top = rect.bottom + 8;
+  if (top + popRect.height > window.innerHeight - 10) {
+    top = Math.max(10, rect.top - popRect.height - 8);
+  }
+  pop.style.left = left + 'px';
+  pop.style.top = top + 'px';
+}
+
+function hideTip() {
+  $('#tipPop').classList.add('hidden');
+}
+
+document.addEventListener('mouseover', e => {
+  const icon = e.target.closest('.tipIcon');
+  if (icon) showTip(icon);
+});
+document.addEventListener('mouseout', e => {
+  if (e.target.closest('.tipIcon')) hideTip();
+});
+document.addEventListener('click', e => {
+  const icon = e.target.closest('.tipIcon');
+  if (icon) {
+    e.stopPropagation();
+    showTip(icon);
+  } else {
+    hideTip();
+  }
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeOpSummaryModal();
+});
 
 async function api(method, payload, timeout = 20000) {
   const c = new AbortController();
@@ -772,7 +1053,10 @@ function updateFormRules() {
   const needReason = ['Parado', 'Aguardando'].includes(st);
   $('#motivoBox').classList.toggle('hidden', !needReason);
   f.motivo.required = needReason;
-  if (!needReason) f.motivo.value = '';
+  if (!needReason) {
+    f.motivo.value = '';
+    $$('#reasonQuickChips .rChip').forEach(b => b.classList.remove('active'));
+  }
 
   const isDone = st === 'Concluido';
   f.fim.required = isDone;
@@ -786,7 +1070,7 @@ function updateLiveMetrics() {
   const vol = f.volume.value;
 
   if (!i || !fin) {
-    $('#rtTime').textContent = '0,00';
+    $('#rtTime').textContent = '0Min';
     $('#rtHH').textContent = '0,00';
     $('#rtProd').textContent = '0,00';
     return;
@@ -798,7 +1082,7 @@ function updateLiveMetrics() {
   const hh = tempo * col;
   const prod = (hh > 0 && vol !== '') ? (+vol / hh) : 0;
 
-  $('#rtTime').textContent = fmt(tempo);
+  $('#rtTime').textContent = fmtHumanMinutes(min);
   $('#rtHH').textContent = fmt(hh);
   $('#rtProd').textContent = fmt(prod);
 }
@@ -888,18 +1172,20 @@ async function handleSave(e) {
   const p = Object.fromEntries(new FormData(f).entries());
   p.action = 'create';
   p.requestId = uid();
-  p.doca = p.doca.trim().replace(/\s+/g, ' ').toUpperCase();
+  p.doca = p.doca.trim().toUpperCase();
   p.placa = p.placa.replace(/\s/g, '').toUpperCase();
+  p.vehiculo = (p.vehiculo || 'CNTRN').trim().toUpperCase();
 
   try {
     const r = await api('POST', { ...p, token: S.session.token });
     if (r.status !== 'ok') throw Object.assign(new Error(r.message), { functional: true });
     toast(r.message);
-    const keep = { data: p.data, turno: p.turno, expedicao: p.expedicao };
+    const keep = { data: p.data, turno: p.turno, expedicao: p.expedicao, vehiculo: p.vehiculo };
     f.reset();
     f.data.value = keep.data;
     f.turno.value = keep.turno;
     f.expedicao.value = keep.expedicao;
+    f.vehiculo.value = keep.vehiculo;
     f.colaboradores.value = '1';
     updateFormRules();
     updateLiveMetrics();
@@ -921,12 +1207,14 @@ function renderYard() {
   $('#yardCount').textContent = open.length;
   $('#yardList').innerHTML = open.map(x => {
     const stayMin = x.data === today() ? getLiveStayMinutes(x) : 0;
-    const stayBadge = stayMin > 0 ? `<span class="badge ${stayMin > 120 ? 'bad' : 'run'}">⏱ ${formatMinutesShort(stayMin)}</span>` : '';
+    const stayBadge = stayMin > 0 ? `<span class="badge ${stayMin > 120 ? 'bad' : 'run'}">⏱ ${fmtHumanMinutes(stayMin)}</span>` : '';
+    const vehBadge = x.vehiculo ? `<span class="badge veh">${esc(x.vehiculo)}</span>` : '';
     return `
       <div class="card opCard">
         <div class="opHead">
-          <span class="opDoca">Doca ${esc(x.doca)} · ${esc(x.placa)}</span>
-          <div style="display:flex;gap:6px;align-items:center">
+          <span class="opDoca">${esc(x.expedicao)} · Doca ${esc(x.doca)} · ${esc(x.placa)}</span>
+          <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+            ${vehBadge}
             ${stayBadge}
             <span class="badge">${esc(x.status)}</span>
           </div>
@@ -938,12 +1226,19 @@ function renderYard() {
             <div class="field"><label>Fim *</label><input name="fim" type="time" value="${now()}" required></div>
             <div class="field"><label>Volume *</label><input name="volume" type="number" min="0" step="0.01" value="${x.volume ?? ''}" required></div>
           </div>
-          <div class="field"><label>Status *</label>
-            <select name="status">
-              <option value="Concluido">Concluido</option>
-              <option value="Parado">Parado</option>
-              <option value="Aguardando">Aguardando</option>
-            </select>
+          <div class="row2">
+            <div class="field"><label>Status *</label>
+              <select name="status">
+                <option value="Concluido">Concluido</option>
+                <option value="Parado">Parado</option>
+                <option value="Aguardando">Aguardando</option>
+              </select>
+            </div>
+            <div class="field"><label>${S.lang === 'es' ? 'Vehículo' : 'Veículo'}</label>
+              <select name="vehiculo">
+                ${['CNTRN', 'CARRETA', 'TRUCK', 'BAU', 'VUC', 'OUTRO'].map(v => `<option value="${v}" ${(x.vehiculo || 'CNTRN') === v ? 'selected' : ''}>${v}</option>`).join('')}
+              </select>
+            </div>
           </div>
           <div class="field"><label>Motivo</label><input name="motivo" value="${esc(x.motivo)}"></div>
           <div class="field"><label>Observações</label><input name="observacoes" value="${esc(x.observacoes)}"></div>
@@ -978,7 +1273,7 @@ async function handleCloseOp(e) {
 }
 
 /* =========================================================
-   MÓDULO DE YMS & BI INTERACTIVO (CROSS-FILTERING AVANZADO)
+   MÓDULO DE YMS & BI INTERACTIVO
    ========================================================= */
 function applyPresetRange(mode) {
   $$('.presetBtn').forEach(b => b.classList.toggle('active', b.dataset.range === mode));
@@ -1007,8 +1302,14 @@ function toggleSelectFilter(selId, val) {
   renderKpis();
 }
 
-function toggleDocaFilter(doca) {
-  S.bi.doca = (S.bi.doca === doca) ? '' : doca;
+function toggleDockAreaFilter(area, doca) {
+  const curArea = $('#kArea').value;
+  if (curArea === area && S.bi.doca === doca) {
+    S.bi.doca = '';
+  } else {
+    $('#kArea').value = area;
+    S.bi.doca = doca;
+  }
   S.bi.showAllRows = false;
   renderKpis();
 }
@@ -1024,9 +1325,10 @@ function renderActiveFilterChips() {
   const chips = [];
   if ($('#kDateStart').value) chips.push({ lbl: `${es ? 'Desde' : 'De'}: ${$('#kDateStart').value}`, clear: () => { $('#kDateStart').value = ''; } });
   if ($('#kDateEnd').value) chips.push({ lbl: `${es ? 'Hasta' : 'Até'}: ${$('#kDateEnd').value}`, clear: () => { $('#kDateEnd').value = ''; } });
-  if ($('#kArea').value) chips.push({ lbl: `Área: ${$('#kArea').value}`, clear: () => { $('#kArea').value = ''; } });
+  if ($('#kArea').value) chips.push({ lbl: `Área: ${$('#kArea').value}`, clear: () => { $('#kArea').value = ''; S.bi.doca = ''; } });
   if ($('#kShift').value) chips.push({ lbl: `Turno: ${$('#kShift').value}`, clear: () => { $('#kShift').value = ''; } });
   if ($('#kOp').value) chips.push({ lbl: `${es ? 'Operación' : 'Operação'}: ${$('#kOp').value}`, clear: () => { $('#kOp').value = ''; } });
+  if ($('#kVeh').value) chips.push({ lbl: `${es ? 'Vehículo' : 'Veículo'}: ${$('#kVeh').value}`, clear: () => { $('#kVeh').value = ''; } });
   if ($('#kStatus').value) chips.push({ lbl: `Status: ${$('#kStatus').value}`, clear: () => { $('#kStatus').value = ''; } });
   if (S.bi.doca) chips.push({ lbl: `Doca: ${S.bi.doca}`, clear: () => { S.bi.doca = ''; } });
   if (S.bi.kpiFocus !== 'ALL') chips.push({ lbl: `${es ? 'Vista' : 'Visão'}: ${S.bi.kpiFocus}`, clear: () => { S.bi.kpiFocus = 'ALL'; } });
@@ -1045,17 +1347,22 @@ function renderActiveFilterChips() {
   });
 }
 
-function renderBarsHTML(items, activeVal, onClickAttr, colorClass = '', unit = '') {
+function renderBarsHTML(items, activeVal, attrA, attrB, colorClass = '', formatterFn = null) {
   if (!items.length) return `<div style="color:var(--mut);font-size:13px;text-align:center;padding:12px 0">${S.lang === 'es' ? 'Sin datos para este filtro' : 'Sem dados para este filtro'}</div>`;
   const max = Math.max(1, ...items.map(x => x.val));
   return items.map(it => {
     const pct = Math.min(100, Math.round((it.val / max) * 100));
     const isSel = activeVal && activeVal === it.key;
+    const displayVal = formatterFn ? formatterFn(it) : fmt(it.val, it.dec ?? 2);
+    const dataAttrs = [
+      attrA ? `${attrA}="${esc(it.key)}"` : '',
+      attrB && it.subKey ? `${attrB}="${esc(it.subKey)}"` : ''
+    ].filter(Boolean).join(' ');
     return `
-      <div class="barRow ${isSel ? 'selected' : ''}" ${onClickAttr ? `${onClickAttr}="${esc(it.key)}"` : ''}>
+      <div class="barRow ${isSel ? 'selected' : ''}" ${dataAttrs}>
         <div class="barInfo">
           <span>${esc(it.label)} ${isSel ? '✓' : ''}</span>
-          <span>${fmt(it.val, it.dec ?? 2)}${unit}</span>
+          <span>${displayVal}</span>
         </div>
         <div class="barTrack">
           <div class="barFill ${it.cls || colorClass}" style="width:${pct}%"></div>
@@ -1065,25 +1372,50 @@ function renderBarsHTML(items, activeVal, onClickAttr, colorClass = '', unit = '
   }).join('');
 }
 
+function renderDockTilesHTML(docks, fArea, fDoca) {
+  return `
+    <div class="dockBoard">
+      ${docks.map(d => {
+        const st = d.last.status;
+        const isOpen = ['Em operacao', 'Aguardando', 'Parado'].includes(st);
+        const stayMin = (isOpen && d.last.data === today()) ? getLiveStayMinutes(d.last) : 0;
+        const overSla = stayMin > 120;
+        const cls = st === 'Em operacao' ? 'st-run' : st === 'Aguardando' ? 'st-wait' : st === 'Parado' ? 'st-stop' : 'st-done';
+        const isSel = (fArea === d.area && fDoca === d.doca);
+        return `
+          <div class="dockTile ${cls} ${overSla ? 'sla-alert' : ''} ${isSel ? 'selected' : ''}" data-area="${esc(d.area)}" data-doca="${esc(d.doca)}">
+            <div class="dockTop">
+              <span class="dockName"><span class="dockAreaTag">${esc(d.area)}</span> ${esc(d.doca)}</span>
+              ${stayMin > 0 ? `<span class="dockTimer ${overSla ? 'over' : ''}">⏱ ${fmtHumanMinutes(stayMin)}</span>` : ''}
+            </div>
+            <div class="dockPlate">${esc(d.last.placa)} ${d.last.vehiculo ? `(${esc(d.last.vehiculo)})` : ''}</div>
+            <div class="dockStat">${esc(st)} · ${d.count} ops</div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
 function renderKpis() {
   const fStart = $('#kDateStart').value;
   const fEnd = $('#kDateEnd').value;
   const fArea = $('#kArea').value;
   const fShift = $('#kShift').value;
   const fOp = $('#kOp').value;
+  const fVeh = $('#kVeh').value;
   const fStatus = $('#kStatus').value;
   const fDoca = S.bi.doca;
 
   renderActiveFilterChips();
 
-  const matchDateRange = (x) => (!fStart || x.data >= fStart) && (!fEnd || x.data <= fEnd);
-
-  // Base filtrada completa
   const baseList = S.data.filter(x =>
-    matchDateRange(x) &&
+    (!fStart || x.data >= fStart) &&
+    (!fEnd || x.data <= fEnd) &&
     (!fArea || x.expedicao === fArea) &&
     (!fShift || x.turno === fShift) &&
     (!fOp || x.operacao === fOp) &&
+    (!fVeh || x.vehiculo === fVeh) &&
     (!fStatus || x.status === fStatus) &&
     (!fDoca || x.doca === fDoca)
   );
@@ -1096,8 +1428,8 @@ function renderKpis() {
   const totalVol = enriched.reduce((s, x) => s + x.m.vol, 0);
   const totalHH = enriched.reduce((s, x) => s + x.m.hh, 0);
   const totalTempo = enriched.reduce((s, x) => s + x.m.tempo, 0);
+  const totalPeople = enriched.reduce((s, x) => s + x.m.col, 0);
 
-  // Separación clara entre PARADO (detención operativa) y AGUARDANDO (espera en patio)
   const paradoRows = enriched.filter(x => x.status === 'Parado');
   const aguardandoRows = enriched.filter(x => x.status === 'Aguardando');
   const delayRows = enriched.filter(x => ['Parado', 'Aguardando'].includes(x.status) || x.motivo);
@@ -1105,29 +1437,29 @@ function renderKpis() {
   const paradoHours = paradoRows.reduce((s, x) => s + x.m.tempo, 0);
   const aguardandoHours = aguardandoRows.reduce((s, x) => s + x.m.tempo, 0);
   const totalDelayHours = paradoHours + aguardandoHours;
+  const effectiveHours = Math.max(0, totalTempo - totalDelayHours);
 
   const globalProd = totalHH > 0 ? (totalVol / totalHH) : 0;
   const timedList = enriched.filter(x => x.m.tempo > 0);
   const avgCycleMin = timedList.length ? (timedList.reduce((s, x) => s + x.m.tempo, 0) / timedList.length) * 60 : 0;
-  const effPct = totalTempo > 0 ? Math.max(0, ((totalTempo - totalDelayHours) / totalTempo) * 100) : 100;
+  const effPct = totalTempo > 0 ? Math.max(0, (effectiveHours / totalTempo) * 100) : 100;
 
   const es = S.lang === 'es';
   const focus = S.bi.kpiFocus;
 
-  // 8 TARJETAS KPI INTERACTIVAS
   $('#kpiCards').innerHTML = `
     <div class="kpiBox ok ${focus === 'TOP_PROD' ? 'selected' : ''}" data-focus="TOP_PROD">
       <div class="kpiTop">
-        <span class="kpiLbl">${es ? 'Productividad Global' : 'Produtividade Global'}</span>
+        <span class="kpiLbl">${es ? 'Productividad Global' : 'Produtividade Global'} <span class="tipIcon" data-tip-es="Fórmula: Volumen Total ÷ Horas-Hombre (Personas × Tiempo). Haz clic para ordenar la tabla de mayor a menor productividad." data-tip-pt="Fórmula: Volume Total ÷ Horas-Homem (Pessoas × Tempo). Clique para ordenar a tabela da maior para a menor produtividade.">ⓘ</span></span>
         <span class="kpiHint">${es ? 'Ordenar ▾' : 'Ordenar ▾'}</span>
       </div>
       <div class="kpiVal">${fmt(globalProd)}</div>
-      <div class="kpiSub">Vol / HH (${fmt(totalHH)} HH)</div>
+      <div class="kpiSub">Vol / HH (${fmt(totalHH)} HH · ${totalPeople} pers.)</div>
     </div>
 
     <div class="kpiBox ${focus === 'TOP_VOL' ? 'selected' : ''}" data-focus="TOP_VOL">
       <div class="kpiTop">
-        <span class="kpiLbl">${es ? 'Volumen Total' : 'Volume Total'}</span>
+        <span class="kpiLbl">${es ? 'Volumen Total' : 'Volume Total'} <span class="tipIcon" data-tip-es="Suma de cajas/unidades movidas en las operaciones filtradas. Haz clic para ordenar la tabla por mayor volumen." data-tip-pt="Soma de caixas/unidades movimentadas nas operações filtradas. Clique para ordenar a tabela por maior volume.">ⓘ</span></span>
         <span class="kpiHint">${es ? 'Top Vol ▾' : 'Top Vol ▾'}</span>
       </div>
       <div class="kpiVal">${fmt(totalVol, 0)}</div>
@@ -1136,56 +1468,56 @@ function renderKpis() {
 
     <div class="kpiBox ${focus === 'OPEN_ONLY' ? 'selected' : ''}" data-focus="OPEN_ONLY">
       <div class="kpiTop">
-        <span class="kpiLbl">${es ? 'Operaciones YMS' : 'Operações YMS'}</span>
+        <span class="kpiLbl">${es ? 'Operaciones YMS' : 'Operações YMS'} <span class="tipIcon" data-tip-es="Total de registros filtrados: concluidos vs abiertos en patio. Haz clic para ver solo las operaciones abiertas." data-tip-pt="Total de registros filtrados: concluídos vs abertos no pátio. Clique para ver apenas as operações abertas.">ⓘ</span></span>
         <span class="kpiHint">${es ? 'Abiertas ▾' : 'Abertas ▾'}</span>
       </div>
       <div class="kpiVal">${totalOps}</div>
       <div class="kpiSub">${doneOps} ${es ? 'concluidas' : 'concluídas'} · <b>${openOps} ${es ? 'abiertas' : 'abertas'}</b></div>
     </div>
 
-    <div class="kpiBox ${focus === 'LONG_CYCLE' ? 'selected' : ''}" data-focus="LONG_CYCLE">
-      <div class="kpiTop">
-        <span class="kpiLbl">${es ? 'Ciclo Promedio' : 'Ciclo Médio'}</span>
-        <span class="kpiHint">${es ? 'Mayor ▾' : 'Maior ▾'}</span>
-      </div>
-      <div class="kpiVal">${Math.round(avgCycleMin)} min</div>
-      <div class="kpiSub">${es ? 'Permanencia en muelle' : 'Permanência na doca'}</div>
-    </div>
-
     <div class="kpiBox ${effPct >= 85 ? 'ok' : 'warn'}" data-focus="ALL">
       <div class="kpiTop">
-        <span class="kpiLbl">${es ? 'Eficiencia Operativa' : 'Eficiência Operacional'}</span>
+        <span class="kpiLbl">${es ? 'Eficiencia Operativa' : 'Eficiência Operacional'} <span class="tipIcon" data-tip-es="Porcentaje de tiempo productivo frente al tiempo total en muelle (descontando horas Parado y Aguardando)." data-tip-pt="Percentual de tempo produtivo frente ao tempo total na doca (descontando horas Parado e Aguardando).">ⓘ</span></span>
         <span class="kpiHint">SLA</span>
       </div>
       <div class="kpiVal">${fmt(effPct, 1)}%</div>
-      <div class="kpiSub">${fmt(totalTempo)} h ${es ? 'totales en muelle' : 'totais na doca'}</div>
+      <div class="kpiSub">${fmtHumanHours(effectiveHours)} / ${fmtHumanHours(totalTempo)}</div>
+    </div>
+
+    <div class="kpiBox ${focus === 'LONG_CYCLE' ? 'selected' : ''}" data-focus="LONG_CYCLE">
+      <div class="kpiTop">
+        <span class="kpiLbl">${es ? 'Ciclo Promedio' : 'Ciclo Médio'} <span class="tipIcon" data-tip-es="Tiempo promedio de permanencia por operación en muelle. Haz clic para ordenar por mayor tiempo." data-tip-pt="Tempo médio de permanência por operação na doca. Clique para ordenar por maior tempo.">ⓘ</span></span>
+        <span class="kpiHint">${es ? 'Mayor ▾' : 'Maior ▾'}</span>
+      </div>
+      <div class="kpiVal">${fmtHumanMinutes(avgCycleMin)}</div>
+      <div class="kpiSub">${es ? 'Permanencia media en doca' : 'Permanência média na doca'}</div>
     </div>
 
     <div class="kpiBox ${paradoHours > 0 ? 'bad' : 'ok'} ${focus === 'PARADO_ONLY' ? 'selected' : ''}" data-focus="PARADO_ONLY">
       <div class="kpiTop">
-        <span class="kpiLbl">${es ? 'Tiempo Parado' : 'Tempo Parado'}</span>
+        <span class="kpiLbl">${es ? 'Tiempo Parado' : 'Tempo Parado'} <span class="tipIcon" data-tip-es="Tiempo acumulado de operaciones detenidas por incidencias. Haz clic para filtrar únicamente registros en estado PARADO." data-tip-pt="Tempo acumulado de operações paradas por ocorrências. Clique para filtrar apenas registros em status PARADO.">ⓘ</span></span>
         <span class="kpiHint">${es ? 'Filtrar ▾' : 'Filtrar ▾'}</span>
       </div>
-      <div class="kpiVal">${fmt(paradoHours)} h</div>
-      <div class="kpiSub">${paradoRows.length} ${es ? 'detenciones en muelle' : 'paradas na doca'}</div>
+      <div class="kpiVal">${fmtHumanHours(paradoHours)}</div>
+      <div class="kpiSub">${paradoRows.length} ${es ? 'detenciones en doca' : 'paradas na doca'}</div>
     </div>
 
     <div class="kpiBox ${aguardandoHours > 0 ? 'warn' : 'ok'} ${focus === 'AGUARDANDO_ONLY' ? 'selected' : ''}" data-focus="AGUARDANDO_ONLY">
       <div class="kpiTop">
-        <span class="kpiLbl">${es ? 'Tiempo Aguardando' : 'Tempo Aguardando'}</span>
+        <span class="kpiLbl">${es ? 'Tiempo Aguardando' : 'Tempo Aguardando'} <span class="tipIcon" data-tip-es="Tiempo acumulado esperando liberación de carga, descarga o documentación. Haz clic para filtrar registros en AGUARDANDO." data-tip-pt="Tempo acumulado aguardando liberação de carga, descarga ou documentação. Clique para filtrar registros em AGUARDANDO.">ⓘ</span></span>
         <span class="kpiHint">${es ? 'Filtrar ▾' : 'Filtrar ▾'}</span>
       </div>
-      <div class="kpiVal">${fmt(aguardandoHours)} h</div>
+      <div class="kpiVal">${fmtHumanHours(aguardandoHours)}</div>
       <div class="kpiSub">${aguardandoRows.length} ${es ? 'esperas de liberación' : 'esperas de liberação'}</div>
     </div>
 
-    <div class="kpiBox" data-focus="ALL">
+    <div class="kpiBox ok" data-focus="ALL">
       <div class="kpiTop">
-        <span class="kpiLbl">${es ? 'Promedio / Operación' : 'Média / Operação'}</span>
-        <span class="kpiHint">Vol</span>
+        <span class="kpiLbl">${es ? 'Promedio Vol / Op' : 'Média Vol / Op'} <span class="tipIcon" data-tip-es="Promedio de cajas o unidades movidas por cada operación atendida en el período seleccionado." data-tip-pt="Média de caixas ou unidades movimentadas por cada operação atendida no período selecionado.">ⓘ</span></span>
+        <span class="kpiHint">BI</span>
       </div>
       <div class="kpiVal">${fmt(totalOps ? totalVol / totalOps : 0, 0)}</div>
-      <div class="kpiSub">${es ? 'Cajas por vehículo' : 'Caixas por veículo'}</div>
+      <div class="kpiSub">${es ? 'Unidades por operación' : 'Unidades por operação'}</div>
     </div>
   `;
 
@@ -1193,11 +1525,13 @@ function renderKpis() {
     card.onclick = () => setKpiFocus(card.dataset.focus);
   });
 
-  // COMPARATIVA OPERATIVA CD VS FÁBRICA (respectando el rango de fechas y filtros)
+  // COMPARATIVA OPERATIVA CD VS FÁBRICA
   const areaBase = S.data.filter(x =>
-    matchDateRange(x) &&
+    (!fStart || x.data >= fStart) &&
+    (!fEnd || x.data <= fEnd) &&
     (!fShift || x.turno === fShift) &&
     (!fOp || x.operacao === fOp) &&
+    (!fVeh || x.vehiculo === fVeh) &&
     (!fStatus || x.status === fStatus) &&
     (!fDoca || x.doca === fDoca)
   ).map(x => ({ ...x, m: calcSafeMetrics(x) }));
@@ -1212,7 +1546,7 @@ function renderKpis() {
       <div class="areaCard ${isSel ? 'selected' : ''}" data-area="${ar}">
         <h4><span>${ar} ${isSel ? '✓' : ''}</span><span class="badge ${isSel ? 'run' : ''}">${sub.length} ops</span></h4>
         <div class="areaStats">
-          <div><span>${es ? 'Volumen' : 'Volume'}</span><b>${fmt(v, 0)}</b></div>
+          <div><span>Volume</span><b>${fmt(v, 0)}</b></div>
           <div><span>HH</span><b>${fmt(h, 1)}</b></div>
           <div><span>Vol / HH</span><b>${fmt(p, 2)}</b></div>
         </div>
@@ -1221,71 +1555,100 @@ function renderKpis() {
   }).join('');
 
   $$('#areaCompBox .areaCard').forEach(card => {
-    card.onclick = () => toggleSelectFilter('#kArea', card.dataset.area);
+    card.onclick = () => {
+      const targetArea = card.dataset.area;
+      if ($('#kArea').value === targetArea) {
+        $('#kArea').value = '';
+        S.bi.doca = '';
+      } else {
+        $('#kArea').value = targetArea;
+        S.bi.doca = '';
+      }
+      S.bi.showAllRows = false;
+      renderKpis();
+    };
   });
 
-  // MAPA VISUAL DE MUELLES EN VIVO (YARD DOCK BOARD)
+  // MAPA VISUAL DE DOCAS SEPARADO POR ÁREA (CD vs FÁBRICA)
   const dockMap = {};
-  S.data.filter(x => matchDateRange(x) && (!fArea || x.expedicao === fArea)).forEach(x => {
+  S.data.filter(x => (!fStart || x.data >= fStart) && (!fEnd || x.data <= fEnd) && (!fArea || x.expedicao === fArea)).forEach(x => {
+    const area = x.expedicao || 'CD';
     const d = x.doca || '?';
-    if (!dockMap[d]) dockMap[d] = { doca: d, count: 0, last: x };
-    dockMap[d].count++;
-    dockMap[d].last = x;
+    const key = `${area}::${d}`;
+    if (!dockMap[key]) dockMap[key] = { key, area, doca: d, count: 0, last: x };
+    dockMap[key].count++;
+    dockMap[key].last = x;
   });
-  const docks = Object.values(dockMap).sort((a, b) => a.doca.localeCompare(b.doca, undefined, { numeric: true }));
-  $('#dockBoardHint').textContent = fDoca ? `${es ? 'Filtrado:' : 'Filtrado:'} Doca ${fDoca}` : `${docks.length} ${es ? 'muelles registrados' : 'docas registradas'}`;
 
-  $('#dockBoard').innerHTML = docks.map(d => {
-    const st = d.last.status;
-    const isOpen = ['Em operacao', 'Aguardando', 'Parado'].includes(st);
-    const stayMin = (isOpen && d.last.data === today()) ? getLiveStayMinutes(d.last) : 0;
-    const overSla = stayMin > 120;
-    const cls = st === 'Em operacao' ? 'st-run' : st === 'Aguardando' ? 'st-wait' : st === 'Parado' ? 'st-stop' : 'st-done';
-    const isSel = fDoca === d.doca;
-    return `
-      <div class="dockTile ${cls} ${overSla ? 'sla-alert' : ''} ${isSel ? 'selected' : ''}" data-doca="${esc(d.doca)}">
-        <div class="dockTop">
-          <span class="dockName">Doca ${esc(d.doca)}</span>
-          ${stayMin > 0 ? `<span class="dockTimer ${overSla ? 'over' : ''}">⏱ ${formatMinutesShort(stayMin)}</span>` : ''}
+  const allDocks = Object.values(dockMap).sort((a, b) => a.doca.localeCompare(b.doca, undefined, { numeric: true }));
+  $('#dockBoardHint').textContent = fDoca ? `Filtrado: ${fArea || ''} · ${fDoca}` : `${allDocks.length} ${es ? 'muelles registrados' : 'docas registradas'}`;
+
+  if (!allDocks.length) {
+    $('#dockBoard').innerHTML = `<div style="color:var(--mut);font-size:13px">${es ? 'Sin actividad de muelles en este rango' : 'Sem atividade de docas neste período'}</div>`;
+  } else if (fArea) {
+    $('#dockBoard').innerHTML = renderDockTilesHTML(allDocks, fArea, fDoca);
+  } else {
+    const cdDocks = allDocks.filter(d => d.area === 'CD');
+    const fabDocks = allDocks.filter(d => d.area !== 'CD');
+    let htmlGroups = '';
+    if (cdDocks.length) {
+      htmlGroups += `
+        <div class="dockGroup">
+          <div class="dockGroupTitle">🏢 ${es ? 'Muelles CD' : 'Docas CD'} <span class="badge run">${cdDocks.length}</span></div>
+          ${renderDockTilesHTML(cdDocks, fArea, fDoca)}
         </div>
-        <div class="dockPlate">${esc(d.last.placa)} · ${d.count} ops</div>
-        <div class="dockStat">${esc(st)}</div>
-      </div>
-    `;
-  }).join('') || `<div style="color:var(--mut);font-size:13px">${es ? 'Sin muelles registrados.' : 'Sem docas registradas.'}</div>`;
+      `;
+    }
+    if (fabDocks.length) {
+      htmlGroups += `
+        <div class="dockGroup">
+          <div class="dockGroupTitle">🏭 ${es ? 'Muelles FÁBRICA' : 'Docas FÁBRICA'} <span class="badge">${fabDocks.length}</span></div>
+          ${renderDockTilesHTML(fabDocks, fArea, fDoca)}
+        </div>
+      `;
+    }
+    $('#dockBoard').innerHTML = htmlGroups;
+  }
 
   $$('#dockBoard .dockTile').forEach(tile => {
-    tile.onclick = () => toggleDocaFilter(tile.dataset.doca);
+    tile.onclick = () => toggleDockAreaFilter(tile.dataset.area, tile.dataset.doca);
   });
 
-  // 1. Evolución Diaria de Volumen (últimos 10 días del filtro)
+  // 1. Evolución Diaria de Volumen
   const byDay = {};
   enriched.forEach(x => {
-    const k = x.data || '?';
+    const k = x.data || 'S/F';
     byDay[k] = (byDay[k] || 0) + x.m.vol;
   });
   const dayItems = Object.entries(byDay)
     .sort((a, b) => a[0].localeCompare(b[0]))
     .slice(-10)
     .map(([key, val]) => ({ key, label: key.slice(5), val, dec: 0 }));
-  $('#chartDaily').innerHTML = renderBarsHTML(dayItems, '', '', '');
+  $('#chartDaily').innerHTML = renderBarsHTML(dayItems, '', '', '', '');
 
-  // 2. Ocupación / Congestión por Muelle (Horas) - interactivo
-  const byDockHours = {};
+  // 2. Carga por Muelle (Identificando Área · Doca)
+  const byDock = {};
   enriched.forEach(x => {
-    const k = x.doca || '?';
-    byDockHours[k] = (byDockHours[k] || 0) + x.m.tempo;
+    const area = x.expedicao || 'CD';
+    const d = x.doca || '?';
+    const k = `${area}::${d}`;
+    if (!byDock[k]) byDock[k] = { key: k, area, doca: d, label: `${area} · ${d}`, val: 0 };
+    byDock[k].val += 1;
   });
-  const dockHourItems = Object.entries(byDockHours)
-    .map(([key, val]) => ({ key, label: `Doca ${key}`, val, cls: 'warn' }))
+  const dockItems = Object.values(byDock)
     .sort((a, b) => b.val - a.val)
-    .slice(0, 8);
-  $('#chartDockLoad').innerHTML = renderBarsHTML(dockHourItems, fDoca, 'data-doca', 'warn', ' h');
+    .slice(0, 12)
+    .map(it => ({ ...it, subKey: it.area }));
+  const activeDockComposite = (fArea && fDoca) ? `${fArea}::${fDoca}` : '';
+  $('#chartDockLoad').innerHTML = renderBarsHTML(dockItems, activeDockComposite, 'data-dockkey', 'data-area', 'warn', it => `${Math.round(it.val)} ops`);
   $$('#chartDockLoad .barRow').forEach(el => {
-    el.onclick = () => toggleDocaFilter(el.dataset.doca);
+    el.onclick = () => {
+      const [ar, dc] = el.dataset.dockkey.split('::');
+      toggleDockAreaFilter(ar, dc);
+    };
   });
 
-  // 3. Gráfico Dona por Status (interactivo)
+  // 3. Gráfico Dona por Status
   const cDone = enriched.filter(x => x.status === 'Concluido').length;
   const cRun = enriched.filter(x => x.status === 'Em operacao').length;
   const cWait = enriched.filter(x => x.status === 'Aguardando').length;
@@ -1323,7 +1686,7 @@ function renderKpis() {
     });
   }
 
-  // 4. Productividad por Operación (Vol / HH) - interactivo
+  // 4. Productividad por Operación
   const byOp = {};
   enriched.forEach(x => {
     const k = x.operacao || 'Outro';
@@ -1332,14 +1695,51 @@ function renderKpis() {
     byOp[k].hh += x.m.hh;
   });
   const opItems = Object.entries(byOp)
-    .map(([key, v]) => ({ key, label: key, val: v.hh > 0 ? v.vol / v.hh : 0, cls: 'ok' }))
+    .map(([key, v]) => ({ key, label: key, val: v.hh > 0 ? v.vol / v.hh : 0 }))
     .sort((a, b) => b.val - a.val);
-  $('#chartProd').innerHTML = renderBarsHTML(opItems, fOp, 'data-op', 'ok');
+  $('#chartProd').innerHTML = renderBarsHTML(opItems, fOp, 'data-op', '', 'ok', it => `${fmt(it.val)} Vol/HH`);
   $$('#chartProd .barRow').forEach(el => {
     el.onclick = () => toggleSelectFilter('#kOp', el.dataset.op);
   });
 
-  // 5. Volumen por Turno (ya limpio con .trim()) - interactivo
+  // 5. Rendimiento por Tipo de Vehículo (Ops + Tiempo Promedio + Vol/HH)
+  const byVeh = {};
+  enriched.forEach(x => {
+    const k = x.vehiculo || (es ? 'SIN DEFINIR' : 'NÃO INFORMADO');
+    if (!byVeh[k]) byVeh[k] = { ops: 0, tempo: 0, vol: 0, hh: 0 };
+    byVeh[k].ops += 1;
+    byVeh[k].tempo += x.m.tempo;
+    byVeh[k].vol += x.m.vol;
+    byVeh[k].hh += x.m.hh;
+  });
+  const vehItems = Object.entries(byVeh)
+    .map(([key, v]) => ({
+      key,
+      label: key,
+      val: v.ops,
+      avgTime: v.ops > 0 ? v.tempo / v.ops : 0,
+      prod: v.hh > 0 ? v.vol / v.hh : 0
+    }))
+    .sort((a, b) => b.val - a.val);
+
+  $('#chartVeh').innerHTML = renderBarsHTML(
+    vehItems,
+    fVeh,
+    'data-veh',
+    '',
+    '',
+    it => `${it.val} ops · ⏱ ${fmtHumanHours(it.avgTime)} · ${fmt(it.prod, 0)} Vol/HH`
+  );
+  $$('#chartVeh .barRow').forEach(el => {
+    el.onclick = () => {
+      const v = el.dataset.veh;
+      if (['CNTRN', 'CARRETA', 'TRUCK', 'BAU', 'VUC', 'OUTRO'].includes(v)) {
+        toggleSelectFilter('#kVeh', v);
+      }
+    };
+  });
+
+  // 6. Volumen por Turno
   const byShift = {};
   enriched.forEach(x => {
     const k = x.turno || '1° Turno';
@@ -1348,12 +1748,12 @@ function renderKpis() {
   const shiftItems = Object.entries(byShift)
     .map(([key, val]) => ({ key, label: key, val, dec: 0 }))
     .sort((a, b) => b.val - a.val);
-  $('#chartShift').innerHTML = renderBarsHTML(shiftItems, fShift, 'data-shift');
+  $('#chartShift').innerHTML = renderBarsHTML(shiftItems, fShift, 'data-shift', '', '', it => fmt(it.val, 0));
   $$('#chartShift .barRow').forEach(el => {
     el.onclick = () => toggleSelectFilter('#kShift', el.dataset.shift);
   });
 
-  // 6. Motivos de Demora / Paradas (Horas)
+  // 7. Motivos de Demora / Paradas (en formato 2H 20Min)
   const byStop = {};
   delayRows.forEach(x => {
     const k = x.motivo || x.status;
@@ -1362,9 +1762,9 @@ function renderKpis() {
   const stopItems = Object.entries(byStop)
     .map(([key, val]) => ({ key, label: key, val, cls: 'bad' }))
     .sort((a, b) => b.val - a.val);
-  $('#chartStops').innerHTML = renderBarsHTML(stopItems, '', '', 'bad', ' h');
+  $('#chartStops').innerHTML = renderBarsHTML(stopItems, '', '', '', 'bad', it => fmtHumanHours(it.val));
 
-  // 7. TABLA DRILL-DOWN INTERACTIVA CON BUSCADOR Y EXPORTACIÓN
+  // 8. TABLA DRILL-DOWN (Con clic en fila para abrir Ficha Resumen Visual)
   let drill = enriched.slice().reverse();
   let titleTxt = es ? 'Detalle de Operaciones Filtradas' : 'Detalhe de Operações Filtradas';
 
@@ -1393,6 +1793,8 @@ function renderKpis() {
     drill = drill.filter(x =>
       x.placa.includes(qSearch) ||
       x.doca.includes(qSearch) ||
+      x.vehiculo.includes(qSearch) ||
+      x.user.includes(qSearch) ||
       x.motivo.toUpperCase().includes(qSearch)
     );
   }
@@ -1417,43 +1819,53 @@ function renderKpis() {
             <th>Turno</th>
             <th>Doca</th>
             <th>${es ? 'Operación' : 'Operação'}</th>
+            <th>${es ? 'Vehículo' : 'Veículo'}</th>
             <th>Placa</th>
+            <th>${es ? 'Personas' : 'Pessoas'}</th>
             <th>Status</th>
             <th>${es ? 'Tiempo' : 'Tempo'}</th>
             <th>Vol</th>
             <th>Vol/HH</th>
+            <th>${es ? 'Registrador' : 'Usuário'}</th>
           </tr>
         </thead>
         <tbody>
-          ${visible.map(x => `
-            <tr>
+          ${visible.map((x, idx) => `
+            <tr data-ridx="${idx}" title="${es ? 'Clic para ver resumen' : 'Clique para ver resumo'}">
               <td>${esc(x.data)}</td>
               <td>${esc(x.expedicao)}</td>
               <td>${esc(x.turno)}</td>
               <td><b>${esc(x.doca)}</b></td>
               <td>${esc(x.operacao)}</td>
+              <td>${x.vehiculo ? `<span class="badge veh">${esc(x.vehiculo)}</span>` : '—'}</td>
               <td>${esc(x.placa)}</td>
+              <td><b>${x.m.col}</b></td>
               <td><span class="badge ${x.status === 'Concluido' ? 'ok' : x.status === 'Parado' ? 'bad' : x.status === 'Em operacao' ? 'run' : ''}">${esc(x.status)}</span></td>
-              <td>${fmt(x.m.tempo)} h</td>
+              <td><b>${fmtHumanHours(x.m.tempo)}</b></td>
               <td><b>${fmt(x.m.vol, 0)}</b></td>
               <td><b>${fmt(x.m.prod)}</b></td>
+              <td style="color:var(--mut);font-weight:700">${esc(x.user || '—')}</td>
             </tr>
           `).join('')}
         </tbody>
       </table>
     `;
 
+    $$('#drillTableBox tbody tr').forEach(trEl => {
+      trEl.onclick = () => openOpSummaryModal(visible[+trEl.dataset.ridx]);
+    });
+
     if (drill.length > 40) {
       $('#drillPager').innerHTML = `
-        <span>${es ? `Mostrando ${visible.length} de ${drill.length} registros` : `Mostrando ${visible.length} de ${drill.length} registros`}</span>
-        <button type="button" id="toggleRowsBtn" class="btn sm sec">${S.bi.showAllRows ? (es ? 'Mostrar menos' : 'Mostrar menos') : (es ? `Ver todos (${drill.length})` : `Ver todos (${drill.length})`)}</button>
+        <span>Mostrando ${visible.length} de ${drill.length} registros</span>
+        <button type="button" id="toggleRowsBtn" class="btn sm sec">${S.bi.showAllRows ? 'Mostrar menos' : `Ver todos (${drill.length})`}</button>
       `;
       $('#toggleRowsBtn').onclick = () => {
         S.bi.showAllRows = !S.bi.showAllRows;
         renderKpis();
       };
     } else {
-      $('#drillPager').innerHTML = `<span>${drill.length} ${es ? 'registros encontrados' : 'registros encontrados'}</span>`;
+      $('#drillPager').innerHTML = `<span>${drill.length} registros encontrados</span>`;
     }
   }
 }
@@ -1461,33 +1873,60 @@ function renderKpis() {
 function renderHistory() {
   const fDate = $('#filterDate').value;
   const list = S.data.filter(x => !fDate || x.data === fDate).slice().reverse();
-  $('#historyList').innerHTML = list.map(x => {
+  $('#historyList').innerHTML = list.map((x, idx) => {
     const isDone = x.status === 'Concluido';
+    const m = calcSafeMetrics(x);
     return `
-      <div class="card opCard ${isDone ? 'done' : ''}">
+      <div class="card opCard ${isDone ? 'done' : ''}" data-hidx="${idx}" style="cursor:pointer">
         <div class="opHead">
-          <span class="opDoca">Doca ${esc(x.doca)} · ${esc(x.placa)}</span>
-          <span class="badge ${isDone ? 'ok' : ''}">${esc(x.status)}</span>
+          <span class="opDoca">${esc(x.expedicao)} · Doca ${esc(x.doca)} · ${esc(x.placa)}</span>
+          <div style="display:flex;gap:6px;align-items:center">
+            ${x.vehiculo ? `<span class="badge veh">${esc(x.vehiculo)}</span>` : ''}
+            <span class="badge ${isDone ? 'ok' : ''}">${esc(x.status)}</span>
+          </div>
         </div>
         <div class="opMeta">
-          ${esc(x.data)} | ${esc(x.turno)} | <b>${esc(x.operacao)}</b> (${esc(x.expedicao)})<br>
-          ${esc(x.inicio)} → ${esc(x.fim || '--:--')} · Vol: <b>${fmt(x.volume)}</b> · ${x.colaboradores} pers.
+          ${esc(x.data)} | ${esc(x.turno)} | <b>${esc(x.operacao)}</b><br>
+          ${esc(x.inicio)} → ${esc(x.fim || '--:--')} (<b>${fmtHumanHours(m.tempo)}</b>) · Vol: <b>${fmt(x.volume)}</b> · ${m.col} pers.
           ${x.motivo ? `<br><span style="color:var(--bad)">Motivo: ${esc(x.motivo)}</span>` : ''}
         </div>
       </div>
     `;
   }).join('') || `<div class="card" style="text-align:center;color:var(--mut)">${S.lang === 'es' ? 'Sin registros para esta fecha.' : 'Sem registros para esta data.'}</div>`;
+
+  $$('#historyList .opCard').forEach(card => {
+    card.onclick = () => openOpSummaryModal(list[+card.dataset.hidx]);
+  });
 }
 
+/* EXPORTACIÓN CSV CORREGIDA (FILAS Y COLUMNAS LIMPIAS EN EXCEL) */
 function downloadCSVRows(list, filename) {
-  const head = ['Data', 'Turno', 'Doca', 'Operacao', 'Placa', 'Inicio', 'Fim', 'Colaboradores', 'Volume', 'Status', 'Motivo', 'Observacoes', 'Expedicao', 'Tempo(h)', 'HH', 'Vol/HH', 'USER'];
-  const rows = list.map(x => [x.data, x.turno, x.doca, x.operacao, x.placa, x.inicio, x.fim, x.colaboradores, x.volume, x.status, x.motivo, x.observacoes, x.expedicao, x.tempo, x.hh, x.prod, x.user]);
-  const text = '\\ufeff' + [head, ...rows].map(r => r.map(v => '"' + String(v ?? '').replace(/"/g, '""') + '"').join(';')).join('\\n');
-  const u = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
+  const head = [
+    'Data', 'Turno', 'Doca', 'Operacao', 'Vehiculo', 'Placa',
+    'Inicio', 'Fim', 'Tempo', 'Personas', 'Volume', 'Status',
+    'Motivo', 'Observacoes', 'Expedicao', 'HH', 'Vol/HH', 'USER'
+  ];
+  const rows = list.map(x => {
+    const m = calcSafeMetrics(x);
+    return [
+      x.data, x.turno, x.doca, x.operacao, x.vehiculo, x.placa,
+      x.inicio, x.fim, fmtHumanHours(m.tempo), m.col, x.volume, x.status,
+      x.motivo, x.observacoes, x.expedicao, fmt(m.hh), fmt(m.prod), x.user
+    ];
+  });
+
+  const csvBody = [head, ...rows]
+    .map(r => r.map(v => '"' + String(v ?? '').replace(/"/g, '""') + '"').join(';'))
+    .join('\r\n');
+
+  const blob = new Blob(['\uFEFF' + csvBody], { type: 'text/csv;charset=utf-8;' });
+  const u = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = u;
   a.download = filename;
+  document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
   URL.revokeObjectURL(u);
 }
 
@@ -1538,6 +1977,16 @@ $$('.chips').forEach(box => {
   };
 });
 
+$('#reasonQuickChips').onclick = e => {
+  if (!e.target.matches('.rChip')) return;
+  $$('#reasonQuickChips .rChip').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  $('#newForm').motivo.value = e.target.dataset.val;
+};
+
+$('#opModalClose').onclick = closeOpSummaryModal;
+$('#opModal').onclick = e => { if (e.target.id === 'opModal') closeOpSummaryModal(); };
+
 $('#loginLang').onclick = $('#langBtn').onclick = toggleLang;
 $('#logoutBtn').onclick = () => signOut(true);
 $('#refreshBtn').onclick = () => loadData().then(() => toast(S.lang === 'es' ? 'Actualizado' : 'Atualizado')).catch(e => toast(e.message));
@@ -1567,8 +2016,9 @@ $$('#kDateStart, #kDateEnd').forEach(el => {
   };
 });
 
-$$('#kArea, #kShift, #kOp, #kStatus').forEach(el => {
+$$('#kArea, #kShift, #kOp, #kVeh, #kStatus').forEach(el => {
   el.onchange = () => {
+    if (el.id === 'kArea') S.bi.doca = '';
     S.bi.showAllRows = false;
     renderKpis();
   };
@@ -1580,6 +2030,7 @@ $('#clearFiltersBtn').onclick = () => {
   $('#kArea').value = '';
   $('#kShift').value = '';
   $('#kOp').value = '';
+  $('#kVeh').value = '';
   $('#kStatus').value = '';
   $('#biSearch').value = '';
   $$('.presetBtn').forEach(b => b.classList.toggle('active', b.dataset.range === 'ALL'));
