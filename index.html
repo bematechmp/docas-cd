@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0f2544">
-<title>DOCAS CD — YMS & BI Control de Muelles</title>
+<title>DOCAS CD — Controle de produtividade CD &amp; Fabrica Manaus</title>
 <style>
 :root{
   --pri:#0f2544;--pri2:#1d4ed8;--acc:#0284c7;--bg:#f1f5f9;--card:#ffffff;--line:#cbd5e1;
@@ -19,21 +19,21 @@ button,input,select,textarea{font:inherit}
 .login{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(160deg,#09172c,#1e3a8a);margin-bottom:-78px}
 .loginCard{width:min(400px,100%);background:#fff;padding:28px 24px;border-radius:20px;box-shadow:0 20px 50px #0005}
 .brand{font-size:26px;font-weight:900;color:var(--pri);letter-spacing:-.5px}
-.sub{color:var(--mut);margin:4px 0 20px;font-size:14px}
+.sub{color:var(--mut);margin:4px 0 20px;font-size:13px;font-weight:700}
 
 /* HEADER */
-.top{position:sticky;top:0;z-index:20;background:var(--pri);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px #0002}
-.top h1{margin:0;font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px}
-.ymsTag{background:#0284c7;color:#fff;font-size:10px;padding:2px 7px;border-radius:6px;letter-spacing:.5px;font-weight:800}
-.top small{display:block;font-size:11px;opacity:.85}
-.topBtns{display:flex;gap:8px;align-items:center}
+.top{position:sticky;top:0;z-index:20;background:var(--pri);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px #0002;gap:8px}
+.top h1{margin:0;font-size:17px;font-weight:800;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ymsTag{background:#0284c7;color:#fff;font-size:10px;padding:3px 8px;border-radius:6px;letter-spacing:.3px;font-weight:800}
+.top small{display:block;font-size:11px;opacity:.85;margin-top:2px}
+.topBtns{display:flex;gap:8px;align-items:center;flex-shrink:0}
 .pill{background:#ffffff22;border:1px solid #ffffff44;color:#fff;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;cursor:pointer}
 
 /* BANNER OFFLINE */
 .banner{background:#fef3c7;color:#92400e;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;border-bottom:1px solid #fcd34d}
 
 /* CONTENEDOR Y TARJETAS */
-main{max-width:1140px;margin:0 auto;padding:14px}
+main{max-width:1180px;margin:0 auto;padding:14px}
 .page{display:none}
 .page.active{display:block}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px;box-shadow:0 2px 8px #0f172a08}
@@ -89,7 +89,8 @@ main{max-width:1140px;margin:0 auto;padding:14px}
 .opCard{border-left:5px solid var(--warn)}
 .opCard.done{border-left-color:var(--ok)}
 .opHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:6px;flex-wrap:wrap}
-.opDoca{font-size:16px;font-weight:900;color:var(--pri)}
+.opDoca{font-size:16px;font-weight:900;color:var(--pri);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.idBadge{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;font-weight:900;background:#e2e8f0;color:var(--pri);padding:2px 7px;border-radius:6px;letter-spacing:.3px}
 .badge{padding:3px 9px;border-radius:999px;font-size:11px;font-weight:800;background:#fef3c7;color:#92400e}
 .badge.ok{background:#dcfce7;color:#166534}
 .badge.bad{background:#fee2e2;color:#991b1b}
@@ -152,13 +153,14 @@ main{max-width:1140px;margin:0 auto;padding:14px}
   font-weight:900;cursor:pointer;display:grid;place-items:center;flex-shrink:0
 }
 .modalClose:hover{background:#ffffff44}
-.modalBody{padding:16px 18px}
+.modalBody{padding:16px 18px;max-height:82vh;overflow-y:auto}
 .sumTopStrip{
   display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;
   padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid #e2e8f0
 }
 .sumMainTitle{font-size:18px;font-weight:900;color:var(--pri)}
-.sumGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.sumGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
+.sumGrid2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
 .sumCell{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:8px 10px}
 .sumCell span{display:block;font-size:10px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
 .sumCell b{display:block;font-size:14px;font-weight:900;color:var(--pri);margin-top:2px}
@@ -258,16 +260,19 @@ main{max-width:1140px;margin:0 auto;padding:14px}
 .areaStats div{background:#fff;padding:6px 4px;border-radius:8px;border:1px solid #e2e8f0}
 .areaStats b{display:block;font-size:13px;color:var(--pri)}
 
-/* TABLA DRILL-DOWN INTERACTIVA */
+/* TABLA DRILL-DOWN INTERACTIVA CON COLUMNA ID FIJA */
 .drillTools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.searchInput{min-height:34px;padding:4px 10px;border:1.5px solid var(--line);border-radius:8px;font-size:12px;min-width:200px}
-.drillTableWrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+.searchInput{min-height:34px;padding:4px 10px;border:1.5px solid var(--line);border-radius:8px;font-size:12px;min-width:210px}
+.drillTableWrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;position:relative}
 .drillTable{width:100%;border-collapse:collapse;font-size:12px;text-align:left}
 .drillTable th{background:#f8fafc;color:var(--pri);font-weight:800;padding:9px 10px;border-bottom:1.5px solid var(--line);white-space:nowrap}
 .drillTable td{padding:8px 10px;border-bottom:1px solid #e2e8f0;white-space:nowrap}
+.drillTable th:first-child,.drillTable td:first-child{position:sticky;left:0;z-index:2;border-right:1.5px solid var(--line)}
+.drillTable th:first-child{background:#f8fafc;z-index:3}
+.drillTable td:first-child{background:#fff}
 .drillTable tbody tr{cursor:pointer;transition:background .12s}
 .drillTable tbody tr:hover td{background:#eff6ff}
-.drillTable tbody tr:hover td:first-child{box-shadow:inset 3px 0 0 var(--pri2)}
+.drillTable tbody tr:hover td:first-child{background:#eff6ff;box-shadow:inset 3px 0 0 var(--pri2)}
 .pager{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:12px;color:var(--mut);font-weight:700}
 
 /* NAVEGACIÓN INFERIOR FIJA */
@@ -304,10 +309,10 @@ main{max-width:1140px;margin:0 auto;padding:14px}
 <section id="loginGate" class="login">
   <div class="loginCard">
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <div class="brand">DOCAS CD <span class="ymsTag">YMS</span></div>
+      <div class="brand">DOCAS CD</div>
       <button id="loginLang" type="button" class="pill" style="color:var(--pri);border-color:var(--line)">ES / PT</button>
     </div>
-    <p class="sub" data-t="sub">Gestión de patio, muelles y BI</p>
+    <p class="sub" data-t="sub">Controle de produtividade CD &amp; Fabrica Manaus</p>
     <form id="loginForm">
       <div class="field">
         <label data-t="user">Usuario</label>
@@ -332,7 +337,7 @@ main{max-width:1140px;margin:0 auto;padding:14px}
 
   <header class="top">
     <div>
-      <h1>DOCAS CD <span class="ymsTag">YMS & BI</span></h1>
+      <h1>DOCAS CD <span class="ymsTag">Controle de produtividade CD &amp; Fabrica Manaus</span></h1>
       <small id="userLabel"></small>
     </div>
     <div class="topBtns">
@@ -393,8 +398,7 @@ main{max-width:1140px;margin:0 auto;padding:14px}
               </select>
             </div>
           </div>
-
-          <div class="row2">
+<div class="row2">
             <div class="field">
               <label data-t="plate">Placa / Vehículo *</label>
               <div class="inline">
@@ -480,7 +484,8 @@ main{max-width:1140px;margin:0 auto;padding:14px}
         </div>
       </form>
     </section>
-<!-- PANTALLA 2: EN PATIO -->
+
+    <!-- PANTALLA 2: EN PATIO -->
     <section id="tabYard" class="page">
       <div class="cardTitle" style="padding:0 4px">
         <span data-t="openOps">En Patio / Abiertas</span>
@@ -493,7 +498,7 @@ main{max-width:1140px;margin:0 auto;padding:14px}
     <section id="tabKpis" class="page">
       <div class="biBanner">
         <div>
-          <h2 data-t="biHead">Tablero YMS & BI — Control de Muelles</h2>
+          <h2 data-t="biHead">Controle de produtividade CD &amp; Fabrica Manaus</h2>
           <p data-t="biSub">Haz clic en cualquier tarjeta, doca o barra para cruzar filtros en vivo · Toca una fila de la tabla para ver su ficha completa</p>
         </div>
         <button id="clearFiltersBtn" type="button" class="btn sm" style="background:#ffffff22;border:1px solid #ffffff55" data-t="clearF">Limpiar Filtros</button>
@@ -646,7 +651,7 @@ main{max-width:1140px;margin:0 auto;padding:14px}
             <small style="font-size:11px;font-weight:600;color:var(--mut);text-transform:none;margin-left:6px" data-t="clickRowHint">(Clic en una fila para ver resumen)</small>
           </div>
           <div class="drillTools">
-            <input id="biSearch" type="search" class="searchInput" placeholder="Buscar placa, doca, vehículo o usuario...">
+            <input id="biSearch" type="search" class="searchInput" placeholder="Buscar ID, placa, doca, vehículo o usuario...">
             <button id="biExportBtn" type="button" class="btn sm sec" data-t="exportFiltered">Exportar Filtro (CSV)</button>
           </div>
         </div>
@@ -719,7 +724,7 @@ const $$ = (q, r = document) => [...r.querySelectorAll(q)];
 
 const TXT = {
   es: {
-    sub: 'Gestión de patio, muelles y BI', user: 'Usuario', pass: 'Contraseña', enter: 'Entrar',
+    sub: 'Controle de produtividade CD & Fabrica Manaus', user: 'Usuario', pass: 'Contraseña', enter: 'Entrar',
     retry: 'Enviar ahora', exit: 'Salir', newReg: 'Nuevo Registro', area: 'Área / Expedição *',
     vehType: 'Tipo de Vehículo *',
     date: 'Fecha *', shift: 'Turno *', dock: 'Doca / Muelle *', op: 'Operación *',
@@ -728,7 +733,7 @@ const TXT = {
     notes: 'Observaciones', tOcup: 'Tiempo', save: 'Guardar en Sheets',
     openOps: 'En Patio / Abiertas', filterDate: 'Filtrar fecha', export: 'Descargar Excel (CSV)',
     nav1: 'Registrar', nav2: 'En Patio', nav3: 'YMS / KPIs', nav4: 'Historial',
-    biHead: 'Tablero YMS & BI — Control de Muelles',
+    biHead: 'Controle de produtividade CD & Fabrica Manaus',
     biSub: 'Haz clic en cualquier tarjeta, doca o barra para cruzar filtros en vivo · Toca una fila de la tabla para ver su ficha completa',
     clearF: 'Limpiar Filtros', quickRange: 'Período rápido:', rToday: 'Hoy', r7d: 'Últimos 7 días',
     rMonth: 'Este mes', rAll: 'Todo el historial', fStart: 'Data Inicio', fEnd: 'Data Fin',
@@ -743,7 +748,7 @@ const TXT = {
     exportFiltered: 'Exportar Filtro (CSV)'
   },
   pt: {
-    sub: 'Gestão de pátio, docas e BI', user: 'Usuário', pass: 'Senha', enter: 'Entrar',
+    sub: 'Controle de produtividade CD & Fabrica Manaus', user: 'Usuário', pass: 'Senha', enter: 'Entrar',
     retry: 'Enviar agora', exit: 'Sair', newReg: 'Novo Registro', area: 'Área / Expedição *',
     vehType: 'Tipo de Veículo *',
     date: 'Data *', shift: 'Turno *', dock: 'Doca *', op: 'Operação *',
@@ -752,7 +757,7 @@ const TXT = {
     notes: 'Observações', tOcup: 'Tempo', save: 'Salvar no Sheets',
     openOps: 'No Pátio / Abertas', filterDate: 'Filtrar data', export: 'Baixar Excel (CSV)',
     nav1: 'Registrar', nav2: 'No Pátio', nav3: 'YMS / KPIs', nav4: 'Histórico',
-    biHead: 'Painel YMS & BI — Controle de Docas',
+    biHead: 'Controle de produtividade CD & Fabrica Manaus',
     biSub: 'Clique em qualquer cartão, doca ou barra para cruzar filtros ao vivo · Toque em uma linha da tabela para ver o resumo completo',
     clearF: 'Limpar Filtros', quickRange: 'Período rápido:', rToday: 'Hoje', r7d: 'Últimos 7 dias',
     rMonth: 'Este mês', rAll: 'Tudo', fStart: 'Data Início', fEnd: 'Data Fim',
@@ -767,7 +772,6 @@ const TXT = {
     exportFiltered: 'Exportar Filtro (CSV)'
   }
 };
-
 function uid() {
   return (crypto.randomUUID ? crypto.randomUUID() : Date.now() + '_' + Math.random().toString(36).slice(2)).replace(/-/g, '_');
 }
@@ -832,9 +836,41 @@ function cleanTime(raw) {
   return '';
 }
 
+function cleanDateTime(raw) {
+  const s = String(raw ?? '').trim();
+  if (!s) return '';
+  if (/^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}/.test(s)) return s.slice(0, 19);
+  const mBr = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}:\d{2}(?::\d{2})?)/);
+  if (mBr) {
+    const timePart = mBr[4].length === 4 ? '0' + mBr[4] : mBr[4];
+    return `${mBr[3]}-${mBr[2].padStart(2, '0')}-${mBr[1].padStart(2, '0')} ${timePart}`;
+  }
+  const d = new Date(s);
+  if (!isNaN(d) && (s.includes('T') || s.includes('GMT') || s.includes('-') || s.includes('/'))) {
+    const datePart = d.toLocaleDateString('sv-SE');
+    const timePart = d.toTimeString().slice(0, 8);
+    return `${datePart} ${timePart}`;
+  }
+  return s;
+}
+
+function formatOpId(raw) {
+  const explicit = String(raw.id ?? raw.ID ?? raw.codigo ?? raw.codigoId ?? '').trim().toUpperCase();
+  if (explicit) return explicit;
+  const r = parseInt(raw.rowId, 10);
+  if (!isNaN(r) && r > 0) {
+    const seq = r >= 2 ? r - 1 : r;
+    return 'A' + String(seq).padStart(5, '0');
+  }
+  return '—';
+}
+
 function cleanRow(raw) {
+  const rawRegTs = raw.registro ?? raw.createdAt ?? raw.timestamp ?? raw.dataRegistro ?? raw.fechaRegistro ?? raw.registradoEm ?? raw.created_at ?? raw.ts ?? '';
   return {
     ...raw,
+    opId: formatOpId(raw),
+    registradoEm: cleanDateTime(rawRegTs),
     data: cleanDate(raw.data),
     turno: String(raw.turno ?? '').trim(),
     doca: String(raw.doca ?? '').trim().toUpperCase(),
@@ -895,7 +931,7 @@ function calcSafeMetrics(x) {
 function tr() {
   $$('[data-t]').forEach(el => { el.textContent = TXT[S.lang][el.dataset.t] || el.textContent; });
   $$('option[data-es]').forEach(el => { el.textContent = el.dataset[S.lang]; });
-  $('#biSearch').placeholder = S.lang === 'es' ? 'Buscar placa, doca, vehículo o usuario...' : 'Buscar placa, doca, veículo ou usuário...';
+  $('#biSearch').placeholder = S.lang === 'es' ? 'Buscar ID, placa, doca, vehículo o usuario...' : 'Buscar ID, placa, doca, veículo ou usuário...';
   document.documentElement.lang = S.lang;
 }
 
@@ -913,7 +949,7 @@ function toast(msg) {
   setTimeout(() => t.classList.add('hidden'), 3200);
 }
 
-/* MODAL VISUAL DE RESUMEN DE OPERACIÓN (AL HACER CLIC EN UNA FILA) */
+/* MODAL VISUAL DE RESUMEN DE OPERACIÓN (CON ID Y FECHA/HORA DE REGISTRO) */
 function openOpSummaryModal(x) {
   if (!x) return;
   const es = S.lang === 'es';
@@ -922,6 +958,7 @@ function openOpSummaryModal(x) {
 
   $('#opModalHeader').innerHTML = `
     <span>${es ? 'Ficha Resumen de Operación' : 'Ficha Resumo da Operação'}</span>
+    <span class="ymsTag" style="background:#fff;color:var(--pri)">${esc(x.opId)}</span>
     <span class="ymsTag">${esc(x.expedicao || 'CD')}</span>
   `;
 
@@ -938,6 +975,10 @@ function openOpSummaryModal(x) {
     </div>
 
     <div class="sumGrid">
+      <div class="sumCell"><span>ID</span><b>${esc(x.opId)}</b></div>
+      <div class="sumCell"><span>${es ? 'Guardado en Sistema' : 'Salvo no Sistema'}</span><b style="font-size:12px">${esc(x.registradoEm || '—')}</b></div>
+      <div class="sumCell"><span>${es ? 'Área' : 'Área'}</span><b>${esc(x.expedicao || 'CD')}</b></div>
+
       <div class="sumCell"><span>${es ? 'Hora Inicio' : 'Hora Início'}</span><b>${esc(x.inicio || '--:--')}</b></div>
       <div class="sumCell"><span>${es ? 'Hora Fin' : 'Hora Fim'}</span><b>${esc(x.fim || (es ? 'En curso' : 'Em curso'))}</b></div>
       <div class="sumCell"><span>${es ? 'Tiempo Total' : 'Tempo Total'}</span><b>${fmtHumanHours(m.tempo)}</b></div>
@@ -945,10 +986,11 @@ function openOpSummaryModal(x) {
       <div class="sumCell"><span>${es ? 'Personas' : 'Pessoas'}</span><b>${m.col}</b></div>
       <div class="sumCell"><span>${es ? 'Volumen' : 'Volume'}</span><b>${fmt(m.vol, 0)}</b></div>
       <div class="sumCell"><span>Vol / HH</span><b>${fmt(m.prod)}</b></div>
+    </div>
 
+    <div class="sumGrid2">
       <div class="sumCell"><span>Horas-Hombre (HH)</span><b>${fmt(m.hh)}</b></div>
       <div class="sumCell"><span>${es ? 'Tipo Vehículo' : 'Tipo Veículo'}</span><b>${esc(x.vehiculo || '—')}</b></div>
-      <div class="sumCell"><span>${es ? 'Área' : 'Área'}</span><b>${esc(x.expedicao || 'CD')}</b></div>
     </div>
 
     ${x.motivo ? `
@@ -965,7 +1007,7 @@ function openOpSummaryModal(x) {
 
     <div class="sumFoot">
       <span>${es ? 'Registrado por:' : 'Registrado por:'} <b style="color:var(--pri)">${esc(x.user || '—')}</b></span>
-      <span>${es ? 'Fila Sheets #' : 'Linha Sheets #'}${x.rowId || '—'}</span>
+      <span>${esc(x.opId)} · #${x.rowId || '—'}</span>
     </div>
   `;
 
@@ -1175,6 +1217,7 @@ async function handleSave(e) {
   p.doca = p.doca.trim().toUpperCase();
   p.placa = p.placa.replace(/\s/g, '').toUpperCase();
   p.vehiculo = (p.vehiculo || 'CNTRN').trim().toUpperCase();
+  p.clientCreatedAt = `${today()} ${now()}`;
 
   try {
     const r = await api('POST', { ...p, token: S.session.token });
@@ -1212,7 +1255,7 @@ function renderYard() {
     return `
       <div class="card opCard">
         <div class="opHead">
-          <span class="opDoca">${esc(x.expedicao)} · Doca ${esc(x.doca)} · ${esc(x.placa)}</span>
+          <span class="opDoca"><span class="idBadge">${esc(x.opId)}</span> ${esc(x.expedicao)} · Doca ${esc(x.doca)} · ${esc(x.placa)}</span>
           <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
             ${vehBadge}
             ${stayBadge}
@@ -1256,7 +1299,14 @@ async function handleCloseOp(e) {
   const x = S.data.find(a => a.rowId === +f.dataset.row);
   if (!x) return;
 
-  const p = { ...Object.fromEntries(new FormData(f).entries()), action: 'close_op', rowId: x.rowId, fingerprint: x.fingerprint, requestId: uid() };
+  const p = {
+    ...Object.fromEntries(new FormData(f).entries()),
+    action: 'close_op',
+    rowId: x.rowId,
+    id: x.opId,
+    fingerprint: x.fingerprint,
+    requestId: uid()
+  };
   try {
     const r = await api('POST', { ...p, token: S.session.token });
     if (r.status !== 'ok') throw Object.assign(new Error(r.message), { functional: true });
@@ -1271,7 +1321,6 @@ async function handleCloseOp(e) {
     }
   }
 }
-
 /* =========================================================
    MÓDULO DE YMS & BI INTERACTIVO
    ========================================================= */
@@ -1764,7 +1813,7 @@ function renderKpis() {
     .sort((a, b) => b.val - a.val);
   $('#chartStops').innerHTML = renderBarsHTML(stopItems, '', '', '', 'bad', it => fmtHumanHours(it.val));
 
-  // 8. TABLA DRILL-DOWN (Con clic en fila para abrir Ficha Resumen Visual)
+  // 8. TABLA DRILL-DOWN (ID fijo como primera columna + Fecha/Hora de guardado)
   let drill = enriched.slice().reverse();
   let titleTxt = es ? 'Detalle de Operaciones Filtradas' : 'Detalhe de Operações Filtradas';
 
@@ -1791,6 +1840,7 @@ function renderKpis() {
   const qSearch = $('#biSearch').value.trim().toUpperCase();
   if (qSearch) {
     drill = drill.filter(x =>
+      x.opId.includes(qSearch) ||
       x.placa.includes(qSearch) ||
       x.doca.includes(qSearch) ||
       x.vehiculo.includes(qSearch) ||
@@ -1814,6 +1864,7 @@ function renderKpis() {
       <table class="drillTable">
         <thead>
           <tr>
+            <th>ID</th>
             <th>${es ? 'Fecha' : 'Data'}</th>
             <th>Área</th>
             <th>Turno</th>
@@ -1827,11 +1878,13 @@ function renderKpis() {
             <th>Vol</th>
             <th>Vol/HH</th>
             <th>${es ? 'Registrador' : 'Usuário'}</th>
+            <th>${es ? 'Guardado en Sistema' : 'Salvo no Sistema'}</th>
           </tr>
         </thead>
         <tbody>
           ${visible.map((x, idx) => `
             <tr data-ridx="${idx}" title="${es ? 'Clic para ver resumen' : 'Clique para ver resumo'}">
+              <td><span class="idBadge">${esc(x.opId)}</span></td>
               <td>${esc(x.data)}</td>
               <td>${esc(x.expedicao)}</td>
               <td>${esc(x.turno)}</td>
@@ -1845,6 +1898,7 @@ function renderKpis() {
               <td><b>${fmt(x.m.vol, 0)}</b></td>
               <td><b>${fmt(x.m.prod)}</b></td>
               <td style="color:var(--mut);font-weight:700">${esc(x.user || '—')}</td>
+              <td style="color:var(--mut);font-weight:700">${esc(x.registradoEm || '—')}</td>
             </tr>
           `).join('')}
         </tbody>
@@ -1879,7 +1933,7 @@ function renderHistory() {
     return `
       <div class="card opCard ${isDone ? 'done' : ''}" data-hidx="${idx}" style="cursor:pointer">
         <div class="opHead">
-          <span class="opDoca">${esc(x.expedicao)} · Doca ${esc(x.doca)} · ${esc(x.placa)}</span>
+          <span class="opDoca"><span class="idBadge">${esc(x.opId)}</span> ${esc(x.expedicao)} · Doca ${esc(x.doca)} · ${esc(x.placa)}</span>
           <div style="display:flex;gap:6px;align-items:center">
             ${x.vehiculo ? `<span class="badge veh">${esc(x.vehiculo)}</span>` : ''}
             <span class="badge ${isDone ? 'ok' : ''}">${esc(x.status)}</span>
@@ -1899,19 +1953,19 @@ function renderHistory() {
   });
 }
 
-/* EXPORTACIÓN CSV CORREGIDA (FILAS Y COLUMNAS LIMPIAS EN EXCEL) */
+/* EXPORTACIÓN CSV (CON ID Y FECHA/HORA DE GUARDADO) */
 function downloadCSVRows(list, filename) {
   const head = [
-    'Data', 'Turno', 'Doca', 'Operacao', 'Vehiculo', 'Placa',
+    'ID', 'Data', 'Turno', 'Doca', 'Operacao', 'Vehiculo', 'Placa',
     'Inicio', 'Fim', 'Tempo', 'Personas', 'Volume', 'Status',
-    'Motivo', 'Observacoes', 'Expedicao', 'HH', 'Vol/HH', 'USER'
+    'Motivo', 'Observacoes', 'Expedicao', 'HH', 'Vol/HH', 'USER', 'Registrado_Em'
   ];
   const rows = list.map(x => {
     const m = calcSafeMetrics(x);
     return [
-      x.data, x.turno, x.doca, x.operacao, x.vehiculo, x.placa,
+      x.opId, x.data, x.turno, x.doca, x.operacao, x.vehiculo, x.placa,
       x.inicio, x.fim, fmtHumanHours(m.tempo), m.col, x.volume, x.status,
-      x.motivo, x.observacoes, x.expedicao, fmt(m.hh), fmt(m.prod), x.user
+      x.motivo, x.observacoes, x.expedicao, fmt(m.hh), fmt(m.prod), x.user, x.registradoEm
     ];
   });
 
